@@ -10,6 +10,54 @@ use Livewire\Component;
 #[Title('Beranda')]
 class Home extends Component
 {
+    // Dummy data — nanti diganti Promo::where('is_active', true)->limit(3)->get()
+    public function getPromosProperty(): array
+    {
+        return [
+            [
+                'title' => 'Diskon 20% Facial Glow Signature',
+                'description' => 'Potongan harga khusus untuk treatment facial andalan kami.',
+            ],
+            [
+                'title' => 'Paket Hemat Konsultasi + Skin Check-Up',
+                'description' => 'Konsultasi dermatologi dan skin check-up dalam satu paket hemat.',
+            ],
+        ];
+    }
+
+    // Dummy data — nanti diganti Product::where('is_active', true)->orderBy('order')->limit(4)->get()
+    public function getFeaturedProductsProperty(): array
+    {
+        return [
+            ['slug' => 'hydrating-toner', 'name' => 'Hydrating Toner', 'price' => 145000],
+            ['slug' => 'vitamin-c-serum', 'name' => 'Vitamin C Serum', 'price' => 210000],
+            ['slug' => 'sunscreen-spf-50', 'name' => 'Sunscreen SPF 50', 'price' => 165000],
+            ['slug' => 'night-repair-cream', 'name' => 'Night Repair Cream', 'price' => 235000],
+        ];
+    }
+
+    // Dummy data — nanti diganti Testimonial::where('is_active', true)->latest()->limit(3)->get()
+    public function getFeaturedTestimonialsProperty(): array
+    {
+        return [
+            [
+                'name' => 'Rahma Wulandari',
+                'message' => 'Perawatan facial-nya bikin kulit terasa lebih cerah dan lembap. Dokternya juga menjelaskan dengan sabar.',
+                'rating' => 5,
+            ],
+            [
+                'name' => 'Dian Kusuma',
+                'message' => 'Awalnya ragu coba laser whitening, tapi prosesnya nyaman dan hasilnya terlihat bertahap.',
+                'rating' => 5,
+            ],
+            [
+                'name' => 'Putri Anggraini',
+                'message' => 'Konsultasi dermatologi di sini enak, dokternya detail banget jelasin kondisi kulit saya.',
+                'rating' => 4,
+            ],
+        ];
+    }
+
     public function render()
     {
         return view('livewire.landing.home');

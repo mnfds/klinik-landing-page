@@ -70,6 +70,40 @@
 
     @include('partials.landing.divider')
 
+    {{-- PROMO AKTIF --}}
+    @if (count($this->promos) > 0)
+        <section class="bg-blush/20 py-16 lg:py-20">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="flex items-end justify-between gap-4 flex-wrap">
+                    <div>
+                        <span class="text-xs font-medium tracking-wide uppercase text-gold">Sedang Berlangsung</span>
+                        <h2 class="mt-3 font-display text-3xl sm:text-4xl text-forest-dark">
+                            Promo Pilihan Bulan Ini
+                        </h2>
+                    </div>
+                    
+                    <a href="{{ Route::has('promos') ? route('promos') : '#' }}"
+                        wire:navigate
+                        class="text-sm font-medium text-forest-dark border-b border-gold hover:text-forest transition-colors"
+                    >
+                        Lihat Semua Promo →
+                    </a>
+                </div>
+
+                <div class="mt-10 grid sm:grid-cols-2 gap-6">
+                    @foreach ($this->promos as $promo)
+                        <div wire:key="home-promo-{{ $loop->index }}" class="rounded-2xl bg-white border border-forest/10 p-7">
+                            <h3 class="font-display text-lg text-forest-dark">{{ $promo['title'] }}</h3>
+                            <p class="mt-2 text-sm text-charcoal/60 leading-relaxed">{{ $promo['description'] }}</p>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
+        @include('partials.landing.divider')
+    @endif
+
     {{-- LAYANAN UNGGULAN --}}
     <section class="bg-ivory py-20 lg:py-28">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
@@ -102,6 +136,50 @@
 
     @include('partials.landing.divider')
 
+    {{-- CUPLIKAN PRODUK --}}
+    <section class="bg-ivory py-20 lg:py-28">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-end justify-between gap-4 flex-wrap">
+                <div class="max-w-xl">
+                    <span class="text-xs font-medium tracking-wide uppercase text-gold">Produk Kami</span>
+                    <h2 class="mt-3 font-display text-3xl sm:text-4xl text-forest-dark">
+                        Lanjutkan perawatan di rumah
+                    </h2>
+                </div>
+                
+                <a href="{{ Route::has('products') ? route('products') : '#' }}"
+                    wire:navigate
+                    class="text-sm font-medium text-forest-dark border-b border-gold hover:text-forest transition-colors"
+                >
+                    Lihat Semua Produk →
+                </a>
+            </div>
+
+            <div class="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-5">
+                @foreach ($this->featuredProducts as $product)
+                    
+                    <a href="{{ Route::has('products.detail') ? route('products.detail', $product['slug']) : '#' }}"
+                        wire:navigate
+                        wire:key="home-product-{{ $loop->index }}"
+                        class="group rounded-2xl border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md"
+                    >
+                        <div class="aspect-square bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center">
+                            <svg viewBox="0 0 24 24" class="w-8 h-8 text-forest/25" fill="none" stroke="currentColor" stroke-width="1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 3h6l1 3h3a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h3l1-3z" />
+                            </svg>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-sm font-medium text-forest-dark leading-snug">{{ $product['name'] }}</p>
+                            <p class="mt-1 text-sm text-charcoal/50">Rp {{ number_format($product['price'], 0, ',', '.') }}</p>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    @include('partials.landing.divider')
+
     {{-- KENAPA MEMILIH KAMI --}}
     <section class="bg-forest-dark text-ivory py-20 lg:py-28">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-3 gap-12">
@@ -122,6 +200,47 @@
                     <div>
                         <h3 class="font-display text-lg text-ivory">{{ $item['title'] }}</h3>
                         <p class="mt-2 text-sm text-ivory/60 leading-relaxed">{{ $item['desc'] }}</p>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    {{-- CUPLIKAN TESTIMONI --}}
+    <section class="bg-ivory py-20 lg:py-28">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-end justify-between gap-4 flex-wrap">
+                <div class="max-w-xl">
+                    <span class="text-xs font-medium tracking-wide uppercase text-gold">Testimoni</span>
+                    <h2 class="mt-3 font-display text-3xl sm:text-4xl text-forest-dark">
+                        Kata mereka yang sudah merasakan
+                    </h2>
+                </div>
+                
+                <a href="{{ Route::has('testimonials') ? route('testimonials') : '#' }}"
+                    wire:navigate
+                    class="text-sm font-medium text-forest-dark border-b border-gold hover:text-forest transition-colors"
+                >
+                    Lihat Semua Testimoni →
+                </a>
+            </div>
+
+            <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                @foreach ($this->featuredTestimonials as $testimonial)
+                    <div wire:key="home-testimonial-{{ $loop->index }}" class="rounded-2xl border border-forest/10 bg-white p-7 flex flex-col">
+                        <div class="flex items-center gap-1">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <svg viewBox="0 0 20 20" class="w-4 h-4 {{ $i <= $testimonial['rating'] ? 'text-gold' : 'text-forest/10' }}" fill="currentColor">
+                                    <path d="M10 1.5l2.6 5.27 5.82.85-4.21 4.1.99 5.79L10 14.9l-5.2 2.61.99-5.79-4.21-4.1 5.82-.85L10 1.5z" />
+                                </svg>
+                            @endfor
+                        </div>
+                        <p class="mt-4 text-sm text-charcoal/70 leading-relaxed flex-1">
+                            &ldquo;{{ $testimonial['message'] }}&rdquo;
+                        </p>
+                        <p class="mt-5 pt-4 border-t border-forest/10 font-display text-base text-forest-dark">
+                            {{ $testimonial['name'] }}
+                        </p>
                     </div>
                 @endforeach
             </div>
