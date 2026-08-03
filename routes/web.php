@@ -7,6 +7,7 @@ use App\Livewire\Landing\Services\Index as ServicesIndex;
 use App\Livewire\Landing\Services\Detail as ServiceDetail;
 use App\Livewire\Landing\Products\Index as ProductsIndex;
 use App\Livewire\Landing\Products\Detail as ProductDetail;
+use App\Livewire\Landing\Doctors\Index as DoctorsIndex;
 
 
 
@@ -20,6 +21,10 @@ Route::get('/layanan/{slug}', ServiceDetail::class)->name('services.detail');
 Route::get('/produk', ProductsIndex::class)->name('products');
 Route::get('/produk/{slug}', ProductDetail::class)->name('products.detail');
 
+// ===== DOCTORS GUEST ROUTE =====
+Route::get('/dokter', DoctorsIndex::class)->name('doctors');
+
+// ===== ADMIN ROUTE (BACKEND) =====
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', Dashboard::class)->name('dashboard');
         // nanti route CRUD tiap modul ditambahkan di sini
