@@ -9,6 +9,7 @@ use App\Livewire\Landing\Products\Index as ProductsIndex;
 use App\Livewire\Landing\Products\Detail as ProductDetail;
 use App\Livewire\Landing\Doctors\Index as DoctorsIndex;
 use App\Livewire\Landing\Testimonials\Index as TestimonialsIndex;
+use App\Livewire\Landing\Promos\Index as PromosIndex;
 
 
 // Route::view('/', 'welcome');
@@ -27,6 +28,8 @@ Route::get('/dokter', DoctorsIndex::class)->name('doctors');
 // ===== TESTIMONIALS GUEST ROUTE =====
 Route::get('/testimoni', TestimonialsIndex::class)->name('testimonials');
 
+// ===== PROMOS GUEST ROUTE =====
+Route::get('/promo', PromosIndex::class)->name('promos');
 
 
 // ===== ADMIN ROUTE (BACKEND) =====

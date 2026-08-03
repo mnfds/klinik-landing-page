@@ -22,6 +22,7 @@
                     ['label' => 'Beranda', 'route' => 'home'],
                     ['label' => 'Layanan', 'route' => 'services'],
                     ['label' => 'Produk', 'route' => 'products'],
+                    ['label' => 'Promo', 'route' => 'promos'],
                     ['label' => 'Dokter', 'route' => 'doctors'],
                     ['label' => 'Testimoni', 'route' => 'testimonials'],
                 ] as $item)
