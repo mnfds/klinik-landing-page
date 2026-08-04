@@ -30,13 +30,13 @@
         <div>
             <h3 class="font-display text-base text-ivory mb-4">Kontak</h3>
             <ul class="space-y-3 text-sm text-ivory/70">
-                <li>Jl. Contoh No. 123, Palangkaraya</li>
+                <li>Jl. Gatot Subroto No.88, Kuripan, Kec. Banjarmasin Tim., Kota Banjarmasin, Kalimantan Selatan 70238</li>
                 <li>
-                    <a href="https://wa.me/6280000000000" target="_blank" rel="noopener" class="hover:text-blush transition-colors">
-                        +62 800-0000-0000
+                    <a href="https://wa.me/6285822810149" target="_blank" rel="noopener" class="hover:text-blush transition-colors">
+                        +62 858-2281-0149
                     </a>
                 </li>
-                <li>halo@kliniknamu.id</li>
+                <li>dokterlklinik@gmail.com</li>
             </ul>
         </div>
 
@@ -44,8 +44,8 @@
         <div>
             <h3 class="font-display text-base text-ivory mb-4">Jam Operasional</h3>
             <ul class="space-y-2 text-sm text-ivory/70">
-                <li class="flex justify-between gap-4"><span>Senin–Jumat</span><span>09.00–20.00</span></li>
-                <li class="flex justify-between gap-4"><span>Sabtu–Minggu</span><span>10.00–18.00</span></li>
+                <li class="flex justify-between gap-4"><span>Senin–Sabtu</span><span>08.00–20.00</span></li>
+                <li class="flex justify-between gap-4"><span>Minggu</span><span>09.00–17.00</span></li>
             </ul>
             {{-- Nanti diganti data dinamis dari tabel operational_hours --}}
         </div>

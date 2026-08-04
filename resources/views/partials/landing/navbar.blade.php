@@ -39,7 +39,7 @@
             <!-- CTA -->
             <div class="hidden lg:block">
                 
-                <a href="https://wa.me/6280000000000"
+                <a href="https://wa.me/6285822810149"
                     target="_blank"
                     rel="noopener"
                     class="inline-flex items-center gap-2 rounded-full bg-forest px-5 py-2.5 text-sm font-medium text-ivory shadow-sm transition-all duration-300 hover:bg-forest-dark hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
@@ -89,7 +89,7 @@
             </a>
         @endforeach
         
-         <a href="https://wa.me/6280000000000"
+         <a href="https://wa.me/6285822810149"
             target="_blank"
             rel="noopener"
             class="block text-center rounded-full bg-forest px-5 py-3 text-sm font-medium text-ivory"

@@ -48,7 +48,7 @@
                             </p>
 
                             
-                            <a href="https://wa.me/6280000000000?text={{ urlencode('Halo, saya ingin tanya tentang promo ' . $promo['title']) }}"
+                            <a href="https://wa.me/6285822810149?text={{ urlencode('Halo, saya ingin tanya tentang promo ' . $promo['title']) }}"
                                 target="_blank"
                                 rel="noopener"
                                 class="mt-5 block text-center rounded-full bg-forest py-2.5 text-sm font-medium text-ivory transition-all duration-300 hover:bg-forest-dark"

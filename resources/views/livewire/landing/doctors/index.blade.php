@@ -49,7 +49,7 @@
                         </div>
 
                         
-                        <a href="https://wa.me/6280000000000?text={{ urlencode('Halo, saya ingin booking dengan ' . $doctor['name']) }}"
+                        <a href="https://wa.me/6285822810149?text={{ urlencode('Halo, saya ingin booking dengan ' . $doctor['name']) }}"
                             target="_blank"
                             rel="noopener"
                             class="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-forest px-6 py-2.5 text-sm font-medium text-ivory transition-all duration-300 hover:bg-forest-dark"

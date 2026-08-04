@@ -22,7 +22,7 @@
 
     @include('partials.landing.divider')
     @include('partials.landing.footer')
-
+    @include('partials.landing.whatsapp-button')
     @livewireScripts
 </body>
 </html>
