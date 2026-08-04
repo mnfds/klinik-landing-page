@@ -8,15 +8,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        ivory: '#FBF7F1',
+        ivory: '#F2F4FA',
         forest: {
-          DEFAULT: '#2C4433',
-          light: '#3F5F49',
-          dark: '#1E2E23',
+          DEFAULT: '#2E4F7D',
+          light: '#4A6B9A',
+          dark: '#203754',
         },
-        blush: '#E8C7BF',
-        gold: '#B98A4D',
-        charcoal: '#2A2622',
+        blush: '#D7E6FF',
+        gold: '#3BA8F5',
+        charcoal: '#273244',
       },
       fontFamily: {
         display: ['Fraunces', 'serif'],
