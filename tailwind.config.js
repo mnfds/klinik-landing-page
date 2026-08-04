@@ -21,6 +21,7 @@ export default {
       fontFamily: {
         display: ['Fraunces', 'serif'],
         sans: ['Manrope', 'sans-serif'],
+        contax: ['Contax Sans', 'sans-serif'],
       },
     },
   },
