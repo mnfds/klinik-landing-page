@@ -45,6 +45,11 @@
                 <li class="flex font-contax justify-between gap-4"><span>Senin – Sabtu</span><span>08.00–20.00</span></li>
                 <li class="flex font-contax justify-between gap-4"><span>Minggu</span><span>09.00–17.00</span></li>
             </ul>
+            <h3 class="font-contax text-base text-ivory mb-4 mt-4">Sosial Media</h3>
+            <ul class="space-y-2 text-sm text-ivory/70">
+                <li class="flex font-contax justify-between gap-4"><span><i class="fa-brands fa-instagram"></i> klinik_dokter_l</span><li>
+                <li class="flex font-contax justify-between gap-4"><span><i class="fa-brands fa-tiktok"></i></i> klinik_dokter_l</span><li>
+            </ul>
             {{-- Nanti diganti data dinamis dari tabel operational_hours --}}
         </div>
     </div>
