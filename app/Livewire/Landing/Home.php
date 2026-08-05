@@ -35,6 +35,48 @@ class Home extends Component
         ];
     }
 
+    public function getFeaturedServicesProperty(): array
+    {
+        return [
+            [
+                'slug' => 'facial-glow-signature',
+                'name' => 'Facial Glow Signature',
+                'price' => 350000,
+                'box' => asset('images/example/box.png')
+            ],
+            [
+                'slug' => 'laser-whitening',
+                'name' => 'Laser Whitening',
+                'price' => 750000,
+                'box' => asset('images/example/box.png')
+            ],
+            [
+                'slug' => 'chemical-peeling',
+                'name' => 'Chemical Peeling',
+                'price' => 450000,
+                'box' => asset('images/example/box.png')
+            ],
+            [
+                'slug' => 'konsultasi-dermatologi',
+                'name' => 'Konsultasi Dermatologi',
+                'price' => 200000,
+                'box' => asset('images/example/box.png')
+            ],
+            [
+                'slug' => 'penanganan-jerawat-medis',
+                'name' => 'Penanganan Jerawat Medis',
+                'price' => 300000,
+                'box' => asset('images/example/box.png')
+            ],
+            [
+                'slug' => 'skin-check-up',
+                'name' => 'Skin Check-Up',
+                'price' => 150000,
+                'box' => asset('images/example/box.png')
+            ],
+        ];
+    }
+    
     // Dummy data — nanti diganti Product::where('is_active', true)->orderBy('order')->limit(4)->get()
     public function getFeaturedProductsProperty(): array
     {
