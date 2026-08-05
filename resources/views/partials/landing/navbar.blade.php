@@ -31,7 +31,7 @@
                 rel="noopener"
                 class="font-contax text-sm"
             >
-                Our Location
+                OUR LOCATION
             </a>
         </div>
 
@@ -56,11 +56,9 @@
             <div class="flex items-center justify-between h-[4rem]">
                 <!-- Logo -->
                 <a href="{{ route('home') }}" wire:navigate class="flex items-center gap-2 group">
-                    <span class="flex items-center justify-center w-9 h-9 rounded-full bg-blush text-forest-dark transition-transform duration-300 group-hover:scale-105">
-                        <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M12 3c-3 3-5 6-5 9a5 5 0 0010 0c0-3-2-6-5-9z" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </span>
+                    {{-- <span class="flex items-center justify-center w-9 h-9 rounded-full bg-blush overflow-hidden transition-transform duration-300 group-hover:scale-105"> --}}
+                        <img src="{{ asset('images/logo/logo-no-text.png') }}" alt="{{ config('app.name', 'Klinik') }}" class="w-12 h-12 object-contain">
+                    {{-- </span> --}}
                     <span class="font-display text-xl text-forest-dark tracking-tight">{{ config('app.name', 'Klinik') }}</span>
                 </a>
 
@@ -92,7 +90,7 @@
                         rel="noopener"
                         class="inline-flex items-center gap-2 rounded-full bg-forest px-3 py-2.5 text-sm font-medium text-ivory shadow-sm transition-all duration-300 hover:bg-forest-dark hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
                     >
-                        Booking via WhatsApp
+                        Booking Now
                     </a>
                 </div>
 
@@ -157,7 +155,7 @@
                 rel="noopener"
                 class="block text-base font-medium text-charcoal/80 hover:text-forest"
             >
-                Our Location
+                OUR LOCATION
             </a>
             <a
                 href="{{ asset('brochure.pdf') }}"
@@ -176,7 +174,7 @@
             rel="noopener"
             class="block text-center rounded-full bg-forest px-5 py-3 text-sm font-medium text-ivory"
         >
-            Booking via WhatsApp
+            Booking Now
         </a>
     </div>
 </div>

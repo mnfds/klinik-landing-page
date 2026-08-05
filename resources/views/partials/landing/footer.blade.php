@@ -3,11 +3,9 @@
         <!-- Brand -->
         <div class="space-y-4">
             <div class="flex items-center gap-2">
-                <span class="flex items-center justify-center w-9 h-9 rounded-full bg-blush text-forest-dark">
-                    <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M12 3c-3 3-5 6-5 9a5 5 0 0010 0c0-3-2-6-5-9z" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </span>
+                {{-- <span class="flex items-center justify-center w-9 h-9 rounded-full bg-blush text-forest-dark"> --}}
+                    <img src="{{ asset('images/logo/logo-no-text.png') }}" alt="{{ config('app.name', 'Klinik') }}" class="w-14 h-14 object-contain">
+                {{-- </span> --}}
                 <span class="font-display text-lg text-ivory">{{ config('app.name', 'Klinik') }}</span>
             </div>
             <p class="text-sm text-ivory/70 leading-relaxed max-w-xs">

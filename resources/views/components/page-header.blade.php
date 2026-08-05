@@ -16,7 +16,7 @@
     >
 
     {{-- Overlay gradient supaya teks tetap kebaca --}}
-    <div class="absolute inset-0 bg-gradient-to-t from-forest-dark/90 via-forest-dark/50 to-forest-dark/20"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-forest-dark/70 via-forest-dark/20 to-forest-dark/0"></div>
 
     {{-- Content --}}
     <div class="relative h-full max-w-7xl mx-auto px-6 lg:px-8 flex flex-col justify-end pb-10 lg:pb-14">
