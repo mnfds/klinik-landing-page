@@ -23,6 +23,7 @@ class Index extends Component
                 'description' => 'Perawatan facial dengan teknologi terkini untuk kulit tampak lebih cerah dan lembap.',
                 'price' => 350000,
                 'youtube_link' => null,
+                'box' => asset('images/example/box.png')
             ],
             [
                 'slug' => 'laser-whitening',
@@ -31,6 +32,7 @@ class Index extends Component
                 'description' => 'Mencerahkan area kulit tertentu dengan teknologi laser yang aman dan minim risiko.',
                 'price' => 750000,
                 'youtube_link' => 'https://youtube.com/watch?v=example',
+                'box' => asset('images/example/box.png')
             ],
             [
                 'slug' => 'chemical-peeling',
@@ -39,6 +41,7 @@ class Index extends Component
                 'description' => 'Mengangkat sel kulit mati untuk regenerasi kulit yang lebih sehat dan halus.',
                 'price' => 450000,
                 'youtube_link' => null,
+                'box' => asset('images/example/box.png')
             ],
             [
                 'slug' => 'konsultasi-dermatologi',
@@ -47,6 +50,7 @@ class Index extends Component
                 'description' => 'Konsultasi kondisi kulit dengan dokter untuk penanganan masalah kulit non-estetika.',
                 'price' => 200000,
                 'youtube_link' => null,
+                'box' => asset('images/example/box.png')
             ],
             [
                 'slug' => 'penanganan-jerawat-medis',
@@ -55,6 +59,7 @@ class Index extends Component
                 'description' => 'Diagnosis dan penanganan jerawat sedang-berat dengan pendekatan medis.',
                 'price' => 300000,
                 'youtube_link' => null,
+                'box' => asset('images/example/box.png')
             ],
             [
                 'slug' => 'skin-check-up',
@@ -63,6 +68,7 @@ class Index extends Component
                 'description' => 'Pemeriksaan menyeluruh kondisi kulit sebagai dasar rekomendasi perawatan lanjutan.',
                 'price' => 150000,
                 'youtube_link' => null,
+                'box' => asset('images/example/box.png')
             ],
         ];
     }
