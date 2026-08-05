@@ -176,6 +176,10 @@
 
     {{-- PROMO AKTIF --}}
     @if (count($this->promos) > 0)
+        @php
+            $desktopSlides = collect($this->promos)->chunk(2)->values();
+        @endphp
+
         <section class="bg-blush/20 py-16 lg:py-20">
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
                 <div class="relative flex flex-col items-center gap-2 text-center lg:flex-row lg:items-end lg:justify-center lg:gap-4">
@@ -194,25 +198,109 @@
                     </a>
                 </div>
 
+                {{-- ============ DESKTOP CAROUSEL: 2 CARD/SLIDE, FOTO LANDSCAPE ============ --}}
+                <div
+                    x-data="{
+                        activeIndex: 0,
+                        total: {{ $desktopSlides->count() }},
+                        autoSlide: null,
+                        next() { this.activeIndex = (this.activeIndex + 1) % this.total; },
+                        prev() { this.activeIndex = (this.activeIndex - 1 + this.total) % this.total; },
+                        goTo(i) { this.activeIndex = i; this.restart(); },
+                        startAutoSlide() { this.autoSlide = setInterval(() => this.next(), 4000); },
+                        stopAutoSlide() { clearInterval(this.autoSlide); },
+                        restart() { this.stopAutoSlide(); this.startAutoSlide(); }
+                    }"
+                    x-init="startAutoSlide()"
+                    @mouseenter="stopAutoSlide()"
+                    @mouseleave="startAutoSlide()"
+                    class="hidden md:block mt-10 relative"
+                >
+                    {{-- Track --}}
+                    <div class="overflow-hidden">
+                        <div
+                            class="flex transition-transform duration-500 ease-in-out"
+                            :style="`transform: translateX(-${activeIndex * 100}%)`"
+                        >
+                            @foreach ($desktopSlides as $slide)
+                                <div wire:key="home-promo-desktop-slide-{{ $loop->index }}" class="w-full flex-shrink-0 grid grid-cols-2 gap-6 lg:gap-8 px-1">
+                                    @foreach ($slide as $promo)
+                                        <div wire:key="home-promo-desktop-{{ $loop->parent->index }}-{{ $loop->index }}"
+                                            class="rounded-tl-[25px] rounded-ee-[25px] bg-white border border-forest/10 overflow-hidden flex flex-col"
+                                        >
+                                            @if (!empty($promo['landscape']))
+                                                <img
+                                                    src="{{ $promo['landscape'] }}"
+                                                    alt="{{ $promo['title'] }}"
+                                                    class="w-full h-auto object-contain block"
+                                                    loading="lazy"
+                                                >
+                                            @endif
+
+                                            <div class="p-7 flex-1">
+                                                <h3 class="font-contax text-lg text-forest-dark">{{ $promo['title'] }}</h3>
+                                                <p class="mt-2 font-contax text-sm text-charcoal/60 leading-relaxed">{{ $promo['description'] }}</p>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    {{-- Nav Arrows --}}
+                    @if ($desktopSlides->count() > 1)
+                        <button
+                            @click="prev(); restart()"
+                            aria-label="Sebelumnya"
+                            class="absolute top-1/2 -translate-y-1/2 -left-4 lg:-left-6 w-10 h-10 rounded-full bg-white border border-forest/10 shadow flex items-center justify-center text-forest-dark hover:bg-forest-dark hover:text-white transition-colors"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button
+                            @click="next(); restart()"
+                            aria-label="Selanjutnya"
+                            class="absolute top-1/2 -translate-y-1/2 -right-4 lg:-right-6 w-10 h-10 rounded-full bg-white border border-forest/10 shadow flex items-center justify-center text-forest-dark hover:bg-forest-dark hover:text-white transition-colors"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    @endif
+
+                    {{-- Dots --}}
+                    @if ($desktopSlides->count() > 1)
+                        <div class="flex justify-center gap-2 mt-6">
+                            @foreach ($desktopSlides as $slide)
+                                <button
+                                    @click="goTo({{ $loop->index }})"
+                                    class="w-2 h-2 rounded-full transition-colors"
+                                    :class="activeIndex === {{ $loop->index }} ? 'bg-forest-dark' : 'bg-forest/20'"
+                                ></button>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+
+                {{-- ============ MOBILE CAROUSEL: 1 CARD/SLIDE, FOTO 1:1 ============ --}}
                 <div
                     x-data="{
                         activeIndex: 0,
                         total: {{ count($this->promos) }},
                         autoSlide: null,
-                        next() {
-                            this.activeIndex = (this.activeIndex + 1) % this.total;
-                        },
-                        startAutoSlide() {
-                            this.autoSlide = setInterval(() => this.next(), 4000);
-                        },
-                        stopAutoSlide() {
-                            clearInterval(this.autoSlide);
-                        }
+                        next() { this.activeIndex = (this.activeIndex + 1) % this.total; },
+                        prev() { this.activeIndex = (this.activeIndex - 1 + this.total) % this.total; },
+                        goTo(i) { this.activeIndex = i; this.restart(); },
+                        startAutoSlide() { this.autoSlide = setInterval(() => this.next(), 4000); },
+                        stopAutoSlide() { clearInterval(this.autoSlide); },
+                        restart() { this.stopAutoSlide(); this.startAutoSlide(); }
                     }"
                     x-init="startAutoSlide()"
                     @mouseenter="stopAutoSlide()"
                     @mouseleave="startAutoSlide()"
-                    class="mt-10 relative max-w-md mx-auto"
+                    class="md:hidden mt-10 relative max-w-md mx-auto"
                 >
                     {{-- Track --}}
                     <div class="overflow-hidden">
@@ -221,13 +309,14 @@
                             :style="`transform: translateX(-${activeIndex * 100}%)`"
                         >
                             @foreach ($this->promos as $promo)
-                                <div wire:key="home-promo-{{ $loop->index }}" class="w-full flex-shrink-0 px-1">
+                                <div wire:key="home-promo-mobile-{{ $loop->index }}" class="w-full flex-shrink-0 px-1">
                                     <div class="rounded-tl-[25px] rounded-ee-[25px] bg-white border border-forest/10 overflow-hidden">
-                                        @if (!empty($promo['image']))
+                                        @if (!empty($promo['box']))
                                             <img
-                                                src="{{ $promo['image'] }}"
+                                                src="{{ $promo['box'] }}"
                                                 alt="{{ $promo['title'] }}"
-                                                class="w-full h-auto object-contain block"
+                                                class="w-full h-auto aspect-square object-cover block"
+                                                loading="lazy"
                                             >
                                         @endif
 
@@ -241,16 +330,40 @@
                         </div>
                     </div>
 
+                    {{-- Nav Arrows --}}
+                    @if (count($this->promos) > 1)
+                        <button
+                            @click="prev(); restart()"
+                            aria-label="Sebelumnya"
+                            class="absolute top-1/2 -translate-y-1/2 -left-2 w-9 h-9 rounded-full bg-white border border-forest/10 shadow flex items-center justify-center text-forest-dark hover:bg-forest-dark hover:text-white transition-colors"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button
+                            @click="next(); restart()"
+                            aria-label="Selanjutnya"
+                            class="absolute top-1/2 -translate-y-1/2 -right-2 w-9 h-9 rounded-full bg-white border border-forest/10 shadow flex items-center justify-center text-forest-dark hover:bg-forest-dark hover:text-white transition-colors"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    @endif
+
                     {{-- Dots --}}
-                    <div class="flex justify-center gap-2 mt-5">
-                        @foreach ($this->promos as $promo)
-                            <button
-                                @click="activeIndex = {{ $loop->index }}; stopAutoSlide(); startAutoSlide()"
-                                class="w-2 h-2 rounded-full transition-colors"
-                                :class="activeIndex === {{ $loop->index }} ? 'bg-forest-dark' : 'bg-forest/20'"
-                            ></button>
-                        @endforeach
-                    </div>
+                    @if (count($this->promos) > 1)
+                        <div class="flex justify-center gap-2 mt-5">
+                            @foreach ($this->promos as $promo)
+                                <button
+                                    @click="goTo({{ $loop->index }})"
+                                    class="w-2 h-2 rounded-full transition-colors"
+                                    :class="activeIndex === {{ $loop->index }} ? 'bg-forest-dark' : 'bg-forest/20'"
+                                ></button>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
             </div>
         </section>

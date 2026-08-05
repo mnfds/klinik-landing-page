@@ -17,17 +17,20 @@ class Home extends Component
             [
                 'title' => 'Diskon 20% Facial Glow Signature',
                 'description' => 'Potongan harga khusus untuk treatment facial andalan kami.',
-                'image' => asset('images/promo/promo-1.png'),
+                'landscape' => asset('images/example/landscape.png'),
+                'box' => asset('images/example/box.png'),
             ],
             [
                 'title' => 'Paket Hemat Konsultasi + Skin Check-Up',
                 'description' => 'Konsultasi dermatologi dan skin check-up dalam satu paket hemat.',
-                'image' => asset('images/promo/promo-3.png'),
+                'landscape' => asset('images/example/landscape.png'),
+                'box' => asset('images/example/box.png'),
             ],
             [
                 'title' => 'Buy 2 Get 1 Produk Skincare Pilihan',
                 'description' => 'Berlaku untuk pembelian Hydrating Toner, Vitamin C Serum, dan Night Repair Cream.',
-                'image' => asset('images/promo/promo-2.png'),
+                'landscape' => asset('images/example/landscape.png'),
+                'box' => asset('images/example/box.png'),
             ],
         ];
     }
