@@ -1,11 +1,16 @@
 <div>
     {{-- HEADER --}}
-    <x-page-header
-        badge="Layanan Kami"
-        description="Setiap layanan ditangani langsung oleh dokter dan tenaga profesional berpengalaman."
-    >
-        Treatment estetika dan layanan medis dalam satu tempat
-    </x-page-header>
+    <section class="bg-forest-dark text-ivory py-20 lg:py-24">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <span class="text-xs font-medium tracking-wide uppercase text-blush">Layanan Kami</span>
+            <h1 class="mt-3 font-display text-4xl sm:text-5xl leading-tight max-w-2xl">
+                Treatment estetika dan layanan medis dalam satu tempat
+            </h1>
+            <p class="mt-4 text-ivory/70 max-w-xl">
+                Setiap layanan ditangani langsung oleh dokter dan tenaga profesional berpengalaman.
+            </p>
+        </div>
+    </section>
 
     @include('partials.landing.divider')
 

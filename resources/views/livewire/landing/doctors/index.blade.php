@@ -1,11 +1,16 @@
 <div>
     {{-- HEADER --}}
-    <x-page-header
-        badge="Tim Kami"
-        description="Pilih dokter dan sesuaikan waktu kunjunganmu dengan jadwal praktik di bawah ini."
-    >
-        Dokter berpengalaman, jadwal yang fleksibel
-    </x-page-header>
+    <section class="bg-forest-dark text-ivory py-20 lg:py-24">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <span class="text-xs font-medium tracking-wide uppercase text-blush">Tim Kami</span>
+            <h1 class="mt-3 font-display text-4xl sm:text-5xl leading-tight max-w-2xl">
+                Dokter berpengalaman, jadwal yang fleksibel
+            </h1>
+            <p class="mt-4 text-ivory/70 max-w-xl">
+                Pilih dokter dan sesuaikan waktu kunjunganmu dengan jadwal praktik di bawah ini.
+            </p>
+        </div>
+    </section>
 
     @include('partials.landing.divider')
 

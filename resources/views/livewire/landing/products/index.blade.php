@@ -1,11 +1,16 @@
 <div>
     {{-- HEADER --}}
-    <x-page-header
-        badge="Produk Kami"
-        description="Konsultasikan dulu dengan tim kami via WhatsApp untuk rekomendasi yang sesuai jenis kulitmu."
-    >
-        Rangkaian skincare pilihan untuk perawatan di rumah
-    </x-page-header>
+    <section class="bg-forest-dark text-ivory py-20 lg:py-24">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <span class="text-xs font-medium tracking-wide uppercase text-blush">Produk Kami</span>
+            <h1 class="mt-3 font-display text-4xl sm:text-5xl leading-tight max-w-2xl">
+                Rangkaian skincare pilihan untuk perawatan di rumah
+            </h1>
+            <p class="mt-4 text-ivory/70 max-w-xl">
+                Konsultasikan dulu dengan tim kami via WhatsApp untuk rekomendasi yang sesuai jenis kulitmu.
+            </p>
+        </div>
+    </section>
 
     @include('partials.landing.divider')
 
