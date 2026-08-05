@@ -1,7 +1,7 @@
 <div>
     {{-- BREADCRUMB --}}
-    <div class="bg-ivory border-b border-forest/10">
-        <div class="max-w-5xl mx-auto px-6 lg:px-8 py-4">
+    <div class="bg-ivory border-b border-forest/10 pt-[70px] lg:pt-[110px]">
+        <div class="max-w-5xl mx-auto px-6 lg:px-8 py-4 flex justify-end">
             <a href="{{ route('services') }}" wire:navigate class="text-sm font-contax text-charcoal/60 hover:text-forest transition-colors inline-flex items-center gap-1">
                 <svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
