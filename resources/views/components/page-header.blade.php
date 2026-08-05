@@ -21,15 +21,15 @@
     {{-- Content --}}
     <div class="relative h-full max-w-7xl mx-auto px-6 lg:px-8 flex flex-col justify-end pb-10 lg:pb-14">
         @if($label)
-            <span class="text-xs font-medium tracking-wide uppercase text-blush">{{ $label }}</span>
+            <span class="text-xs font-contax font-medium tracking-wide uppercase text-blush">{{ $label }}</span>
         @endif
 
-        <h1 class="mt-3 font-display text-4xl sm:text-5xl leading-tight max-w-2xl text-ivory">
+        <h1 class="mt-3 font-contax text-4xl sm:text-5xl leading-tight max-w-2xl text-ivory">
             {{ $title }}
         </h1>
 
         @if($subtitle)
-            <p class="mt-4 text-ivory/70 max-w-xl">
+            <p class="mt-4 font-contax text-ivory/70 max-w-xl">
                 {{ $subtitle }}
             </p>
         @endif
