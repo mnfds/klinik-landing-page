@@ -1,5 +1,5 @@
 <div>
-{{-- HERO CAROUSEL --}}
+    {{-- HERO CAROUSEL --}}
     <section
         x-data="{
             active: 0,
@@ -22,7 +22,7 @@
         }"
         x-init="start()"
         class="relative h-[100dvh] w-full overflow-hidden"
-    >
+        >
         {{-- SLIDE 1 --}}
         <div
             x-show="active === 0"
@@ -196,29 +196,79 @@
     @if (count($this->promos) > 0)
         <section class="bg-blush/20 py-16 lg:py-20">
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
-                <div class="flex items-end justify-between gap-4 flex-wrap">
-                    <div>
-                        <span class="text-xs font-medium tracking-wide uppercase text-gold">Sedang Berlangsung</span>
-                        <h2 class="mt-3 font-display text-3xl sm:text-4xl text-forest-dark">
-                            Promo Pilihan Bulan Ini
+                <div class="relative flex flex-col items-center gap-2 text-center lg:flex-row lg:items-end lg:justify-center lg:gap-4">
+                    <div class="text-center">
+                        <h2 class="mt-3 font-contax text-3xl font-medium sm:text-4xl text-forest-dark">
+                            What's New at Dokter L Clinic
                         </h2>
                     </div>
-                    
+
                     <a href="{{ Route::has('promos') ? route('promos') : '#' }}"
                         wire:navigate
-                        class="text-sm font-medium text-forest-dark border-b border-gold hover:text-forest transition-colors"
+                        class="text-sm font-contax text-forest-dark border-b border-gold hover:text-forest transition-colors
+                            lg:absolute lg:right-0 lg:bottom-0"
                     >
                         Lihat Semua Promo →
                     </a>
                 </div>
 
-                <div class="mt-10 grid sm:grid-cols-2 gap-6">
-                    @foreach ($this->promos as $promo)
-                        <div wire:key="home-promo-{{ $loop->index }}" class="rounded-tl-[25px] rounded-ee-[25px] bg-white border border-forest/10 p-7">
-                            <h3 class="font-display text-lg text-forest-dark">{{ $promo['title'] }}</h3>
-                            <p class="mt-2 text-sm text-charcoal/60 leading-relaxed">{{ $promo['description'] }}</p>
+                <div
+                    x-data="{
+                        activeIndex: 0,
+                        total: {{ count($this->promos) }},
+                        autoSlide: null,
+                        next() {
+                            this.activeIndex = (this.activeIndex + 1) % this.total;
+                        },
+                        startAutoSlide() {
+                            this.autoSlide = setInterval(() => this.next(), 4000);
+                        },
+                        stopAutoSlide() {
+                            clearInterval(this.autoSlide);
+                        }
+                    }"
+                    x-init="startAutoSlide()"
+                    @mouseenter="stopAutoSlide()"
+                    @mouseleave="startAutoSlide()"
+                    class="mt-10 relative max-w-md mx-auto"
+                >
+                    {{-- Track --}}
+                    <div class="overflow-hidden">
+                        <div
+                            class="flex transition-transform duration-500 ease-in-out"
+                            :style="`transform: translateX(-${activeIndex * 100}%)`"
+                        >
+                            @foreach ($this->promos as $promo)
+                                <div wire:key="home-promo-{{ $loop->index }}" class="w-full flex-shrink-0 px-1">
+                                    <div class="rounded-tl-[25px] rounded-ee-[25px] bg-white border border-forest/10 overflow-hidden">
+                                        @if (!empty($promo['image']))
+                                            <img
+                                                src="{{ $promo['image'] }}"
+                                                alt="{{ $promo['title'] }}"
+                                                class="w-full h-auto object-contain block"
+                                            >
+                                        @endif
+
+                                        <div class="p-7">
+                                            <h3 class="font-display text-lg text-forest-dark">{{ $promo['title'] }}</h3>
+                                            <p class="mt-2 text-sm text-charcoal/60 leading-relaxed">{{ $promo['description'] }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
+                    </div>
+
+                    {{-- Dots --}}
+                    <div class="flex justify-center gap-2 mt-5">
+                        @foreach ($this->promos as $promo)
+                            <button
+                                @click="activeIndex = {{ $loop->index }}; stopAutoSlide(); startAutoSlide()"
+                                class="w-2 h-2 rounded-full transition-colors"
+                                :class="activeIndex === {{ $loop->index }} ? 'bg-forest-dark' : 'bg-forest/20'"
+                            ></button>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </section>
