@@ -9,7 +9,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+    /* Chrome, Edge, Safari */
+    body::-webkit-scrollbar {
+        width: 10px;
+    }
+    body::-webkit-scrollbar-track {
+        background: transparent;
+        border-radius: 20px;
+    }
+    body::-webkit-scrollbar-thumb {
+        background: #2E4F7D;
+        border-radius: 20px;
+    }
 
+    body::-webkit-scrollbar-thumb:hover {
+        background: #203450;
+    }
+    </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>

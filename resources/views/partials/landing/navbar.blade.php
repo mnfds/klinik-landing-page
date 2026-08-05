@@ -50,7 +50,7 @@
     <!-- Main Nav (fixed - mengambang di atas konten, transparan saat discroll) -->
     <nav
         :class="scrolled ? 'bg-ivory/80 shadow-md top-2' : 'bg-ivory/95 top-2 lg:top-12'"
-        class="fixed inset-x-2 lg:inset-x-20 z-50 transition-all duration-300 border-2 rounded-lg border-forest/10 opacity-90"
+        class="fixed inset-x-2 lg:inset-x-20 z-50 transition-all duration-300 border-2 rounded-xl border-forest/10"
     >
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex items-center justify-between h-[4rem]">
