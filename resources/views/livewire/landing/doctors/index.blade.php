@@ -13,7 +13,7 @@
     <section class="bg-ivory py-16 lg:py-20">
         <div class="max-w-5xl mx-auto px-6 lg:px-8 space-y-8">
             @forelse ($this->doctorsList as $doctor)
-                <div wire:key="doctor-{{ $loop->index }}" class="rounded-2xl border border-forest/10 bg-white overflow-hidden lg:flex">
+                <div wire:key="doctor-{{ $loop->index }}" class="rounded-tl-[50px] rounded-ee-[50px] border border-forest/10 bg-white overflow-hidden lg:flex">
 
                     {{-- Photo --}}
                     <div class="lg:w-64 shrink-0 aspect-[4/3] lg:aspect-auto bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center">

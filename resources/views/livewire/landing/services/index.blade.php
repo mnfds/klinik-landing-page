@@ -35,7 +35,7 @@
             {{-- Grid --}}
             <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6" wire:key="services-grid-{{ $activeType }}">
                 @forelse ($this->filteredServices as $service)
-                    <div wire:key="service-{{ $loop->index }}" class="group rounded-2xl border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md">
+                    <div wire:key="service-{{ $loop->index }}" class="group rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md">
                         {{-- Image placeholder --}}
                         <div class="aspect-[4/3] bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center">
                             <svg viewBox="0 0 24 24" class="w-10 h-10 text-forest/25" fill="none" stroke="currentColor" stroke-width="1">

@@ -14,7 +14,7 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse ($this->testimonialsList as $testimonial)
-                    <div wire:key="testimonial-{{ $loop->index }}" class="rounded-2xl border border-forest/10 bg-white p-7 flex flex-col">
+                    <div wire:key="testimonial-{{ $loop->index }}" class="rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 bg-white p-7 flex flex-col">
 
                         {{-- Rating --}}
                         <div class="flex items-center gap-1">

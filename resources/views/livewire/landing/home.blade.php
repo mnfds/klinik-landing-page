@@ -92,7 +92,7 @@
 
                 <div class="mt-10 grid sm:grid-cols-2 gap-6">
                     @foreach ($this->promos as $promo)
-                        <div wire:key="home-promo-{{ $loop->index }}" class="rounded-2xl bg-white border border-forest/10 p-7">
+                        <div wire:key="home-promo-{{ $loop->index }}" class="rounded-tl-[25px] rounded-ee-[25px] bg-white border border-forest/10 p-7">
                             <h3 class="font-display text-lg text-forest-dark">{{ $promo['title'] }}</h3>
                             <p class="mt-2 text-sm text-charcoal/60 leading-relaxed">{{ $promo['description'] }}</p>
                         </div>
@@ -120,7 +120,7 @@
                     ['title' => 'Layanan Medis', 'desc' => 'Konsultasi dan penanganan medis non-tindakan estetika oleh dokter berpengalaman.'],
                     ['title' => 'Produk Perawatan', 'desc' => 'Rangkaian skincare pilihan yang bisa kamu bawa pulang, konsultasikan dulu via WhatsApp.'],
                 ] as $item)
-                    <div class="group rounded-2xl border border-forest/10 p-8 transition-all duration-300 hover:border-forest/30 hover:shadow-sm">
+                    <div class="group rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 p-8 transition-all duration-300 hover:border-forest/30 hover:shadow-sm">
                         <span class="flex items-center justify-center w-11 h-11 rounded-full bg-blush/40 text-forest transition-colors duration-300 group-hover:bg-blush">
                             <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5">
                                 <path d="M12 3c-3 3-5 6-5 9a5 5 0 0010 0c0-3-2-6-5-9z" stroke-linecap="round" stroke-linejoin="round"/>
@@ -161,7 +161,7 @@
                     <a href="{{ Route::has('products.detail') ? route('products.detail', $product['slug']) : '#' }}"
                         wire:navigate
                         wire:key="home-product-{{ $loop->index }}"
-                        class="group rounded-2xl border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md"
+                        class="group rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md"
                     >
                         <div class="aspect-square bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center">
                             <svg viewBox="0 0 24 24" class="w-8 h-8 text-forest/25" fill="none" stroke="currentColor" stroke-width="1">
@@ -227,7 +227,7 @@
 
             <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($this->featuredTestimonials as $testimonial)
-                    <div wire:key="home-testimonial-{{ $loop->index }}" class="rounded-2xl border border-forest/10 bg-white p-7 flex flex-col">
+                    <div wire:key="home-testimonial-{{ $loop->index }}" class="rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 bg-white p-7 flex flex-col">
                         <div class="flex items-center gap-1">
                             @for ($i = 1; $i <= 5; $i++)
                                 <svg viewBox="0 0 20 20" class="w-4 h-4 {{ $i <= $testimonial['rating'] ? 'text-gold' : 'text-forest/10' }}" fill="currentColor">
