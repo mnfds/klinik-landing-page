@@ -75,7 +75,7 @@
                         <a
                             href="{{ Route::has($item['route']) ? route($item['route']) : '#' }}"
                             wire:navigate
-                            class="relative text-sm font-medium text-charcoal/80 hover:text-forest transition-colors duration-200 after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
+                            class="relative text-sm font-contax font-medium text-charcoal/80 hover:text-forest transition-colors duration-200 after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
                         >
                             {{ $item['label'] }}
                         </a>
@@ -88,7 +88,7 @@
                         href="https://wa.me/6285822810149"
                         target="_blank"
                         rel="noopener"
-                        class="inline-flex items-center gap-2 rounded-full bg-forest px-3 py-2.5 text-sm font-medium text-ivory shadow-sm transition-all duration-300 hover:bg-forest-dark hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+                        class="inline-flex items-center gap-2 rounded-full bg-forest px-3 py-2.5 text-sm font-contax font-medium text-ivory shadow-sm transition-all duration-300 hover:bg-forest-dark hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
                     >
                         Booking Now
                     </a>
@@ -133,7 +133,7 @@
             <a
                 href="{{ Route::has($item['route']) ? route($item['route']) : '#' }}"
                 wire:navigate
-                class="block text-base font-medium text-charcoal/80 hover:text-forest"
+                class="block text-base font-contax font-medium text-charcoal/80 hover:text-forest"
             >
                 {{ $item['label'] }}
             </a>
@@ -145,7 +145,7 @@
                 href="https://wa.me/6285822810149?text={{ urlencode('Halo, saya ingin melakukan reservasi online.') }}"
                 target="_blank"
                 rel="noopener"
-                class="block text-base font-medium text-forest"
+                class="block text-base font-contax font-medium text-forest"
             >
                 Online Reservation
             </a>
@@ -153,7 +153,7 @@
                 href="https://maps.google.com"
                 target="_blank"
                 rel="noopener"
-                class="block text-base font-medium text-charcoal/80 hover:text-forest"
+                class="block text-base font-contax font-medium text-charcoal/80 hover:text-forest"
             >
                 OUR LOCATION
             </a>
@@ -161,7 +161,7 @@
                 href="{{ asset('brochure.pdf') }}"
                 target="_blank"
                 rel="noopener"
-                class="block text-base font-medium text-charcoal/80 hover:text-forest"
+                class="block text-base font-contax font-medium text-charcoal/80 hover:text-forest"
             >
                 E-BROCHURE
             </a>
@@ -172,7 +172,7 @@
             href="https://wa.me/6285822810149"
             target="_blank"
             rel="noopener"
-            class="block text-center rounded-full bg-forest px-5 py-3 text-sm font-medium text-ivory"
+            class="block font-contax text-center rounded-full bg-forest px-5 py-3 text-sm font-medium text-ivory"
         >
             Booking Now
         </a>

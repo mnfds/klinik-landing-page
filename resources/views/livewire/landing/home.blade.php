@@ -41,15 +41,15 @@
             <div class="relative h-full overflow-y-auto pt-20 sm:pt-24 pb-6">
                 <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 h-full flex items-center">
                     <div class="max-w-2xl w-full">
-                        <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-medium tracking-wide uppercase text-ivory sm:text-forest/70 bg-forest/40 sm:bg-blush/40 rounded-full px-3.5 py-1.5">
+                        <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-contax font-medium tracking-wide uppercase text-ivory sm:text-forest/70 bg-forest/40 sm:bg-blush/40 rounded-full px-3.5 py-1.5">
                             Klinik Kecantikan &amp; Medis
                         </span>
 
-                        <h1 class="mt-4 sm:mt-6 font-display text-2xl xs:text-3xl sm:text-5xl lg:text-6xl leading-[1.15] sm:leading-[1.1] text-ivory sm:text-forest-dark">
+                        <h1 class="mt-4 sm:mt-6 font-contax font-bold text-2xl xs:text-3xl sm:text-5xl lg:text-6xl leading-[1.15] sm:leading-[1.1] text-ivory sm:text-forest-dark">
                             Merawat kulitmu, dengan ketenangan yang tepat.
                         </h1>
 
-                        <p class="mt-3 sm:mt-6 text-sm sm:text-lg text-ivory/80 sm:text-charcoal/70 leading-relaxed max-w-lg">
+                        <p class="mt-3 sm:mt-6 font-contax text-sm sm:text-lg text-ivory/80 sm:text-charcoal/70 leading-relaxed max-w-lg">
                             Kami memadukan perawatan estetika dan layanan medis dalam satu tempat —
                             ditangani langsung oleh dokter berpengalaman, dengan pendekatan yang personal untuk setiap jenis kulit.
                         </p>
@@ -58,35 +58,17 @@
                             <a href="https://wa.me/6285822810149"
                                 target="_blank"
                                 rel="noopener"
-                                class="inline-flex items-center justify-center gap-2 rounded-full bg-forest px-6 py-3 sm:py-3.5 text-sm font-medium text-ivory shadow-sm transition-all duration-300 hover:bg-forest-dark hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+                                class="inline-flex items-center justify-center gap-2 rounded-full bg-forest px-6 py-3 sm:py-3.5 text-sm font-contax font-medium text-ivory shadow-sm transition-all duration-300 hover:bg-forest-dark hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
                             >
                                 Booking via WhatsApp
                             </a>
 
                             <a href="{{ Route::has('services') ? route('services') : '#' }}"
                                 wire:navigate
-                                class="inline-flex items-center justify-center gap-2 rounded-full border border-ivory/40 sm:border-forest/20 px-6 py-3 sm:py-3.5 text-sm font-medium text-ivory sm:text-forest-dark transition-all duration-300 hover:border-forest hover:bg-white/10 sm:hover:bg-forest/5"
+                                class="inline-flex items-center justify-center gap-2 rounded-full border border-ivory/40 sm:border-forest/20 px-6 py-3 sm:py-3.5 text-sm font-contax font-medium text-ivory sm:text-forest-dark transition-all duration-300 hover:border-forest hover:bg-white/10 sm:hover:bg-forest/5"
                             >
                                 Lihat Layanan
                             </a>
-                        </div>
-
-                        {{-- Trust strip: disembunyikan di layar sangat kecil supaya button gak ikut terdesak --}}
-                        <div class="mt-6 sm:mt-14 hidden xs:flex items-center gap-4 sm:gap-8 text-xs sm:text-sm text-ivory/70 sm:text-charcoal/60">
-                            <div>
-                                <p class="font-display text-lg sm:text-2xl text-ivory sm:text-forest-dark">10+</p>
-                                <p class="whitespace-nowrap">Tahun melayani</p>
-                            </div>
-                            <div class="w-px h-8 sm:h-10 bg-ivory/20 sm:bg-forest/10"></div>
-                            <div>
-                                <p class="font-display text-lg sm:text-2xl text-ivory sm:text-forest-dark">5.000+</p>
-                                <p class="whitespace-nowrap">Pasien puas</p>
-                            </div>
-                            <div class="w-px h-8 sm:h-10 bg-ivory/20 sm:bg-forest/10"></div>
-                            <div>
-                                <p class="font-display text-lg sm:text-2xl text-ivory sm:text-forest-dark">100%</p>
-                                <p class="whitespace-nowrap">Dokter berlisensi</p>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -110,15 +92,15 @@
 
             <div class="relative h-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 flex items-end sm:items-center pb-14 sm:pb-0">
                 <div class="max-w-2xl">
-                    <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-medium tracking-wide uppercase text-ivory sm:text-forest/70 bg-forest/40 sm:bg-blush/40 rounded-full px-3.5 py-1.5">
+                    <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-contax font-medium tracking-wide uppercase text-ivory sm:text-forest/70 bg-forest/40 sm:bg-blush/40 rounded-full px-3.5 py-1.5">
                         Konsultasi Gratis
                     </span>
 
-                    <h1 class="mt-4 sm:mt-6 font-display text-3xl sm:text-5xl lg:text-6xl leading-[1.15] sm:leading-[1.1] text-ivory sm:text-forest-dark">
+                    <h1 class="mt-4 sm:mt-6 font-contax font-bold text-3xl sm:text-5xl lg:text-6xl leading-[1.15] sm:leading-[1.1] text-ivory sm:text-forest-dark">
                         Konsultasi sebelum treatment pertamamu.
                     </h1>
 
-                    <p class="mt-3 sm:mt-6 text-sm sm:text-lg text-ivory/80 sm:text-charcoal/70 leading-relaxed max-w-lg">
+                    <p class="mt-3 sm:mt-6 font-contax text-sm sm:text-lg text-ivory/80 sm:text-charcoal/70 leading-relaxed max-w-lg">
                         Dokter kami akan membantu menentukan perawatan yang paling sesuai dengan kondisi kulitmu, tanpa biaya konsultasi.
                     </p>
 
@@ -126,7 +108,7 @@
                         <a href="https://wa.me/6285822810149"
                             target="_blank"
                             rel="noopener"
-                            class="inline-flex items-center justify-center gap-2 rounded-full bg-forest px-6 py-3 sm:py-3.5 text-sm font-medium text-ivory shadow-sm transition-all duration-300 hover:bg-forest-dark hover:shadow-md"
+                            class="inline-flex items-center justify-center gap-2 rounded-full bg-forest px-6 py-3 sm:py-3.5 text-sm font-contax font-medium text-ivory shadow-sm transition-all duration-300 hover:bg-forest-dark hover:shadow-md"
                         >
                             Booking Konsultasi
                         </a>
@@ -152,22 +134,22 @@
 
             <div class="relative h-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 flex items-end sm:items-center pb-14 sm:pb-0">
                 <div class="max-w-2xl">
-                    <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-medium tracking-wide uppercase text-ivory sm:text-forest/70 bg-forest/40 sm:bg-blush/40 rounded-full px-3.5 py-1.5">
+                    <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-contax font-medium tracking-wide uppercase text-ivory sm:text-forest/70 bg-forest/40 sm:bg-blush/40 rounded-full px-3.5 py-1.5">
                         Dokter Berlisensi
                     </span>
 
-                    <h1 class="mt-4 sm:mt-6 font-display text-3xl sm:text-5xl lg:text-6xl leading-[1.15] sm:leading-[1.1] text-ivory sm:text-forest-dark">
+                    <h1 class="mt-4 sm:mt-6 font-contax font-bold text-3xl sm:text-5xl lg:text-6xl leading-[1.15] sm:leading-[1.1] text-ivory sm:text-forest-dark">
                         Ditangani langsung oleh tenaga medis profesional.
                     </h1>
 
-                    <p class="mt-3 sm:mt-6 text-sm sm:text-lg text-ivory/80 sm:text-charcoal/70 leading-relaxed max-w-lg">
+                    <p class="mt-3 sm:mt-6 font-contax text-sm sm:text-lg text-ivory/80 sm:text-charcoal/70 leading-relaxed max-w-lg">
                         Setiap prosedur dilakukan oleh dokter berpengalaman dengan standar medis yang terjamin.
                     </p>
 
                     <div class="mt-6 sm:mt-10">
                         <a href="{{ Route::has('services') ? route('services') : '#' }}"
                             wire:navigate
-                            class="inline-flex items-center justify-center gap-2 rounded-full border border-ivory/40 sm:border-forest/20 px-6 py-3 sm:py-3.5 text-sm font-medium text-ivory sm:text-forest-dark transition-all duration-300 hover:border-forest hover:bg-white/10 sm:hover:bg-forest/5"
+                            class="inline-flex items-center justify-center gap-2 rounded-full border border-ivory/40 sm:border-forest/20 px-6 py-3 sm:py-3.5 text-sm font-contax font-medium text-ivory sm:text-forest-dark transition-all duration-300 hover:border-forest hover:bg-white/10 sm:hover:bg-forest/5"
                         >
                             Lihat Layanan
                         </a>
@@ -250,8 +232,8 @@
                                         @endif
 
                                         <div class="p-7">
-                                            <h3 class="font-display text-lg text-forest-dark">{{ $promo['title'] }}</h3>
-                                            <p class="mt-2 text-sm text-charcoal/60 leading-relaxed">{{ $promo['description'] }}</p>
+                                            <h3 class="font-contax text-lg text-forest-dark">{{ $promo['title'] }}</h3>
+                                            <p class="mt-2 font-contax text-sm text-charcoal/60 leading-relaxed">{{ $promo['description'] }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -280,8 +262,8 @@
     <section class="bg-ivory py-20 lg:py-28">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="max-w-xl">
-                <span class="text-xs font-medium tracking-wide uppercase text-gold">Layanan Kami</span>
-                <h2 class="mt-3 font-display text-3xl sm:text-4xl text-forest-dark">
+                <span class="text-xs font-contax font-medium tracking-wide uppercase text-gold">Layanan Kami</span>
+                <h2 class="mt-3 font-contax text-3xl sm:text-4xl text-forest-dark">
                     Dirancang untuk setiap kebutuhan kulit dan tubuhmu
                 </h2>
             </div>
@@ -298,8 +280,8 @@
                                 <path d="M12 3c-3 3-5 6-5 9a5 5 0 0010 0c0-3-2-6-5-9z" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </span>
-                        <h3 class="mt-6 font-display text-xl text-forest-dark">{{ $item['title'] }}</h3>
-                        <p class="mt-2 text-sm text-charcoal/60 leading-relaxed">{{ $item['desc'] }}</p>
+                        <h3 class="mt-6 font-contax text-xl text-forest-dark">{{ $item['title'] }}</h3>
+                        <p class="mt-2 font-contax text-sm text-charcoal/60 leading-relaxed">{{ $item['desc'] }}</p>
                     </div>
                 @endforeach
             </div>
@@ -313,15 +295,15 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex items-end justify-between gap-4 flex-wrap">
                 <div class="max-w-xl">
-                    <span class="text-xs font-medium tracking-wide uppercase text-gold">Produk Kami</span>
-                    <h2 class="mt-3 font-display text-3xl sm:text-4xl text-forest-dark">
+                    <span class="text-xs font-contax font-medium tracking-wide uppercase text-gold">Produk Kami</span>
+                    <h2 class="mt-3 font-contax text-3xl sm:text-4xl text-forest-dark">
                         Lanjutkan perawatan di rumah
                     </h2>
                 </div>
                 
                 <a href="{{ Route::has('products') ? route('products') : '#' }}"
                     wire:navigate
-                    class="text-sm font-medium text-forest-dark border-b border-gold hover:text-forest transition-colors"
+                    class="text-sm font-contax font-medium text-forest-dark border-b border-gold hover:text-forest transition-colors"
                 >
                     Lihat Semua Produk →
                 </a>
@@ -341,8 +323,8 @@
                             </svg>
                         </div>
                         <div class="p-4">
-                            <p class="text-sm font-medium text-forest-dark leading-snug">{{ $product['name'] }}</p>
-                            <p class="mt-1 text-sm text-charcoal/50">Rp {{ number_format($product['price'], 0, ',', '.') }}</p>
+                            <p class="text-sm font-contax font-medium text-forest-dark leading-snug">{{ $product['name'] }}</p>
+                            <p class="mt-1 font-contax text-sm text-charcoal/50">Rp {{ number_format($product['price'], 0, ',', '.') }}</p>
                         </div>
                     </a>
                 @endforeach
@@ -354,26 +336,46 @@
 
     {{-- KENAPA MEMILIH KAMI --}}
     <section class="bg-forest-dark text-ivory py-20 lg:py-28">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-3 gap-12">
-            <div>
-                <span class="text-xs font-medium tracking-wide uppercase text-blush">Kenapa Kami</span>
-                <h2 class="mt-3 font-display text-3xl text-ivory leading-tight">
-                    Ditangani langsung oleh dokter, bukan sekadar terapis.
-                </h2>
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid lg:grid-cols-3 gap-12">
+                <div>
+                    <span class="text-xs font-medium tracking-wide uppercase text-blush">Kenapa Kami</span>
+                    <h2 class="mt-3 font-display text-3xl text-ivory leading-tight">
+                        Ditangani langsung oleh dokter, bukan sekadar terapis.
+                    </h2>
+                </div>
+
+                <div class="lg:col-span-2 grid sm:grid-cols-2 gap-8">
+                    @foreach ([
+                        ['title' => 'Dokter Berlisensi', 'desc' => 'Setiap treatment dan layanan medis ditangani oleh dokter dengan izin praktik resmi.'],
+                        ['title' => 'Konsultasi Personal', 'desc' => 'Rekomendasi treatment disesuaikan dengan kondisi kulit dan riwayat kesehatanmu.'],
+                        ['title' => 'Produk Teruji', 'desc' => 'Produk yang kami rekomendasikan sudah melalui kurasi dan uji keamanan.'],
+                        ['title' => 'Lingkungan Nyaman', 'desc' => 'Ruang perawatan yang tenang, bersih, dan dirancang untuk kenyamananmu.'],
+                    ] as $item)
+                        <div>
+                            <h3 class="font-contax text-lg text-ivory">{{ $item['title'] }}</h3>
+                            <p class="mt-2 font-contax text-sm text-ivory/60 leading-relaxed">{{ $item['desc'] }}</p>
+                        </div>
+                    @endforeach
+                </div>
             </div>
 
-            <div class="lg:col-span-2 grid sm:grid-cols-2 gap-8">
-                @foreach ([
-                    ['title' => 'Dokter Berlisensi', 'desc' => 'Setiap treatment dan layanan medis ditangani oleh dokter dengan izin praktik resmi.'],
-                    ['title' => 'Konsultasi Personal', 'desc' => 'Rekomendasi treatment disesuaikan dengan kondisi kulit dan riwayat kesehatanmu.'],
-                    ['title' => 'Produk Teruji', 'desc' => 'Produk yang kami rekomendasikan sudah melalui kurasi dan uji keamanan.'],
-                    ['title' => 'Lingkungan Nyaman', 'desc' => 'Ruang perawatan yang tenang, bersih, dan dirancang untuk kenyamananmu.'],
-                ] as $item)
-                    <div>
-                        <h3 class="font-display text-lg text-ivory">{{ $item['title'] }}</h3>
-                        <p class="mt-2 text-sm text-ivory/60 leading-relaxed">{{ $item['desc'] }}</p>
-                    </div>
-                @endforeach
+            {{-- Trust strip --}}
+            <div class="mt-14 flex items-center gap-4 sm:gap-8 text-xs sm:text-sm text-ivory/70">
+                <div>
+                    <p class="font-contax text-lg sm:text-2xl text-ivory">10+</p>
+                    <p class="font-contax whitespace-nowrap">Tahun melayani</p>
+                </div>
+                <div class="w-px h-8 sm:h-10 bg-ivory/20"></div>
+                <div>
+                    <p class="font-contax text-lg sm:text-2xl text-ivory">5.000+</p>
+                    <p class="font-contax whitespace-nowrap">Pasien puas</p>
+                </div>
+                <div class="w-px h-8 sm:h-10 bg-ivory/20"></div>
+                <div>
+                    <p class="font-contax text-lg sm:text-2xl text-ivory">100%</p>
+                    <p class="font-contax whitespace-nowrap">Dokter berlisensi</p>
+                </div>
             </div>
         </div>
     </section>
@@ -383,15 +385,15 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex items-end justify-between gap-4 flex-wrap">
                 <div class="max-w-xl">
-                    <span class="text-xs font-medium tracking-wide uppercase text-gold">Testimoni</span>
-                    <h2 class="mt-3 font-display text-3xl sm:text-4xl text-forest-dark">
+                    <span class="text-xs font-contax font-medium tracking-wide uppercase text-gold">Testimoni</span>
+                    <h2 class="mt-3 font-contax text-3xl sm:text-4xl text-forest-dark">
                         Kata mereka yang sudah merasakan
                     </h2>
                 </div>
                 
                 <a href="{{ Route::has('testimonials') ? route('testimonials') : '#' }}"
                     wire:navigate
-                    class="text-sm font-medium text-forest-dark border-b border-gold hover:text-forest transition-colors"
+                    class="text-sm font-contax font-medium text-forest-dark border-b border-gold hover:text-forest transition-colors"
                 >
                     Lihat Semua Testimoni →
                 </a>
@@ -407,10 +409,10 @@
                                 </svg>
                             @endfor
                         </div>
-                        <p class="mt-4 text-sm text-charcoal/70 leading-relaxed flex-1">
+                        <p class="mt-4 font-contax text-sm text-charcoal/70 leading-relaxed flex-1">
                             &ldquo;{{ $testimonial['message'] }}&rdquo;
                         </p>
-                        <p class="mt-5 pt-4 border-t border-forest/10 font-display text-base text-forest-dark">
+                        <p class="mt-5 pt-4 border-t border-forest/10 font-contax text-base text-forest-dark">
                             {{ $testimonial['name'] }}
                         </p>
                     </div>
@@ -422,17 +424,17 @@
     {{-- CTA PENUTUP --}}
     <section class="py-20 lg:py-28">
         <div class="max-w-3xl mx-auto px-6 text-center">
-            <h2 class="font-display text-3xl sm:text-4xl text-forest-dark">
+            <h2 class="font-contax text-3xl sm:text-4xl text-forest-dark">
                 Siap untuk konsultasi pertamamu?
             </h2>
-            <p class="mt-4 text-charcoal/60">
+            <p class="mt-4 font-contax text-charcoal/60">
                 Tim kami siap membantu menentukan treatment yang paling sesuai untukmu — tanpa paksaan, tanpa buru-buru.
             </p>
             
             <a href="https://wa.me/6285822810149"
                 target="_blank"
                 rel="noopener"
-                class="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-forest px-8 py-4 text-sm font-medium text-ivory shadow-sm transition-all duration-300 hover:bg-forest-dark hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+                class="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-forest px-8 py-4 text-sm font-contax font-medium text-ivory shadow-sm transition-all duration-300 hover:bg-forest-dark hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
             >
                 Hubungi Kami di WhatsApp
             </a>

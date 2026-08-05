@@ -8,15 +8,15 @@
                 {{-- </span> --}}
                 <span class="font-display text-lg text-ivory">{{ config('app.name', 'Klinik') }}</span>
             </div>
-            <p class="text-sm text-ivory/70 leading-relaxed max-w-xs">
+            <p class="text-sm font-contax text-ivory/70 leading-relaxed max-w-xs">
                 Perawatan kecantikan dan layanan medis dengan pendekatan yang tenang, aman, dan personal.
             </p>
         </div>
 
         <!-- Quick Links -->
         <div>
-            <h3 class="font-display text-base text-ivory mb-4">Jelajahi</h3>
-            <ul class="space-y-3 text-sm text-ivory/70">
+            <h3 class="font-contax text-base text-ivory mb-4">Jelajahi</h3>
+            <ul class="space-y-3 font-contax text-sm text-ivory/70">
                 <li><a href="{{ Route::has('services') ? route('services') : '#' }}" wire:navigate class="hover:text-blush transition-colors">Layanan</a></li>
                 <li><a href="{{ Route::has('products') ? route('products') : '#' }}" wire:navigate class="hover:text-blush transition-colors">Produk</a></li>
                 <li><a href="{{ Route::has('doctors') ? route('doctors') : '#' }}" wire:navigate class="hover:text-blush transition-colors">Dokter</a></li>
@@ -26,8 +26,8 @@
 
         <!-- Contact -->
         <div>
-            <h3 class="font-display text-base text-ivory mb-4">Kontak</h3>
-            <ul class="space-y-3 text-sm text-ivory/70">
+            <h3 class="font-contax text-base text-ivory mb-4">Kontak</h3>
+            <ul class="space-y-3 font-contax text-sm text-ivory/70">
                 <li>Jl. Gatot Subroto No.88, Kuripan, Kec. Banjarmasin Tim., Kota Banjarmasin, Kalimantan Selatan 70238</li>
                 <li>
                     <a href="https://wa.me/6285822810149" target="_blank" rel="noopener" class="hover:text-blush transition-colors">
@@ -40,17 +40,17 @@
 
         <!-- Hours -->
         <div>
-            <h3 class="font-display text-base text-ivory mb-4">Jam Operasional</h3>
+            <h3 class="font-contax text-base text-ivory mb-4">Jam Operasional</h3>
             <ul class="space-y-2 text-sm text-ivory/70">
-                <li class="flex justify-between gap-4"><span>Senin–Sabtu</span><span>08.00–20.00</span></li>
-                <li class="flex justify-between gap-4"><span>Minggu</span><span>09.00–17.00</span></li>
+                <li class="flex font-contax justify-between gap-4"><span>Senin – Sabtu</span><span>08.00–20.00</span></li>
+                <li class="flex font-contax justify-between gap-4"><span>Minggu</span><span>09.00–17.00</span></li>
             </ul>
             {{-- Nanti diganti data dinamis dari tabel operational_hours --}}
         </div>
     </div>
 
     <div class="border-t border-ivory/10">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 py-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-ivory/50">
+        <div class="max-w-7xl font-contax mx-auto px-6 lg:px-8 py-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-ivory/50">
             <p>&copy; {{ now()->year }} {{ config('app.name', 'Klinik') }}. Seluruh hak cipta dilindungi.</p>
             <p>Dibuat dengan perhatian pada setiap detail.</p>
         </div>
