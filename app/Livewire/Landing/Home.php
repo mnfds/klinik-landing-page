@@ -39,10 +39,12 @@ class Home extends Component
     public function getFeaturedProductsProperty(): array
     {
         return [
-            ['slug' => 'hydrating-toner', 'name' => 'Hydrating Toner', 'price' => 145000],
-            ['slug' => 'vitamin-c-serum', 'name' => 'Vitamin C Serum', 'price' => 210000],
-            ['slug' => 'sunscreen-spf-50', 'name' => 'Sunscreen SPF 50', 'price' => 165000],
-            ['slug' => 'night-repair-cream', 'name' => 'Night Repair Cream', 'price' => 235000],
+            ['slug' => 'hydrating-toner', 'name' => 'Hydrating Toner', 'price' => 145000, 'box' => asset('images/example/box.png')],
+            ['slug' => 'vitamin-c-serum', 'name' => 'Vitamin C Serum', 'price' => 210000, 'box' => asset('images/example/box.png')],
+            ['slug' => 'sunscreen-spf-50', 'name' => 'Sunscreen SPF 50', 'price' => 165000, 'box' => asset('images/example/box.png')],
+            ['slug' => 'night-repair-cream', 'name' => 'Night Repair Cream', 'price' => 235000, 'box' => asset('images/example/box.png')],
+            ['slug' => 'hydrating-toner', 'name' => 'Hydrating Toner', 'price' => 145000, 'box' => asset('images/example/box.png')],
+            ['slug' => 'vitamin-c-serum', 'name' => 'Vitamin C Serum', 'price' => 210000, 'box' => asset('images/example/box.png')],
         ];
     }
 

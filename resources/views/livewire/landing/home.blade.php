@@ -404,48 +404,209 @@
     @include('partials.landing.divider')
 
     {{-- CUPLIKAN PRODUK --}}
-    <section class="bg-ivory py-20 lg:py-28">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="flex items-end justify-between gap-4 flex-wrap">
-                <div class="max-w-xl">
-                    <span class="text-xs font-contax font-medium tracking-wide uppercase text-gold">Produk Kami</span>
-                    <h2 class="mt-3 font-contax text-3xl sm:text-4xl text-forest-dark">
-                        Lanjutkan perawatan di rumah
-                    </h2>
-                </div>
-                
-                <a href="{{ Route::has('products') ? route('products') : '#' }}"
-                    wire:navigate
-                    class="text-sm font-contax font-medium text-forest-dark border-b border-gold hover:text-forest transition-colors"
-                >
-                    Lihat Semua Produk →
-                </a>
-            </div>
+    @if (count($this->featuredProducts) > 0)
+        @php
+            $mobileProductSlides = collect($this->featuredProducts)->chunk(2)->values();
+            $desktopProductSlides = collect($this->featuredProducts)->chunk(4)->values();
+        @endphp
 
-            <div class="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-5">
-                @foreach ($this->featuredProducts as $product)
-                    
-                    <a href="{{ Route::has('products.detail') ? route('products.detail', $product['slug']) : '#' }}"
+        <section class="bg-ivory py-20 lg:py-28">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="flex items-end justify-between gap-4 flex-wrap">
+                    <div class="max-w-xl">
+                        <span class="text-xs font-contax font-medium tracking-wide uppercase text-gold">Produk Kami</span>
+                        <h2 class="mt-3 font-contax text-3xl sm:text-4xl text-forest-dark">
+                            Lanjutkan perawatan di rumah
+                        </h2>
+                    </div>
+
+                    <a href="{{ Route::has('products') ? route('products') : '#' }}"
                         wire:navigate
-                        wire:key="home-product-{{ $loop->index }}"
-                        class="group rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md"
+                        class="text-sm font-contax font-medium text-forest-dark border-b border-gold hover:text-forest transition-colors"
                     >
-                        <div class="aspect-square bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center">
-                            <svg viewBox="0 0 24 24" class="w-8 h-8 text-forest/25" fill="none" stroke="currentColor" stroke-width="1">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 3h6l1 3h3a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h3l1-3z" />
-                            </svg>
-                        </div>
-                        <div class="p-4">
-                            <p class="text-sm font-contax font-medium text-forest-dark leading-snug">{{ $product['name'] }}</p>
-                            <p class="mt-1 font-contax text-sm text-charcoal/50">Rp {{ number_format($product['price'], 0, ',', '.') }}</p>
-                        </div>
+                        Lihat Semua Produk →
                     </a>
-                @endforeach
-            </div>
-        </div>
-    </section>
+                </div>
 
-    @include('partials.landing.divider')
+                {{-- ============ MOBILE CAROUSEL: 2 CARD/SLIDE ============ --}}
+                <div
+                    x-data="{
+                        activeIndex: 0,
+                        total: {{ $mobileProductSlides->count() }},
+                        autoSlide: null,
+                        next() { this.activeIndex = (this.activeIndex + 1) % this.total; },
+                        prev() { this.activeIndex = (this.activeIndex - 1 + this.total) % this.total; },
+                        goTo(i) { this.activeIndex = i; this.restart(); },
+                        startAutoSlide() { this.autoSlide = setInterval(() => this.next(), 4000); },
+                        stopAutoSlide() { clearInterval(this.autoSlide); },
+                        restart() { this.stopAutoSlide(); this.startAutoSlide(); }
+                    }"
+                    x-init="startAutoSlide()"
+                    @mouseenter="stopAutoSlide()"
+                    @mouseleave="startAutoSlide()"
+                    class="md:hidden mt-10 relative"
+                >
+                    <div class="overflow-hidden">
+                        <div
+                            class="flex transition-transform duration-500 ease-in-out"
+                            :style="`transform: translateX(-${activeIndex * 100}%)`"
+                        >
+                            @foreach ($mobileProductSlides as $slide)
+                                <div wire:key="home-product-mobile-slide-{{ $loop->index }}" class="w-full flex-shrink-0 grid grid-cols-2 gap-5 px-1">
+                                    @foreach ($slide as $product)
+                                        <a href="{{ Route::has('products.detail') ? route('products.detail', $product['slug']) : '#' }}"
+                                            wire:navigate
+                                            wire:key="home-product-mobile-{{ $loop->parent->index }}-{{ $loop->index }}"
+                                            class="group rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md"
+                                        >
+                                            <div class="aspect-square bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center overflow-hidden">
+                                                @if (!empty($product['box']))
+                                                    <img
+                                                        src="{{ $product['box'] }}"
+                                                        alt="{{ $product['name'] }}"
+                                                        class="w-full h-full object-contain"
+                                                        loading="lazy"
+                                                    >
+                                                @else
+                                                    <svg viewBox="0 0 24 24" class="w-8 h-8 text-forest/25" fill="none" stroke="currentColor" stroke-width="1">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 3h6l1 3h3a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h3l1-3z" />
+                                                    </svg>
+                                                @endif
+                                            </div>
+                                            <div class="p-4">
+                                                <p class="text-sm font-contax font-medium text-forest-dark leading-snug">{{ $product['name'] }}</p>
+                                                <p class="mt-1 font-contax text-sm text-charcoal/50">Rp {{ number_format($product['price'], 0, ',', '.') }}</p>
+                                            </div>
+                                        </a>
+                                    @endforeach
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    @if ($mobileProductSlides->count() > 1)
+                        <button
+                            @click="prev(); restart()"
+                            aria-label="Sebelumnya"
+                            class="absolute top-1/2 -translate-y-1/2 -left-2 w-9 h-9 rounded-full bg-white border border-forest/10 shadow flex items-center justify-center text-forest-dark hover:bg-forest-dark hover:text-white transition-colors"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button
+                            @click="next(); restart()"
+                            aria-label="Selanjutnya"
+                            class="absolute top-1/2 -translate-y-1/2 -right-2 w-9 h-9 rounded-full bg-white border border-forest/10 shadow flex items-center justify-center text-forest-dark hover:bg-forest-dark hover:text-white transition-colors"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+
+                        <div class="flex justify-center gap-2 mt-6">
+                            @foreach ($mobileProductSlides as $slide)
+                                <button
+                                    @click="goTo({{ $loop->index }})"
+                                    class="w-2 h-2 rounded-full transition-colors"
+                                    :class="activeIndex === {{ $loop->index }} ? 'bg-forest-dark' : 'bg-forest/20'"
+                                ></button>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+
+                {{-- ============ DESKTOP CAROUSEL: 4 CARD/SLIDE ============ --}}
+                <div
+                    x-data="{
+                        activeIndex: 0,
+                        total: {{ $desktopProductSlides->count() }},
+                        autoSlide: null,
+                        next() { this.activeIndex = (this.activeIndex + 1) % this.total; },
+                        prev() { this.activeIndex = (this.activeIndex - 1 + this.total) % this.total; },
+                        goTo(i) { this.activeIndex = i; this.restart(); },
+                        startAutoSlide() { this.autoSlide = setInterval(() => this.next(), 4000); },
+                        stopAutoSlide() { clearInterval(this.autoSlide); },
+                        restart() { this.stopAutoSlide(); this.startAutoSlide(); }
+                    }"
+                    x-init="startAutoSlide()"
+                    @mouseenter="stopAutoSlide()"
+                    @mouseleave="startAutoSlide()"
+                    class="hidden md:block mt-10 relative"
+                >
+                    <div class="overflow-hidden">
+                        <div
+                            class="flex transition-transform duration-500 ease-in-out"
+                            :style="`transform: translateX(-${activeIndex * 100}%)`"
+                        >
+                            @foreach ($desktopProductSlides as $slide)
+                                <div wire:key="home-product-desktop-slide-{{ $loop->index }}" class="w-full flex-shrink-0 grid grid-cols-4 gap-5 px-1">
+                                    @foreach ($slide as $product)
+                                        <a href="{{ Route::has('products.detail') ? route('products.detail', $product['slug']) : '#' }}"
+                                            wire:navigate
+                                            wire:key="home-product-desktop-{{ $loop->parent->index }}-{{ $loop->index }}"
+                                            class="group rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md"
+                                        >
+                                            <div class="aspect-square bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center overflow-hidden">
+                                                @if (!empty($product['box']))
+                                                    <img
+                                                        src="{{ $product['box'] }}"
+                                                        alt="{{ $product['name'] }}"
+                                                        class="w-full h-full object-contain"
+                                                        loading="lazy"
+                                                    >
+                                                @else
+                                                    <svg viewBox="0 0 24 24" class="w-8 h-8 text-forest/25" fill="none" stroke="currentColor" stroke-width="1">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 3h6l1 3h3a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h3l1-3z" />
+                                                    </svg>
+                                                @endif
+                                            </div>
+                                            <div class="p-4">
+                                                <p class="text-sm font-contax font-medium text-forest-dark leading-snug">{{ $product['name'] }}</p>
+                                                <p class="mt-1 font-contax text-sm text-charcoal/50">Rp {{ number_format($product['price'], 0, ',', '.') }}</p>
+                                            </div>
+                                        </a>
+                                    @endforeach
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    @if ($desktopProductSlides->count() > 1)
+                        <button
+                            @click="prev(); restart()"
+                            aria-label="Sebelumnya"
+                            class="absolute top-1/2 -translate-y-1/2 -left-4 lg:-left-6 w-10 h-10 rounded-full bg-white border border-forest/10 shadow flex items-center justify-center text-forest-dark hover:bg-forest-dark hover:text-white transition-colors"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button
+                            @click="next(); restart()"
+                            aria-label="Selanjutnya"
+                            class="absolute top-1/2 -translate-y-1/2 -right-4 lg:-right-6 w-10 h-10 rounded-full bg-white border border-forest/10 shadow flex items-center justify-center text-forest-dark hover:bg-forest-dark hover:text-white transition-colors"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+
+                        <div class="flex justify-center gap-2 mt-6">
+                            @foreach ($desktopProductSlides as $slide)
+                                <button
+                                    @click="goTo({{ $loop->index }})"
+                                    class="w-2 h-2 rounded-full transition-colors"
+                                    :class="activeIndex === {{ $loop->index }} ? 'bg-forest-dark' : 'bg-forest/20'"
+                                ></button>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </section>
+        @include('partials.landing.divider')
+    @endif
 
     {{-- KENAPA MEMILIH KAMI --}}
     <section class="bg-forest-dark text-ivory py-20 lg:py-28">
