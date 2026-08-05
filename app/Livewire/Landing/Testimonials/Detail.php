@@ -2,15 +2,16 @@
 
 namespace App\Livewire\Landing\Testimonials;
 
+use Illuminate\Support\Facades\Cache;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-#[Layout('layouts.landing')]
-#[Title('Testimoni')]
-class Index extends Component
+class Detail extends Component
 {
-    // Dummy data — nanti diganti Testimonial::with('service')->where('is_active', true)->latest()->get()
+    public array $testimonials;
+
+    // Dummy data — nanti diganti Testimonials::where('slug', $slug)->firstOrFail()
     protected function testimonials(): array
     {
         return [
@@ -59,13 +60,20 @@ class Index extends Component
         ];
     }
 
-    public function getTestimonialsListProperty(): array
+    public function mount(string $slug): void
     {
-        return $this->testimonials();
+        $testimonials = collect($this->testimonials())->firstWhere('slug', $slug);
+
+        abort_if($testimonials === null, 404);
+
+        $this->testimonials = $testimonials;
     }
+
+    #[Layout('layouts.landing')]
+    #[Title('Detail Testimonials')]
 
     public function render()
     {
-        return view('livewire.landing.testimonials.index');
+        return view('livewire.landing.testimonials.detail');
     }
 }
