@@ -1,16 +1,11 @@
 <div>
     {{-- HEADER --}}
-    <section class="bg-forest-dark text-ivory py-20 lg:py-24">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <span class="text-xs font-medium tracking-wide uppercase text-blush">Testimoni</span>
-            <h1 class="mt-3 font-display text-4xl sm:text-5xl leading-tight max-w-2xl">
-                Cerita nyata dari pasien kami
-            </h1>
-            <p class="mt-4 text-ivory/70 max-w-xl">
-                Pengalaman langsung dari mereka yang sudah merasakan perawatan di klinik kami.
-            </p>
-        </div>
-    </section>
+    <x-page-header
+        label="Testimoni"
+        title="Cerita nyata dari pasien kami"
+        subtitle="Pengalaman langsung dari mereka yang sudah merasakan perawatan di klinik kami."
+        image="{{ asset('images/banner/testimonials.png') }}"
+    />
 
     @include('partials.landing.divider')
 

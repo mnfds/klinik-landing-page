@@ -1,16 +1,11 @@
 <div>
     {{-- HEADER --}}
-    <section class="bg-forest-dark text-ivory py-20 lg:py-24">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <span class="text-xs font-medium tracking-wide uppercase text-blush">Promo</span>
-            <h1 class="mt-3 font-display text-4xl sm:text-5xl leading-tight max-w-2xl">
-                Penawaran spesial untuk perawatanmu
-            </h1>
-            <p class="mt-4 text-ivory/70 max-w-xl">
-                Cek promo yang sedang berlangsung sebelum booking treatment atau membeli produk.
-            </p>
-        </div>
-    </section>
+    <x-page-header
+        label="Promo"
+        title="Penawaran spesial untuk perawatanmu"
+        subtitle="Cek promo yang sedang berlangsung sebelum booking treatment atau membeli produk."
+        image="{{ asset('images/banner/promo.png') }}"
+    />
 
     @include('partials.landing.divider')
 
