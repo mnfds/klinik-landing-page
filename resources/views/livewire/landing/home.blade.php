@@ -477,7 +477,7 @@
                                 <button
                                     @click="goTo({{ $loop->index }})"
                                     class="w-2 h-2 rounded-full transition-colors"
-                                    :class="activeIndex === {{ $loop->index }} ? 'bg-forest-dark' : 'bg-forest/20'"
+                                    :class="activeIndex === {{ $loop->index }} ? 'bg-ivory' : 'bg-ivory/30'"
                                 ></button>
                             @endforeach
                         </div>
