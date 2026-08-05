@@ -22,18 +22,24 @@ class Index extends Component
                 'description' => 'Nikmati potongan harga khusus untuk treatment facial andalan kami, berlaku untuk kunjungan pertama.',
                 'start_date' => '2026-08-01',
                 'end_date' => '2026-08-31',
+                'price' => 210000,
+                'box' => asset('images/example/box.png')
             ],
             [
                 'title' => 'Paket Hemat Konsultasi + Skin Check-Up',
                 'description' => 'Konsultasi dermatologi dan skin check-up dalam satu paket dengan harga lebih hemat.',
                 'start_date' => '2026-07-15',
                 'end_date' => '2026-08-10',
+                'price' => 500000,
+                'box' => asset('images/example/box.png')
             ],
             [
                 'title' => 'Buy 2 Get 1 Produk Skincare Pilihan',
                 'description' => 'Berlaku untuk pembelian Hydrating Toner, Vitamin C Serum, dan Night Repair Cream.',
                 'start_date' => '2026-08-01',
                 'end_date' => null,
+                'price' => 3150000,
+                'box' => asset('images/example/box.png')
             ],
         ];
     }

@@ -94,7 +94,7 @@
                                         Lihat Detail
                                     </a>
 
-                                    <a href="https://wa.me/6285822810149?text={{ urlencode('Halo, saya ingin tanya tentang produk ' . $service['name']) }}"
+                                    <a href="https://wa.me/6285822810149?text={{ urlencode('Halo, saya ingin tanya tentang layanan ' . $service['name']) }}"
                                         target="_blank"
                                         rel="noopener"
                                         class="block text-center rounded-full border border-forest/20 py-2 lg:py-2.5 text-xs lg:text-sm font-contax font-medium text-forest-dark transition-all duration-300 hover:bg-[#25D366] hover:text-white hover:border-[#1f8f48]"
