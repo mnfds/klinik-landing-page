@@ -92,6 +92,34 @@ class Home extends Component
         ];
     }
 
+    // Dummy data — nanti diganti Product::where('is_active', true)->orderBy('order')->limit(4)->get()
+    public function getFeaturedBannerProperty(): array
+    {
+        return [
+            [
+                'badge'       => 'Klinik Kecantikan & Medis',
+                'title'       => 'Merawat kulitmu, dengan ketenangan yang tepat.',
+                'description' => 'Kami memadukan perawatan estetika dan layanan medis dalam satu tempat — ditangani langsung oleh dokter berpengalaman, dengan pendekatan yang personal untuk setiap jenis kulit.',
+                'desktop'     => asset('images/banner/services-desktop.jpeg'),
+                'mobile'      => asset('images/banner/services-mobile.jpeg'),
+            ],
+            [
+                'badge'       => 'Konsultasi Gratis',
+                'title'       => 'Konsultasi sebelum treatment pertamamu.',
+                'description' => 'Dokter kami akan membantu menentukan perawatan yang paling sesuai dengan kondisi kulitmu, tanpa biaya konsultasi.',
+                'desktop'     => asset('images/banner/products-desktop.jpeg'),
+                'mobile'      => asset('images/banner/products-mobile.jpeg'),
+            ],
+            [
+                'badge'       => 'Dokter Berlisensi',
+                'title'       => 'Ditangani langsung oleh tenaga medis profesional.',
+                'description' => 'Setiap prosedur dilakukan oleh dokter berpengalaman dengan standar medis yang terjamin.',
+                'desktop'     => asset('images/banner/promo-desktop.png'),
+                'mobile'      => asset('images/banner/promo-mobile.png'),
+            ],
+        ];
+    }
+
     // Dummy data — nanti diganti Testimonial::where('is_active', true)->latest()->limit(3)->get()
     public function getFeaturedTestimonialsProperty(): array
     {

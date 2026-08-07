@@ -1,176 +1,96 @@
 <div>
     {{-- HERO CAROUSEL --}}
-    <section
-        x-data="{
-            active: 0,
-            slides: 3,
-            interval: null,
-            start() {
-                this.interval = setInterval(() => this.next(), 6000)
-            },
-            next() {
-                this.active = (this.active + 1) % this.slides
-            },
-            prev() {
-                this.active = (this.active - 1 + this.slides) % this.slides
-            },
-            goTo(i) {
-                this.active = i
-                clearInterval(this.interval)
-                this.start()
-            }
-        }"
-        x-init="start()"
-        class="relative h-[100dvh] w-full overflow-hidden"
-        >
-        {{-- SLIDE 1 --}}
-        <div
-            x-show="active === 0"
-            x-transition:enter="transition ease-out duration-700"
-            x-transition:enter-start="opacity-0"
-            x-transition:enter-end="opacity-100"
-            x-transition:leave="transition ease-in duration-500"
-            x-transition:leave-start="opacity-100"
-            x-transition:leave-end="opacity-0"
-            class="absolute inset-0"
-        >
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ asset('images/banner/services.png') }}')"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/10 sm:bg-gradient-to-r sm:from-ivory/95 sm:via-ivory/60 sm:to-transparent"></div>
+    @if (count($this->featuredBanner) > 0)
+        <section
+            x-data="{
+                active: 0,
+                slides: {{ count($this->featuredBanner) }},
+                interval: null,
+                start() {
+                    this.interval = setInterval(() => this.next(), 6000)
+                },
+                next() {
+                    this.active = (this.active + 1) % this.slides
+                },
+                prev() {
+                    this.active = (this.active - 1 + this.slides) % this.slides
+                },
+                goTo(i) {
+                    this.active = i
+                    clearInterval(this.interval)
+                    this.start()
+                }
+            }"
+            x-init="start()"
+            class="relative h-[100dvh] w-full overflow-hidden"
+            >
+            @foreach ($this->featuredBanner as $banner)
+            <div
+                wire:key="home-banner-{{ $loop->index }}"
+                x-show="active === {{ $loop->index }}"
+                x-transition:enter="transition ease-out duration-700"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="transition ease-in duration-500"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
+                class="absolute inset-0"
+                >
+                {{-- Background: mobile pakai gambar mobile, sm ke atas pakai gambar desktop --}}
+                <div
+                    class="absolute inset-0 bg-cover bg-center sm:hidden"
+                    style="background-image: url('{{ $banner['mobile'] }}')"
+                ></div>
+                <div
+                    class="absolute inset-0 bg-cover bg-center hidden sm:block"
+                    style="background-image: url('{{ $banner['desktop'] }}')"
+                ></div>
 
-            {{-- WRAPPER: kasih clearance navbar + boleh scroll internal kalau konten kepanjangan --}}
-            <div class="relative h-full overflow-y-auto pt-20 sm:pt-24 pb-6">
-                <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 h-full flex items-center">
-                    <div class="max-w-2xl w-full">
-                        <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-contax font-medium tracking-wide uppercase text-ivory sm:text-forest/70 bg-forest/40 sm:bg-blush/40 rounded-full px-3.5 py-1.5">
-                            Klinik Kecantikan &amp; Medis
-                        </span>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent sm:bg-gradient-to-r sm:from-ivory/95 sm:via-ivory/60 sm:to-transparent"></div>
 
-                        <h1 class="mt-4 sm:mt-6 font-contax font-bold text-2xl xs:text-3xl sm:text-5xl lg:text-6xl leading-[1.15] sm:leading-[1.1] text-ivory sm:text-forest-dark">
-                            Merawat kulitmu, dengan ketenangan yang tepat.
-                        </h1>
+                <div class="relative h-full overflow-y-auto pt-20 sm:pt-24 pb-6">
+                    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 h-full flex items-end">
+                        <div class="max-w-2xl w-full">
+                            <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-contax font-medium tracking-wide uppercase text-ivory sm:text-forest/70 bg-forest/40 sm:bg-blush/40 rounded-full px-3.5 py-1.5">
+                                {{ $banner['badge'] }}
+                            </span>
 
-                        <p class="mt-3 sm:mt-6 font-contax text-sm sm:text-lg text-ivory/80 sm:text-charcoal/70 leading-relaxed max-w-lg">
-                            Kami memadukan perawatan estetika dan layanan medis dalam satu tempat —
-                            ditangani langsung oleh dokter berpengalaman, dengan pendekatan yang personal untuk setiap jenis kulit.
-                        </p>
+                            <h1 class="mt-4 sm:mt-6 font-contax font-bold text-2xl xs:text-3xl sm:text-5xl lg:text-6xl leading-[1.15] sm:leading-[1.1] text-ivory sm:text-forest-dark">
+                                {{ $banner['title'] }}
+                            </h1>
 
-                        <div class="mt-5 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4">
-                            <a href="https://wa.me/6285822810149"
-                                target="_blank"
-                                rel="noopener"
-                                class="inline-flex items-center justify-center gap-2 rounded-full bg-forest px-6 py-3 sm:py-3.5 text-sm font-contax font-medium text-ivory shadow-sm transition-all duration-300 hover:bg-forest-dark hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-                            >
-                                Booking via WhatsApp
-                            </a>
+                            <p class="mt-3 sm:mt-6 font-contax text-sm sm:text-lg text-ivory/80 sm:text-charcoal/70 leading-relaxed max-w-lg">
+                                {{ $banner['description'] }}
+                            </p>
 
-                            <a href="{{ Route::has('services') ? route('services') : '#' }}"
-                                wire:navigate
-                                class="inline-flex items-center justify-center gap-2 rounded-full border border-ivory/40 sm:border-forest/20 px-6 py-3 sm:py-3.5 text-sm font-contax font-medium text-ivory sm:text-forest-dark transition-all duration-300 hover:border-forest hover:bg-white/10 sm:hover:bg-forest/5"
-                            >
-                                Lihat Layanan
-                            </a>
+                            <div class="mt-5 sm:mt-10">
+                                <a href="https://wa.me/6285822810149"
+                                    target="_blank"
+                                    rel="noopener"
+                                    class="inline-flex items-center justify-center gap-2 rounded-full bg-forest px-6 py-3 sm:py-3.5 text-sm font-contax font-medium text-ivory shadow-sm transition-all duration-300 hover:bg-forest-dark hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+                                >
+                                    Booking via WhatsApp
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            @endforeach
 
-        {{-- SLIDE 2 --}}
-        <div
-            x-show="active === 1"
-            x-transition:enter="transition ease-out duration-700"
-            x-transition:enter-start="opacity-0"
-            x-transition:enter-end="opacity-100"
-            x-transition:leave="transition ease-in duration-500"
-            x-transition:leave-start="opacity-100"
-            x-transition:leave-end="opacity-0"
-            class="absolute inset-0"
-            >
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ asset('images/banner/products.png') }}')"></div>
-
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/10 sm:bg-gradient-to-r sm:from-ivory/95 sm:via-ivory/60 sm:to-transparent"></div>
-
-            <div class="relative h-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 flex items-end sm:items-center pb-14 sm:pb-0">
-                <div class="max-w-2xl">
-                    <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-contax font-medium tracking-wide uppercase text-ivory sm:text-forest/70 bg-forest/40 sm:bg-blush/40 rounded-full px-3.5 py-1.5">
-                        Konsultasi Gratis
-                    </span>
-
-                    <h1 class="mt-4 sm:mt-6 font-contax font-bold text-3xl sm:text-5xl lg:text-6xl leading-[1.15] sm:leading-[1.1] text-ivory sm:text-forest-dark">
-                        Konsultasi sebelum treatment pertamamu.
-                    </h1>
-
-                    <p class="mt-3 sm:mt-6 font-contax text-sm sm:text-lg text-ivory/80 sm:text-charcoal/70 leading-relaxed max-w-lg">
-                        Dokter kami akan membantu menentukan perawatan yang paling sesuai dengan kondisi kulitmu, tanpa biaya konsultasi.
-                    </p>
-
-                    <div class="mt-6 sm:mt-10">
-                        <a href="https://wa.me/6285822810149"
-                            target="_blank"
-                            rel="noopener"
-                            class="inline-flex items-center justify-center gap-2 rounded-full bg-forest px-6 py-3 sm:py-3.5 text-sm font-contax font-medium text-ivory shadow-sm transition-all duration-300 hover:bg-forest-dark hover:shadow-md"
-                        >
-                            Booking Konsultasi
-                        </a>
-                    </div>
-                </div>
+            {{-- DOT INDICATORS --}}
+            <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-3 z-10">
+                <template x-for="i in slides" :key="i">
+                    <button
+                        @click="goTo(i - 1)"
+                        :class="active === i - 1 ? 'bg-forest w-8' : 'bg-forest-dark/50 w-2.5 hover:bg-forest'"
+                        class="h-2.5 rounded-full transition-all duration-300"
+                        :aria-label="'Slide ' + i"
+                    ></button>
+                </template>
             </div>
-        </div>
-
-        {{-- SLIDE 3 --}}
-        <div
-            x-show="active === 2"
-            x-transition:enter="transition ease-out duration-700"
-            x-transition:enter-start="opacity-0"
-            x-transition:enter-end="opacity-100"
-            x-transition:leave="transition ease-in duration-500"
-            x-transition:leave-start="opacity-100"
-            x-transition:leave-end="opacity-0"
-            class="absolute inset-0"
-            >
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ asset('images/banner/promo.png') }}')"></div>
-
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/10 sm:bg-gradient-to-r sm:from-ivory/95 sm:via-ivory/60 sm:to-transparent"></div>
-
-            <div class="relative h-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 flex items-end sm:items-center pb-14 sm:pb-0">
-                <div class="max-w-2xl">
-                    <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-contax font-medium tracking-wide uppercase text-ivory sm:text-forest/70 bg-forest/40 sm:bg-blush/40 rounded-full px-3.5 py-1.5">
-                        Dokter Berlisensi
-                    </span>
-
-                    <h1 class="mt-4 sm:mt-6 font-contax font-bold text-3xl sm:text-5xl lg:text-6xl leading-[1.15] sm:leading-[1.1] text-ivory sm:text-forest-dark">
-                        Ditangani langsung oleh tenaga medis profesional.
-                    </h1>
-
-                    <p class="mt-3 sm:mt-6 font-contax text-sm sm:text-lg text-ivory/80 sm:text-charcoal/70 leading-relaxed max-w-lg">
-                        Setiap prosedur dilakukan oleh dokter berpengalaman dengan standar medis yang terjamin.
-                    </p>
-
-                    <div class="mt-6 sm:mt-10">
-                        <a href="{{ Route::has('services') ? route('services') : '#' }}"
-                            wire:navigate
-                            class="inline-flex items-center justify-center gap-2 rounded-full border border-ivory/40 sm:border-forest/20 px-6 py-3 sm:py-3.5 text-sm font-contax font-medium text-ivory sm:text-forest-dark transition-all duration-300 hover:border-forest hover:bg-white/10 sm:hover:bg-forest/5"
-                        >
-                            Lihat Layanan
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {{-- DOT INDICATORS --}}
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3 z-10">
-            <template x-for="i in slides" :key="i">
-                <button
-                    @click="goTo(i - 1)"
-                    :class="active === i - 1 ? 'bg-ivory w-8' : 'bg-ivory/30 w-2.5 hover:bg-ivory/50'"
-                    class="h-2.5 rounded-full transition-all duration-300"
-                    :aria-label="'Slide ' + i"
-                ></button>
-            </template>
-        </div>
-        {{-- OPTIONAL: PREV/NEXT ARROWS --}}
-    </section>
+        </section>
+    @endif
 
     @include('partials.landing.divider')
 
