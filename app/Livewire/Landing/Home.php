@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Landing;
 
+use Carbon\Carbon;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -16,25 +17,49 @@ class Home extends Component
         return [
             [
                 'title' => 'Diskon 20% Facial Glow Signature',
-                'description' => 'Potongan harga khusus untuk treatment facial andalan kami.',
-                'box' => asset('images/example/box.png'),
+                'description' => 'Nikmati potongan harga khusus untuk treatment facial andalan kami, berlaku untuk kunjungan pertama.',
+                'start_date' => '2026-08-01',
+                'end_date' => '2026-08-31',
+                'price' => 210000,
+                'box' => asset('images/example/box.png')
             ],
             [
                 'title' => 'Paket Hemat Konsultasi + Skin Check-Up',
-                'description' => 'Konsultasi dermatologi dan skin check-up dalam satu paket hemat.',
-                'box' => asset('images/example/box.png'),
+                'description' => 'Konsultasi dermatologi dan skin check-up dalam satu paket dengan harga lebih hemat.',
+                'start_date' => '2026-07-15',
+                'end_date' => '2026-08-10',
+                'price' => 500000,
+                'box' => asset('images/example/box.png')
             ],
             [
                 'title' => 'Buy 2 Get 1 Produk Skincare Pilihan',
                 'description' => 'Berlaku untuk pembelian Hydrating Toner, Vitamin C Serum, dan Night Repair Cream.',
-                'box' => asset('images/example/box.png'),
+                'start_date' => '2026-08-01',
+                'end_date' => null,
+                'price' => 3150000,
+                'box' => asset('images/example/box.png')
             ],
             [
-                'title' => 'Diskon 35% Laser Rejuvenation',
-                'description' => 'Potongan harga khusus untuk pelanggan baru kami.',
-                'box' => asset('images/example/box.png'),
+                'title' => 'Diskon 45% Treatment Laser Rejuvanation',
+                'description' => 'Nikmati potongan harga khusus untuk treatment laser rejuvanation hanya pada kunjungan pertama.',
+                'start_date' => '2026-07-15',
+                'end_date' => '2026-07-30',
+                'price' => 210000,
+                'box' => asset('images/example/box.png')
             ],
         ];
+    }
+    
+    public function formatPeriod(?string $start, ?string $end): string
+    {
+        if (! $start && ! $end) {
+            return 'Berlaku hingga pemberitahuan selanjutnya';
+        }
+
+        $startLabel = $start ? Carbon::parse($start)->translatedFormat('d M Y') : null;
+        $endLabel = $end ? Carbon::parse($end)->translatedFormat('d M Y') : 'seterusnya';
+
+        return "{$startLabel} – {$endLabel}";
     }
 
     public function getFeaturedServicesProperty(): array
