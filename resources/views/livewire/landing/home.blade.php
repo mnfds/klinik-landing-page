@@ -177,7 +177,7 @@
     {{-- PROMO AKTIF --}}
     @if (count($this->promos) > 0)
         @php
-            $desktopSlides = collect($this->promos)->chunk(2)->values();
+            $desktopSlides = collect($this->promos)->chunk(3)->values();
         @endphp
 
         <section class="bg-blush/20 py-16 lg:py-20">
@@ -198,7 +198,7 @@
                     </a>
                 </div>
 
-                {{-- ============ DESKTOP CAROUSEL: 2 CARD/SLIDE, FOTO LANDSCAPE ============ --}}
+                {{-- ============ DESKTOP CAROUSEL: 3 CARD/SLIDE, FOTO BOX (1:1) ============ --}}
                 <div
                     x-data="{
                         activeIndex: 0,
@@ -223,16 +223,16 @@
                             :style="`transform: translateX(-${activeIndex * 100}%)`"
                         >
                             @foreach ($desktopSlides as $slide)
-                                <div wire:key="home-promo-desktop-slide-{{ $loop->index }}" class="w-full flex-shrink-0 grid grid-cols-2 gap-6 lg:gap-8 px-1">
+                                <div wire:key="home-promo-desktop-slide-{{ $loop->index }}" class="w-full flex-shrink-0 grid grid-cols-3 gap-6 lg:gap-8 px-1">
                                     @foreach ($slide as $promo)
                                         <div wire:key="home-promo-desktop-{{ $loop->parent->index }}-{{ $loop->index }}"
                                             class="rounded-tl-[25px] rounded-ee-[25px] bg-white border border-forest/10 overflow-hidden flex flex-col"
                                         >
-                                            @if (!empty($promo['landscape']))
+                                            @if (!empty($promo['box']))
                                                 <img
-                                                    src="{{ $promo['landscape'] }}"
+                                                    src="{{ $promo['box'] }}"
                                                     alt="{{ $promo['title'] }}"
-                                                    class="w-full h-auto object-contain block"
+                                                    class="w-full h-auto aspect-square object-cover block"
                                                     loading="lazy"
                                                 >
                                             @endif
@@ -284,7 +284,7 @@
                     @endif
                 </div>
 
-                {{-- ============ MOBILE CAROUSEL: 1 CARD/SLIDE, FOTO 1:1 ============ --}}
+                {{-- ============ MOBILE CAROUSEL: 1 CARD/SLIDE, FOTO BOX (1:1) ============ --}}
                 <div
                     x-data="{
                         activeIndex: 0,
