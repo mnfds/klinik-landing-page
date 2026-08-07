@@ -228,8 +228,8 @@
                             @foreach ($desktopSlides as $slide)
                                 <button
                                     @click="goTo({{ $loop->index }})"
-                                    class="w-2 h-2 rounded-full transition-colors"
-                                    :class="activeIndex === {{ $loop->index }} ? 'bg-forest-dark' : 'bg-forest/20'"
+                                    class="w-2 h-2 rounded-full transition-all duration-300"
+                                    :class="activeIndex === {{ $loop->index }} ? 'bg-forest-dark w-8' : 'bg-forest/20'"
                                 ></button>
                             @endforeach
                         </div>
@@ -341,8 +341,8 @@
                             @foreach ($this->promos as $promo)
                                 <button
                                     @click="goTo({{ $loop->index }})"
-                                    class="w-2 h-2 rounded-full transition-colors"
-                                    :class="activeIndex === {{ $loop->index }} ? 'bg-forest-dark' : 'bg-forest/20'"
+                                    class="w-2 h-2 rounded-full transition-all duration-300"
+                                    :class="activeIndex === {{ $loop->index }} ? 'bg-forest-dark w-8' : 'bg-forest/20'"
                                 ></button>
                             @endforeach
                         </div>
@@ -459,8 +459,8 @@
                             @foreach ($mobileServiceSlides as $slide)
                                 <button
                                     @click="goTo({{ $loop->index }})"
-                                    class="w-2 h-2 rounded-full transition-colors"
-                                    :class="activeIndex === {{ $loop->index }} ? 'bg-ivory' : 'bg-ivory/30'"
+                                    class="w-2 h-2 rounded-full transition-all duration-300"
+                                    :class="activeIndex === {{ $loop->index }} ? 'bg-ivory w-8' : 'bg-ivory/30 w-2.5 hover:bg-ivory/50'"
                                 ></button>
                             @endforeach
                         </div>
@@ -547,8 +547,8 @@
                             @foreach ($desktopServiceSlides as $slide)
                                 <button
                                     @click="goTo({{ $loop->index }})"
-                                    class="w-2 h-2 rounded-full transition-colors"
-                                    :class="activeIndex === {{ $loop->index }} ? 'bg-ivory' : 'bg-ivory/30'"
+                                    class="w-2 h-2 rounded-full transition-all duration-300"
+                                    :class="activeIndex === {{ $loop->index }} ? 'bg-ivory w-8' : 'bg-ivory/30'"
                                 ></button>
                             @endforeach
                         </div>
@@ -666,8 +666,8 @@
                             @foreach ($mobileProductSlides as $slide)
                                 <button
                                     @click="goTo({{ $loop->index }})"
-                                    class="w-2 h-2 rounded-full transition-colors"
-                                    :class="activeIndex === {{ $loop->index }} ? 'bg-forest-dark' : 'bg-forest/20'"
+                                    class="w-2 h-2 rounded-full transition-all duration-300"
+                                    :class="activeIndex === {{ $loop->index }} ? 'bg-forest-dark w-8' : 'bg-forest/20'"
                                 ></button>
                             @endforeach
                         </div>
@@ -754,8 +754,8 @@
                             @foreach ($desktopProductSlides as $slide)
                                 <button
                                     @click="goTo({{ $loop->index }})"
-                                    class="w-2 h-2 rounded-full transition-colors"
-                                    :class="activeIndex === {{ $loop->index }} ? 'bg-forest-dark' : 'bg-forest/20'"
+                                    class="w-2 h-2 rounded-full transition-all duration-300"
+                                    :class="activeIndex === {{ $loop->index }} ? 'bg-forest-dark w-8' : 'bg-forest/20'"
                                 ></button>
                             @endforeach
                         </div>
