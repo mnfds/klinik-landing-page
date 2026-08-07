@@ -1,4 +1,4 @@
-<footer class="bg-forest-dark text-ivory/90">
+<footer class="text-ivory bg-gradient-to-b from-forest-dark/95 via-forest/95 to-forest/95">
     <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
         <!-- Brand -->
         <div class="space-y-4">

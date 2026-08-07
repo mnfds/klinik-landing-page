@@ -361,11 +361,11 @@
             $desktopServiceSlides = collect($this->featuredServices)->chunk(4)->values();
         @endphp
 
-        <section class="bg-forest-dark text-ivory py-20 lg:py-28">
+        <section class="text-ivory py-20 lg:py-28 bg-gradient-to-b from-forest-dark/95 via-forest/95 to-forest/95">
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
                 <div class="flex items-end justify-between gap-4 flex-wrap">
                     <div class="max-w-xl">
-                        <span class="text-xs font-contax font-medium tracking-wide uppercase text-gold">Layanan Kami</span>
+                        <span class="text-xs font-contax font-medium tracking-wide uppercase text-ivory">Layanan Kami</span>
                         <h2 class="mt-3 font-contax text-3xl sm:text-4xl text-ivory">
                             Temukan treatment terbaik untuk kulitmu
                         </h2>
@@ -811,11 +811,11 @@
     </section> --}}
 
     {{-- CUPLIKAN TESTIMONI --}}
-    <section class="bg-forest-dark text-ivory py-20 lg:py-28">
+    <section class="text-ivory py-20 lg:py-28 bg-gradient-to-b from-forest-dark/95 via-forest/95 to-forest/95"> 
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex items-end justify-between gap-4 flex-wrap">
                 <div class="max-w-xl">
-                    <span class="text-xs font-contax font-medium tracking-wide uppercase text-gold">Testimoni</span>
+                    <span class="text-xs font-contax font-medium tracking-wide uppercase text-ivory">Testimoni</span>
                     <h2 class="mt-3 font-contax text-3xl sm:text-4xl text-ivory">
                         Kata mereka yang sudah merasakan
                     </h2>

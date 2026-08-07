@@ -10,9 +10,9 @@ export default {
       colors: {
         ivory: '#F2F4FA',
         forest: {
-          DEFAULT: '#2E4F7D',
+          DEFAULT: '#218ce3',
           light: '#4A6B9A',
-          dark: '#203754',
+          dark: '#125E9C',
         },
         blush: '#D7E6FF',
         gold: '#3BA8F5',
