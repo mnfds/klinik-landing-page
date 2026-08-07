@@ -26,7 +26,7 @@
 
         <div class="text-forest px-4 pt-2 pb-1.5 transition-colors duration-300 hover:text-forest-dark">
             <a
-                href="https://maps.google.com"
+                href="https://maps.app.goo.gl/7beMzsmoK9iyFZfC7"
                 target="_blank"
                 rel="noopener"
                 class="font-contax text-sm"
