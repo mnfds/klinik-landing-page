@@ -96,18 +96,24 @@ class Home extends Component
         return [
             [
                 'name' => 'Rahma Wulandari',
-                'message' => 'Perawatan facial-nya bikin kulit terasa lebih cerah dan lembap. Dokternya juga menjelaskan dengan sabar.',
+                'message' => 'Perawatan facial-nya bikin kulit terasa lebih cerah dan lembap. Dokternya juga menjelaskan dengan sabar sebelum treatment.',
                 'rating' => 5,
+                'service_name' => 'Facial Glow Signature',
+                'slug' => 'slug testi 1',
             ],
             [
                 'name' => 'Dian Kusuma',
-                'message' => 'Awalnya ragu coba laser whitening, tapi prosesnya nyaman dan hasilnya terlihat bertahap.',
+                'message' => 'Awalnya ragu coba laser whitening, tapi ternyata prosesnya nyaman dan hasilnya terlihat bertahap sesuai yang dijanjikan.',
                 'rating' => 5,
+                'service_name' => 'Laser Whitening',
+                'slug' => 'slug testi 2',
             ],
             [
                 'name' => 'Putri Anggraini',
-                'message' => 'Konsultasi dermatologi di sini enak, dokternya detail banget jelasin kondisi kulit saya.',
+                'message' => 'Konsultasi dermatologi di sini enak, dokternya detail banget jelasin kondisi kulit saya sebelum kasih rekomendasi.',
                 'rating' => 4,
+                'service_name' => 'Konsultasi Dermatologi',
+                'slug' => 'slug testi 3',
             ],
         ];
     }

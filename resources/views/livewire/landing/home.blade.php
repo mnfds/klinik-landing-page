@@ -848,7 +848,11 @@
 
             <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($this->featuredTestimonials as $testimonial)
-                    <div wire:key="home-testimonial-{{ $loop->index }}" class="rounded-tl-[25px] rounded-ee-[25px] border border-ivory/10 bg-white p-7 flex flex-col">
+                    <div
+                        wire:key="home-testimonial-{{ $loop->index }}"
+                        class="group flex h-full flex-col rounded-tl-[25px] rounded-ee-[25px] border border-ivory/10 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+
+                        {{-- Rating --}}
                         <div class="flex items-center gap-1">
                             @for ($i = 1; $i <= 5; $i++)
                                 <svg viewBox="0 0 20 20" class="w-4 h-4 {{ $i <= $testimonial['rating'] ? 'text-gold' : 'text-forest/10' }}" fill="currentColor">
@@ -856,12 +860,45 @@
                                 </svg>
                             @endfor
                         </div>
-                        <p class="mt-4 font-contax text-sm text-charcoal/70 leading-relaxed flex-1">
+
+                        {{-- Testimoni --}}
+                        <p class="mt-4 font-contax text-sm text-charcoal/70 leading-relaxed flex-1 line-clamp-2">
                             &ldquo;{{ $testimonial['message'] }}&rdquo;
                         </p>
-                        <p class="mt-5 pt-4 border-t border-forest/10 font-contax text-base text-forest-dark">
-                            {{ $testimonial['name'] }}
-                        </p>
+
+                        {{-- Selengkapnya --}}
+                        <a href="{{ route('testimonials.detail', $testimonial['slug']) }}"
+                            wire:navigate
+                            class="mt-3 self-start text-sm font-contax font-medium text-gold hover:text-forest transition-colors"
+                        >
+                            Selengkapnya →
+                        </a>
+
+                        {{-- Footer --}}
+                        <div class="mt-5 pt-4 border-t border-forest/10">
+                            <div class="flex items-center gap-3">
+                                {{-- Avatar --}}
+                                <div class="flex h-11 w-11 items-center justify-center rounded-full bg-forest text-sm font-semibold text-ivory">
+                                    {{ strtoupper(substr($testimonial['name'], 0, 1)) }}
+                                </div>
+
+                                <div class="min-w-0">
+                                    <h4 class="truncate font-contax text-base text-forest-dark">
+                                        {{ $testimonial['name'] }}
+                                    </h4>
+
+                                    @if ($testimonial['service_name'])
+                                        <p class="text-xs sm:text-sm font-medium text-gold truncate">
+                                            {{ $testimonial['service_name'] }}
+                                        </p>
+                                    @else
+                                        <p class="text-xs sm:text-sm text-charcoal/40">
+                                            Pasien Klinik
+                                        </p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 @endforeach
             </div>
