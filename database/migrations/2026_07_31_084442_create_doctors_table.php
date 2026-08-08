@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('specialization');
             $table->text('bio')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->unsignedInteger('order')->default(0);
             $table->timestamps();
         });
     }
