@@ -48,49 +48,12 @@ new class extends Component
                     <x-nav-link :href="route('admin.testimonials.index')" :active="request()->routeIs('admin.testimonials.index')" wire:navigate>
                         {{ __('Testimoni') }}
                     </x-nav-link>
-                    <div x-data="{ open: false }" @click.outside="open = false" class="relative">
-                        <button
-                            type="button"
-                            @click="open = !open"
-                            class="flex items-center gap-1 px-1 py-2 text-sm font-medium transition
-                                {{ request()->routeIs('admin.banner-home.*') || request()->routeIs('admin.banner-page.*')
-                                    ? 'text-forest border-b-2 border-forest'
-                                    : 'text-charcoal/70 hover:text-forest' }}"
-                            >
-                            {{ __('Banner') }}
-                            <svg
-                                class="w-4 h-4 transition-transform"
-                                :class="{ 'rotate-180': open }"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                >
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </button>
-
-                        <div
-                            x-show="open"
-                            x-transition
-                            x-cloak
-                            class="absolute left-0 mt-2 w-44 bg-white rounded-lg shadow-lg border border-gray-100 py-1 z-50"
-                            >
-                            
-                            <a href="{{ route('admin.banner-home.index') }}"
-                                wire:navigate
-                                @click="open = false"
-                                class="block px-4 py-2 text-sm {{ request()->routeIs('admin.banner-home.*') ? 'text-forest font-medium bg-ivory' : 'text-charcoal/80 hover:bg-ivory' }}"
-                                >
-                                {{ __('Banner Home') }}
-                            </a>
-                            
-                            <a href="{{ route('admin.banner-page.index') }}"
-                                wire:navigate
-                                @click="open = false"
-                                class="block px-4 py-2 text-sm {{ request()->routeIs('admin.banner-page.*') ? 'text-forest font-medium bg-ivory' : 'text-charcoal/80 hover:bg-ivory' }}"
-                                >
-                                {{ __('Banner Page') }}
-                            </a>
-                        </div>
-                    </div>
+                    <x-nav-link :href="route('admin.banner-home.index')" :active="request()->routeIs('admin.banner-home.index')" wire:navigate>
+                        {{ __('Banner Home') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.banner-page.index')" :active="request()->routeIs('admin.banner-page.index')" wire:navigate>
+                        {{ __('Banner Page') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -145,20 +108,23 @@ new class extends Component
             <x-responsive-nav-link :href="route('admin.services.index')" :active="request()->routeIs('admin.services.index')" wire:navigate>
                 {{ __('Layanan') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')" wire:navigate>
+            <x-responsive-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.index')" wire:navigate>
                 {{ __('Produk') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')" wire:navigate>
+            <x-responsive-nav-link :href="route('admin.promos.index')" :active="request()->routeIs('admin.promos.index')" wire:navigate>
                 {{ __('Promo') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')" wire:navigate>
+            <x-responsive-nav-link :href="route('admin.doctors.index')" :active="request()->routeIs('admin.doctors.index')" wire:navigate>
                 {{ __('Dokter') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')" wire:navigate>
+            <x-responsive-nav-link :href="route('admin.testimonials.index')" :active="request()->routeIs('admin.testimonials.index')" wire:navigate>
                 {{ __('Testimoni') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')" wire:navigate>
-                {{ __('Banner') }}
+            <x-responsive-nav-link :href="route('admin.banner-home.index')" :active="request()->routeIs('admin.banner-home.index')" wire:navigate>
+                {{ __('Banner Home') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.banner-page.index')" :active="request()->routeIs('admin.banner-page.index')" wire:navigate>
+                {{ __('Banner Page') }}
             </x-responsive-nav-link>
         </div>
 
