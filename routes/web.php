@@ -13,6 +13,7 @@ use App\Livewire\Landing\Testimonials\Detail as TestimonialsDetail;
 use App\Livewire\Landing\Promos\Index as PromosIndex;
 
 use App\Livewire\Admin\Services\Index as ServicesAdminIndex;
+use App\Livewire\Admin\Products\Index as ProductsAdminIndex;
 
 
 // Route::view('/', 'welcome');
@@ -41,6 +42,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::get('/dashboard', Dashboard::class)->name('dashboard');
         // nanti route CRUD tiap modul ditambahkan di sini
         Route::get('/services', ServicesAdminIndex::class)->name('services.index');
+        Route::get('/products', ProductsAdminIndex::class)->name('products.index');
 });
 
 Route::view('profile', 'profile')->middleware(['auth'])->name('profile');
