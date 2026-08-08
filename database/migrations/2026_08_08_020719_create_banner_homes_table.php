@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('banner_homes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->enum('type', ['treatment', 'medical']);
-            $table->text('description')->nullable();
-            $table->decimal('price', 12, 2)->nullable();
-            $table->string('image')->nullable();
-            $table->string('youtube_link')->nullable();
+            $table->text('text_badge')->nullable();
+            $table->text('text_title')->nullable();
+            $table->text('text_description')->nullable();
+            $table->string('image_mobile')->nullable();
+            $table->string('image_desktop')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('banner_homes');
     }
 };

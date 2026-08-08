@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
+            $table->decimal('price', 12, 2)->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

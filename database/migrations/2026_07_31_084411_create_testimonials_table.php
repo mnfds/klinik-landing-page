@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('photo')->nullable();
+            $table->string('avatar')->nullable();
+            $table->string('youtube_link')->nullable();
             $table->text('message');
             $table->unsignedTinyInteger('rating')->default(5); // 1-5
-            $table->foreignId('service_id')->nullable()->constrained()->nullOnDelete();
+            $table->string('items_testimonials');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
