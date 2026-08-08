@@ -2,10 +2,80 @@
 
 namespace App\Livewire\Admin\BannerHome;
 
+use App\Models\BannerHome;
+use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Create extends Component
 {
+    use WithFileUploads;
+
+    public bool $show = false;
+
+    public string $text_badge = '';
+    public string $text_title = '';
+    public string $text_description = '';
+    public $image_mobile;
+    public $image_desktop;
+    public bool $is_active = true;
+
+    protected function rules(): array
+    {
+        return [
+            'text_badge' => 'nullable|string',
+            'text_title' => 'nullable|string',
+            'text_description' => 'nullable|string',
+            'image_mobile' => 'nullable|image|max:2048',
+            'image_desktop' => 'nullable|image|max:4096',
+            'is_active' => 'boolean',
+        ];
+    }
+
+    #[On('open-create-banner-home-modal')]
+    public function openModal(): void
+    {
+        $this->resetForm();
+        $this->show = true;
+    }
+
+    public function closeModal(): void
+    {
+        $this->show = false;
+        $this->resetForm();
+    }
+
+    private function resetForm(): void
+    {
+        $this->reset(['text_badge', 'text_title', 'text_description', 'image_mobile', 'image_desktop']);
+        $this->is_active = true;
+        $this->resetErrorBag();
+        $this->resetValidation();
+    }
+
+    public function save(): void
+    {
+        $validated = $this->validate();
+
+        if ($this->image_mobile) {
+            $validated['image_mobile'] = $this->image_mobile->store('banner-home', 'public');
+        } else {
+            unset($validated['image_mobile']);
+        }
+
+        if ($this->image_desktop) {
+            $validated['image_desktop'] = $this->image_desktop->store('banner-home', 'public');
+        } else {
+            unset($validated['image_desktop']);
+        }
+
+        BannerHome::create($validated);
+
+        $this->closeModal();
+        $this->dispatch('bannerHomeSaved');
+        session()->flash('success', 'Banner home berhasil ditambahkan.');
+    }
+
     public function render()
     {
         return view('livewire.admin.banner-home.create');

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->text('text_badge')->nullable();
             $table->text('text_title')->nullable();
             $table->text('text_description')->nullable();
+            $table->enum('type', ['services', 'products', 'promos', 'doctors', 'testimonials']);
             $table->string('image_mobile')->nullable();
             $table->string('image_desktop')->nullable();
             $table->boolean('is_active')->default(true);

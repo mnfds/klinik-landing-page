@@ -17,6 +17,8 @@ use App\Livewire\Admin\Products\Index as ProductsAdminIndex;
 use App\Livewire\Admin\Promos\Index as PromosAdminIndex;
 use App\Livewire\Admin\Doctors\Index as DoctorsAdminIndex;
 use App\Livewire\Admin\Testimonials\Index as TestimonialsAdminIndex;
+use App\Livewire\Admin\BannerHome\Index as BannerHomeIndex;
+use App\Livewire\Admin\BannerPage\Index as BannerPageIndex;
 
 
 // Route::view('/', 'welcome');
@@ -49,6 +51,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::get('/promos', PromosAdminIndex::class)->name('promos.index');
         Route::get('/doctors', DoctorsAdminIndex::class)->name('doctors.index');
         Route::get('/testimonials', TestimonialsAdminIndex::class)->name('testimonials.index');
+        Route::get('/banner-home', BannerHomeIndex::class)->name('banner-home.index');
+        Route::get('/banner-page', BannerPageIndex::class)->name('banner-page.index');
 });
 
 Route::view('profile', 'profile')->middleware(['auth'])->name('profile');

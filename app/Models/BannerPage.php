@@ -11,4 +11,8 @@ class BannerPage extends Model
 
     protected $table = 'banner_pages';
     protected $guarded = ['id'];
+    
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
 }

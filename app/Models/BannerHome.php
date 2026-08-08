@@ -11,4 +11,8 @@ class BannerHome extends Model
 
     protected $table = 'banner_homes';
     protected $guarded = ['id'];
+    
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
 }
