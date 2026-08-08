@@ -14,8 +14,4 @@ class Services extends Model
     protected $table = 'services';
     protected $guarded = ['id'];
 
-    public function testimonials(): HasMany
-    {
-        return $this->hasMany(Testimonial::class);
-    }
 }
