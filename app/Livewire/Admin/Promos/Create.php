@@ -13,7 +13,7 @@ class Create extends Component
 
     public bool $show = false;
 
-    public string $title = '';
+    public string $name = '';
     public string $description = '';
     public $image;
     public string $start_date = '';
@@ -24,7 +24,7 @@ class Create extends Component
     protected function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
             'start_date' => 'nullable|date',
@@ -56,7 +56,7 @@ class Create extends Component
 
     private function resetForm(): void
     {
-        $this->reset(['title', 'description', 'image', 'start_date', 'end_date', 'price']);
+        $this->reset(['name', 'description', 'image', 'start_date', 'end_date', 'price']);
         $this->is_active = true;
         $this->resetErrorBag();
         $this->resetValidation();

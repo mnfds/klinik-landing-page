@@ -10,8 +10,8 @@
                 <form wire:submit="save" class="space-y-4">
                     <div>
                         <label class="block text-sm font-medium text-charcoal mb-1">Judul Promo</label>
-                        <input type="text" wire:model="title" class="w-full rounded-lg border-gray-300 focus:border-forest focus:ring-forest text-sm">
-                        @error('title') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                        <input type="text" wire:model="name" class="w-full rounded-lg border-gray-300 focus:border-forest focus:ring-forest text-sm">
+                        @error('name') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                     </div>
 
                     <div>

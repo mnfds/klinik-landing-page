@@ -15,7 +15,7 @@ class Edit extends Component
     public bool $show = false;
     public ?int $promoId = null;
 
-    public string $title = '';
+    public string $name = '';
     public string $description = '';
     public $image;
     public ?string $existingImage = null;
@@ -27,7 +27,7 @@ class Edit extends Component
     protected function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
             'start_date' => 'nullable|date',
@@ -50,7 +50,7 @@ class Edit extends Component
         $promo = Promos::findOrFail($id);
 
         $this->promoId = $promo->id;
-        $this->title = $promo->title;
+        $this->name = $promo->name;
         $this->description = (string) $promo->description;
         $this->existingImage = $promo->image;
         $this->image = null;
@@ -67,7 +67,7 @@ class Edit extends Component
     public function closeModal(): void
     {
         $this->show = false;
-        $this->reset(['promoId', 'title', 'description', 'image', 'existingImage', 'start_date', 'end_date', 'price']);
+        $this->reset(['promoId', 'name', 'description', 'image', 'existingImage', 'start_date', 'end_date', 'price']);
         $this->is_active = true;
     }
 

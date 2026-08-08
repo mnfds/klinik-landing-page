@@ -50,7 +50,7 @@
                                 <div class="w-12 h-12 bg-gray-100 rounded-lg"></div>
                             @endif
                         </td>
-                        <td class="px-4 py-3 font-medium text-charcoal">{{ $promo->title }}</td>
+                        <td class="px-4 py-3 font-medium text-charcoal">{{ $promo->name }}</td>
                         <td class="px-4 py-3 text-xs text-charcoal/70">
                             @if ($promo->start_date || $promo->end_date)
                                 {{ $promo->start_date?->format('d M Y') ?? '-' }} &mdash; {{ $promo->end_date?->format('d M Y') ?? '-' }}

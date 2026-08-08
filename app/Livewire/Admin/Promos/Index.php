@@ -63,7 +63,7 @@ class Index extends Component
     public function render()
     {
         $promos = Promos::query()
-            ->when($this->search, fn ($q) => $q->where('title', 'like', '%' . $this->search . '%'))
+            ->when($this->search, fn ($q) => $q->where('name', 'like', '%' . $this->search . '%'))
             ->orderByDesc('start_date')
             ->paginate(10);
 
