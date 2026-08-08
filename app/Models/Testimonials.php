@@ -14,8 +14,8 @@ class Testimonials extends Model
     protected $table = 'testimonials';
     protected $guarded = ['id'];
 
-    public function service(): BelongsTo
-    {
-        return $this->belongsTo(Service::class);
-    }
+    protected $casts = [
+        'rating' => 'integer',
+        'is_active' => 'boolean',
+    ];
 }
