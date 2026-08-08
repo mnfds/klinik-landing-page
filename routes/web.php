@@ -14,6 +14,7 @@ use App\Livewire\Landing\Promos\Index as PromosIndex;
 
 use App\Livewire\Admin\Services\Index as ServicesAdminIndex;
 use App\Livewire\Admin\Products\Index as ProductsAdminIndex;
+use App\Livewire\Admin\Promos\Index as PromosAdminIndex;
 
 
 // Route::view('/', 'welcome');
@@ -43,6 +44,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         // nanti route CRUD tiap modul ditambahkan di sini
         Route::get('/services', ServicesAdminIndex::class)->name('services.index');
         Route::get('/products', ProductsAdminIndex::class)->name('products.index');
+        Route::get('/promos', PromosAdminIndex::class)->name('promos.index');
 });
 
 Route::view('profile', 'profile')->middleware(['auth'])->name('profile');

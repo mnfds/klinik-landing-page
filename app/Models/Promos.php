@@ -11,4 +11,11 @@ class Promos extends Model
 
     protected $table = 'promos';
     protected $guarded = ['id'];
+    
+    protected $casts = [
+        'start_date' => 'date',
+        'end_date' => 'date',
+        'price' => 'decimal:2',
+        'is_active' => 'boolean',
+    ];
 }
