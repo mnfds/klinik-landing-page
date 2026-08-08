@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\BannerHome;
 
 use App\Models\BannerHome;
 use Illuminate\Support\Facades\Storage;
+use App\Livewire\Concerns\WithCustomPagination;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\On;
@@ -14,7 +15,7 @@ use Livewire\WithPagination;
 #[Title('Kelola Banner Home')]
 class Index extends Component
 {
-    use WithPagination;
+    use WithPagination, WithCustomPagination;
 
     public ?int $deleteId = null;
 

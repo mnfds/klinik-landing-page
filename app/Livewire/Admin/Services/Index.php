@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Services;
 
+use App\Livewire\Concerns\WithCustomPagination;
 use App\Models\Services;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Layout;
@@ -14,7 +15,7 @@ use Livewire\WithPagination;
 #[Title('Kelola Layanan')]
 class Index extends Component
 {
-    use WithPagination;
+    use WithPagination, WithCustomPagination;
 
     public string $search = '';
     public string $filterType = '';

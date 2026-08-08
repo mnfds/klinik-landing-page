@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Promos;
 
 use App\Models\Promos;
 use Illuminate\Support\Facades\Storage;
+use App\Livewire\Concerns\WithCustomPagination;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\On;
@@ -14,7 +15,7 @@ use Livewire\WithPagination;
 #[Title('Kelola Promo')]
 class Index extends Component
 {
-    use WithPagination;
+    use WithPagination, WithCustomPagination;
 
     public string $search = '';
     public ?int $deleteId = null;
