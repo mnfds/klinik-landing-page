@@ -4,25 +4,25 @@
             <div class="bg-white rounded-xl p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="font-fraunces text-lg text-forest">Edit Produk</h3>
-                    <button wire:click="closeModal" class="text-charcoal/50 hover:text-charcoal text-xl leading-none">&times;</button>
+                    <button wire:click="closeModal" class="text-charcoal/50 hover:text-red-500 text-xl leading-none">&times;</button>
                 </div>
 
                 <form wire:submit="save" class="space-y-4">
                     <div>
                         <label class="block text-sm font-medium text-charcoal mb-1">Nama Produk</label>
-                        <input type="text" wire:model="name" class="w-full rounded-lg border-gray-300 focus:border-forest focus:ring-forest text-sm">
+                        <input type="text" wire:model="name" class="w-full rounded-lg border p-2 border-gray-300 focus:border-forest focus:ring-forest text-sm">
                         @error('name') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-charcoal mb-1">Deskripsi</label>
-                        <textarea wire:model="description" rows="3" class="w-full rounded-lg border-gray-300 focus:border-forest focus:ring-forest text-sm"></textarea>
+                        <textarea wire:model="description" rows="3" class="w-full rounded-lg border p-2 border-gray-300 focus:border-forest focus:ring-forest text-sm"></textarea>
                         @error('description') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-charcoal mb-1">Harga (Rp)</label>
-                        <input type="number" step="0.01" wire:model="price" class="w-full rounded-lg border-gray-300 focus:border-forest focus:ring-forest text-sm">
+                        <input type="number" step="0.01" wire:model="price" class="w-full rounded-lg border p-2 border-gray-300 focus:border-forest focus:ring-forest text-sm">
                         @error('price') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                     </div>
 

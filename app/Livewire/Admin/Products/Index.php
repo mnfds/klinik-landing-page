@@ -68,6 +68,11 @@ class Index extends Component
             ->orderBy('name')
             ->paginate(10);
 
-        return view('livewire.admin.products.index', compact('products'));
+        return view('livewire.admin.products.index', [
+            'products' => $products,
+            'totalActive' => Products::where('is_active', true)->count(),
+            'totalInactive' => Products::where('is_active', false)->count(),
+        ]);
+
     }
 }
