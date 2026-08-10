@@ -17,9 +17,17 @@
 
             {{-- Image --}}
             <div class="aspect-square rounded-3xl bg-gradient-to-br from-blush/50 via-blush/20 to-ivory border border-forest/10 flex items-center justify-center overflow-hidden">
-                <svg viewBox="0 0 24 24" class="w-16 h-16 text-forest/25" fill="none" stroke="currentColor" stroke-width="1">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 3h6l1 3h3a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h3l1-3z" />
-                </svg>
+                @if ($product->image)
+                    <img
+                        src="{{ \Storage::url($product->image) }}"
+                        alt="{{ $product->name }}"
+                        class="w-full h-full object-contain"
+                    >
+                @else
+                    <svg viewBox="0 0 24 24" class="w-16 h-16 text-forest/25" fill="none" stroke="currentColor" stroke-width="1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 3h6l1 3h3a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h3l1-3z" />
+                    </svg>
+                @endif
             </div>
 
             {{-- Content --}}
@@ -29,15 +37,15 @@
                 </span>
 
                 <h1 class="mt-3 font-contax text-3xl sm:text-4xl text-forest-dark leading-tight">
-                    {{ $product['name'] }}
+                    {{ $product->name }}
                 </h1>
 
                 <p class="mt-3 font-contax text-2xl text-forest">
-                    Rp {{ number_format($product['price'], 0, ',', '.') }}
+                    {{ $product->price ? 'Rp ' . number_format($product->price, 0, ',', '.') : 'Hubungi Kami' }}
                 </p>
 
                 <p class="mt-6 font-contax text-charcoal/70 leading-relaxed">
-                    {{ $product['description'] }}
+                    {{ $product->description }}
                 </p>
 
                 <div class="mt-4 rounded-xl bg-blush/20 border border-blush/40 px-4 py-3 text-sm font-contax text-charcoal/70">
@@ -45,15 +53,15 @@
                 </div>
 
                 <div class="mt-8 flex flex-col sm:flex-row gap-3">
-                    
-                    <a href="https://wa.me/6285822810149?text={{ urlencode('Halo, saya ingin tanya/beli produk ' . $product['name']) }}"
+
+                    <a href="https://wa.me/6285822810149?text={{ urlencode('Halo, saya ingin tanya/beli produk ' . $product->name) }}"
                         target="_blank"
                         rel="noopener"
                         class="inline-flex items-center justify-center gap-2 rounded-full bg-forest px-6 py-3.5 text-sm font-contax font-medium text-ivory shadow-sm transition-all duration-300 hover:bg-forest-dark hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
                     >
                         Tanya / Beli via WhatsApp
                     </a>
-                    
+
                     <a href="{{ route('products') }}"
                         wire:navigate
                         class="inline-flex items-center justify-center gap-2 rounded-full border border-forest/20 px-6 py-3.5 text-sm font-contax font-medium text-forest-dark transition-all duration-300 hover:border-forest hover:bg-forest/5"

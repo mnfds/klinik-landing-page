@@ -1,10 +1,10 @@
 <div>
     {{-- HEADER --}}
     <x-page-header
-        label="Produk Kami"
-        title="Rangkaian skincare pilihan untuk perawatan di rumah"
-        subtitle="Konsultasikan dulu dengan tim kami via WhatsApp untuk reomdasi yang sesuai jenis kulitmu"
-        image="{{ asset('images/banner/products.png') }}"
+        label="{{ $this->banner->text_badge ?? 'Produk Kami' }}"
+        title="{{ $this->banner->text_title ?? 'Rangkaian skincare pilihan untuk perawatan di rumah' }}"
+        subtitle="{{ $this->banner->text_description ?? 'Konsultasikan dulu dengan tim kami via WhatsApp untuk reomdasi yang sesuai jenis kulitmu' }}"
+        image="{{ $this->banner && $this->banner->image_desktop ? \Storage::url($this->banner->image_desktop) : asset('images/banner/products.png') }}"
     />
 
     @include('partials.landing.divider')
@@ -49,13 +49,13 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
                 @forelse ($this->productsList as $product)
-                    <div wire:key="product-{{ $loop->index }}" class="group h-full flex flex-col rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md">
+                    <div wire:key="product-{{ $product->id }}" class="group h-full flex flex-col rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md">
                         {{-- Image --}}
                         <div class="aspect-square bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center overflow-hidden">
-                            @if (!empty($product['box']))
+                            @if ($product->image)
                                 <img
-                                    src="{{ $product['box'] }}"
-                                    alt="{{ $product['name'] }}"
+                                    src="{{ \Storage::url($product->image) }}"
+                                    alt="{{ $product->name }}"
                                     class="w-full h-full object-contain"
                                     loading="lazy"
                                 >
@@ -68,29 +68,29 @@
 
                         <div class="p-4 lg:p-6 flex flex-col flex-1">
                             <h3 class="font-contax text-base lg:text-lg text-forest-dark">
-                                {{ $product['name'] }}
+                                {{ $product->name }}
                             </h3>
 
                             <p class="mt-2 font-contax text-sm text-charcoal/60 leading-relaxed line-clamp-2">
-                                {{ $product['description'] }}
+                                {{ $product->description }}
                             </p>
 
                             {{-- Grup price + button, selalu nempel di bawah & berdekatan --}}
                             <div class="mt-auto pt-4">
                                 <p class="font-contax text-base lg:text-lg text-forest">
-                                    Rp {{ number_format($product['price'], 0, ',', '.') }}
+                                    {{ $product->price ? 'Rp ' . number_format($product->price, 0, ',', '.') : 'Hubungi Kami' }}
                                 </p>
 
                                 <div class="mt-3 flex flex-col gap-2">
 
-                                    <a href="{{ route('products.detail', $product['slug']) }}"
+                                    <a href="{{ route('products.detail', $product->id) }}"
                                         wire:navigate
                                         class="block text-center rounded-full bg-forest py-2 lg:py-2.5 text-xs lg:text-sm font-contax font-medium text-ivory transition-all duration-300 hover:bg-forest-dark"
                                     >
                                         Lihat Detail
                                     </a>
 
-                                    <a href="https://wa.me/6285822810149?text={{ urlencode('Halo, saya ingin tanya tentang produk ' . $product['name']) }}"
+                                    <a href="https://wa.me/6285822810149?text={{ urlencode('Halo, saya ingin tanya tentang produk ' . $product->name) }}"
                                         target="_blank"
                                         rel="noopener"
                                         class="block text-center rounded-full border border-forest/20 py-2 lg:py-2.5 text-[10px]  lg:text-sm font-contax font-medium text-forest-dark transition-all duration-300 hover:bg-[#25D366] hover:text-white hover:border-[#1f8f48]"
