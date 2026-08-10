@@ -15,7 +15,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 lg:gap-6">
                 @forelse ($this->testimonialsList as $testimonial)
                     <div
-                        wire:key="testimonial-{{ $loop->index }}"
+                        wire:key="testimonial-{{ $testimonial->id }}"
                         class="group flex h-full flex-col rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 bg-white p-5 lg:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-forest/20 hover:shadow-lg">
 
                         {{-- Rating --}}
@@ -23,7 +23,7 @@
                             @for ($i = 1; $i <= 5; $i++)
                                 <svg
                                     viewBox="0 0 20 20"
-                                    class="w-4 h-4 sm:w-5 sm:h-5 {{ $i <= $testimonial['rating'] ? 'text-gold' : 'text-forest/10' }}"
+                                    class="w-4 h-4 sm:w-5 sm:h-5 {{ $i <= $testimonial->rating ? 'text-gold' : 'text-forest/10' }}"
                                     fill="currentColor">
                                     <path d="M10 1.5l2.6 5.27 5.82.85-4.21 4.1.99 5.79L10 14.9l-5.2 2.61.99-5.79-4.21-4.1 5.82-.85L10 1.5z"/>
                                 </svg>
@@ -32,11 +32,11 @@
 
                         {{-- Testimoni --}}
                         <p class="mt-4 flex-1 text-xs sm:text-sm leading-6 text-charcoal/70 line-clamp-2">
-                            &ldquo;{{ $testimonial['message'] }}&rdquo;
+                            &ldquo;{{ $testimonial->message }}&rdquo;
                         </p>
 
                         {{-- Selengkapnya --}}
-                        <a href="{{ route('testimonials.detail', $testimonial['slug']) }}"
+                        <a href="{{ route('testimonials.detail', $testimonial->id) }}"
                             wire:navigate
                             class="mt-3 self-start text-xs sm:text-sm font-medium text-gold hover:text-forest transition-colors"
                         >
@@ -48,18 +48,26 @@
                             <div class="flex items-center gap-3">
 
                                 {{-- Avatar --}}
-                                <div class="flex h-11 w-11 items-center justify-center rounded-full bg-forest text-sm font-semibold text-ivory">
-                                    {{ strtoupper(substr($testimonial['name'], 0, 1)) }}
-                                </div>
+                                @if ($testimonial->avatar)
+                                    <img
+                                        src="{{ \Storage::url($testimonial->avatar) }}"
+                                        alt="{{ $testimonial->name }}"
+                                        class="h-11 w-11 rounded-full object-cover"
+                                    >
+                                @else
+                                    <div class="flex h-11 w-11 items-center justify-center rounded-full bg-forest text-sm font-semibold text-ivory">
+                                        {{ strtoupper(substr($testimonial->name, 0, 1)) }}
+                                    </div>
+                                @endif
 
                                 <div class="min-w-0">
                                     <h4 class="truncate font-display text-sm sm:text-base text-forest-dark">
-                                        {{ $testimonial['name'] }}
+                                        {{ $testimonial->name }}
                                     </h4>
 
-                                    @if ($testimonial['service_name'])
+                                    @if ($testimonial->items_testimonials)
                                         <p class="text-xs sm:text-sm font-medium text-gold truncate">
-                                            {{ $testimonial['service_name'] }}
+                                            {{ $testimonial->items_testimonials }}
                                         </p>
                                     @else
                                         <p class="text-xs sm:text-sm text-charcoal/40">
@@ -92,7 +100,7 @@
             <p class="mt-4 text-charcoal/60">
                 Konsultasikan kebutuhan perawatanmu dengan tim kami sekarang.
             </p>
-            
+
             <a href="https://wa.me/6285822810149"
                 target="_blank"
                 rel="noopener"

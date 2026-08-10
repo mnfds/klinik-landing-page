@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Landing\Testimonials;
 
+use App\Models\Testimonials as TestimonialsModel;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -10,58 +12,12 @@ use Livewire\Component;
 #[Title('Testimoni')]
 class Index extends Component
 {
-    // Dummy data — nanti diganti Testimonial::with('service')->where('is_active', true)->latest()->get()
-    protected function testimonials(): array
+    public function getTestimonialsListProperty(): Collection
     {
-        return [
-            [
-                'name' => 'Rahma Wulandari',
-                'message' => 'Perawatan facial-nya bikin kulit terasa lebih cerah dan lembap. Dokternya juga menjelaskan dengan sabar sebelum treatment.',
-                'rating' => 5,
-                'service_name' => 'Facial Glow Signature',
-                'slug' => 'slug testi 1',
-            ],
-            [
-                'name' => 'Dian Kusuma',
-                'message' => 'Awalnya ragu coba laser whitening, tapi ternyata prosesnya nyaman dan hasilnya terlihat bertahap sesuai yang dijanjikan.',
-                'rating' => 5,
-                'service_name' => 'Laser Whitening',
-                'slug' => 'slug testi 2',
-            ],
-            [
-                'name' => 'Putri Anggraini',
-                'message' => 'Konsultasi dermatologi di sini enak, dokternya detail banget jelasin kondisi kulit saya sebelum kasih rekomendasi.',
-                'rating' => 4,
-                'service_name' => 'Konsultasi Dermatologi',
-                'slug' => 'slug testi 3',
-            ],
-            [
-                'name' => 'Sari Handayani',
-                'message' => 'Tempatnya nyaman dan bersih, staff-nya ramah. Sudah langganan produk skincare-nya juga, cocok di kulit saya.',
-                'rating' => 5,
-                'service_name' => null,
-                'slug' => 'slug testi 4',
-            ],
-            [
-                'name' => 'Fajar Ramadhan',
-                'message' => 'Penanganan jerawat medisnya cukup membantu, dalam beberapa minggu sudah terlihat perubahan yang signifikan.',
-                'rating' => 4,
-                'service_name' => 'Penanganan Jerawat Medis',
-                'slug' => 'slug testi 5',    
-            ],
-            [
-                'name' => 'Novita Sari',
-                'message' => 'Chemical peeling di sini hasilnya halus, tidak perih berlebihan, dan prosesnya cepat.',
-                'rating' => 5,
-                'service_name' => 'Chemical Peeling',
-                'slug' => 'slug testi 5',
-            ],
-        ];
-    }
-
-    public function getTestimonialsListProperty(): array
-    {
-        return $this->testimonials();
+        return TestimonialsModel::query()
+            ->where('is_active', true)
+            ->latest()
+            ->get();
     }
 
     public function render()
