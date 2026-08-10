@@ -2,6 +2,10 @@
 
 namespace App\Livewire\Landing\Doctors;
 
+use App\Models\BannerPage;
+use App\Models\Doctors;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Carbon;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -22,45 +26,21 @@ class Index extends Component
         'minggu' => 'Minggu',
     ];
 
-    // Dummy data — nanti diganti Doctor::with('schedules')->where('is_active', true)->orderBy('order')->get()
-    protected function doctors(): array
+    public function getDoctorsListProperty(): Collection
     {
-        return [
-            [
-                'name' => 'dr. Amelia Putri, Sp.KK',
-                'specialization' => 'Spesialis Kulit & Kelamin',
-                'bio' => 'Berpengalaman lebih dari 8 tahun dalam penanganan masalah kulit medis dan estetika.',
-                'schedules' => [
-                    ['day' => 'senin', 'start_time' => '09:00', 'end_time' => '15:00'],
-                    ['day' => 'rabu', 'start_time' => '09:00', 'end_time' => '15:00'],
-                    ['day' => 'jumat', 'start_time' => '13:00', 'end_time' => '18:00'],
-                ],
-            ],
-            [
-                'name' => 'dr. Bagas Wirawan',
-                'specialization' => 'Dokter Umum & Estetika',
-                'bio' => 'Menangani konsultasi umum serta treatment estetika non-bedah dengan pendekatan yang personal.',
-                'schedules' => [
-                    ['day' => 'selasa', 'start_time' => '10:00', 'end_time' => '16:00'],
-                    ['day' => 'kamis', 'start_time' => '10:00', 'end_time' => '16:00'],
-                    ['day' => 'sabtu', 'start_time' => '09:00', 'end_time' => '14:00'],
-                ],
-            ],
-            [
-                'name' => 'dr. Citra Dewanti, Sp.DV',
-                'specialization' => 'Spesialis Dermatovenereologi',
-                'bio' => 'Fokus pada penanganan jerawat, alergi kulit, dan kondisi kulit kronis lainnya.',
-                'schedules' => [
-                    ['day' => 'senin', 'start_time' => '15:30', 'end_time' => '20:00'],
-                    ['day' => 'kamis', 'start_time' => '15:30', 'end_time' => '20:00'],
-                ],
-            ],
-        ];
+        return Doctors::query()
+            ->with(['schedules' => fn ($q) => $q->where('is_active', true)])
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->get();
     }
 
-    public function getDoctorsListProperty(): array
+    public function getBannerProperty(): ?BannerPage
     {
-        return $this->doctors();
+        return BannerPage::query()
+            ->where('type', 'doctors')
+            ->where('is_active', true)
+            ->first();
     }
 
     public function dayLabel(string $day): string
@@ -68,11 +48,16 @@ class Index extends Component
         return $this->dayLabels[$day] ?? ucfirst($day);
     }
 
-    public function sortedSchedules(array $schedules): array
+    public function sortedSchedules($schedules): \Illuminate\Support\Collection
     {
-        usort($schedules, fn ($a, $b) => array_search($a['day'], $this->dayOrder) <=> array_search($b['day'], $this->dayOrder));
+        return collect($schedules)->sortBy(
+            fn ($schedule) => array_search($schedule->day, $this->dayOrder)
+        )->values();
+    }
 
-        return $schedules;
+    public function formatTime(?string $time): string
+    {
+        return $time ? Carbon::parse($time)->format('H:i') : '';
     }
 
     public function render()
