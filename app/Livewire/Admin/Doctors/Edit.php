@@ -47,6 +47,7 @@ class Edit extends Component
             'photo' => 'nullable|image|max:2048',
             'is_active' => 'boolean',
             'schedules' => 'nullable|array',
+            'schedules.*.id' => 'nullable|integer|exists:doctor_schedules,id',
             'schedules.*.day' => 'required|in:senin,selasa,rabu,kamis,jumat,sabtu,minggu',
             'schedules.*.start_time' => 'required',
             'schedules.*.end_time' => 'required',
