@@ -31,18 +31,32 @@
     <div class="grid grid-cols-3 gap-3 mb-6">
         <div class="bg-white rounded-xl border border-blue-300 px-4 py-3 shadow-md">
             <p class="text-xs text-charcoal/50">Total Promo</p>
-            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $promos->total() }}</p>
+            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $totalPromos }}</p>
         </div>
         <div class="bg-white rounded-xl border border-blue-300 px-4 py-3 shadow-md">
-            <p class="text-xs text-charcoal/50">Sedang Berlangsung</p>
+            <p class="text-xs text-charcoal/50">Total Promo Aktif</p>
+            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $totalActive }}</p>
+        </div>
+        <div class="bg-white rounded-xl border border-blue-300 px-4 py-3 shadow-md">
+            <p class="text-xs text-charcoal/50">Total Promo Nonaktif</p>
+            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $totalInactive }}</p>
+        </div>
+        <div class="bg-white rounded-xl border border-blue-300 px-4 py-3 shadow-md">
+            <p class="text-xs text-charcoal/50">Promo Sedang Berlangsung</p>
             <p class="text-xl font-fraunces text-forest mt-0.5">
-                {{ $promos->filter(fn ($p) => ! $p->end_date || $p->end_date->isFuture() || $p->end_date->isToday())->count() }}
+                {{ $activePromos }}
             </p>
         </div>
         <div class="bg-white rounded-xl border border-blue-300 px-4 py-3 shadow-md">
-            <p class="text-xs text-charcoal/50">Berakhir</p>
+            <p class="text-xs text-charcoal/50">Promo Akan Datang</p>
             <p class="text-xl font-fraunces text-forest mt-0.5">
-                {{ $promos->filter(fn ($p) => $p->end_date && $p->end_date->isPast() && ! $p->end_date->isToday())->count() }}
+                {{ $upcomingPromos }}
+            </p>
+        </div>
+        <div class="bg-white rounded-xl border border-blue-300 px-4 py-3 shadow-md">
+            <p class="text-xs text-charcoal/50">Promo Telah Berakhir</p>
+            <p class="text-xl font-fraunces text-forest mt-0.5">
+                {{ $expiredPromos }}
             </p>
         </div>
     </div>

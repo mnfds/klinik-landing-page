@@ -31,15 +31,23 @@
     <div class="grid grid-cols-3 gap-3 mb-6">
         <div class="bg-white rounded-xl border border-blue-300 px-4 py-3 shadow-md">
             <p class="text-xs text-charcoal/50">Total Layanan</p>
-            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $services->total() }}</p>
+            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $totalServices }}</p>
         </div>
         <div class="bg-white rounded-xl border border-blue-300 px-4 py-3 shadow-md">
-            <p class="text-xs text-charcoal/50">Treatment</p>
-            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $services->where('type', 'treatment')->count() }}</p>
+            <p class="text-xs text-charcoal/50">Total Layanan Aktif</p>
+            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $totalActive }}</p>
         </div>
         <div class="bg-white rounded-xl border border-blue-300 px-4 py-3 shadow-md">
-            <p class="text-xs text-charcoal/50">Medical</p>
-            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $services->where('type', 'medical')->count() }}</p>
+            <p class="text-xs text-charcoal/50">Total Layanan Nonaktif</p>
+            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $totalInactive }}</p>
+        </div>
+        <div class="bg-white rounded-xl border border-blue-300 px-4 py-3 shadow-md">
+            <p class="text-xs text-charcoal/50">Total Layanan Tipe Treatment</p>
+            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $totalTreatment }}</p>
+        </div>
+        <div class="bg-white rounded-xl border border-blue-300 px-4 py-3 shadow-md">
+            <p class="text-xs text-charcoal/50">Total Layanan Tipe Medical</p>
+            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $totalMedical }}</p>
         </div>
     </div>
 

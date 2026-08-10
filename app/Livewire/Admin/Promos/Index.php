@@ -68,6 +68,23 @@ class Index extends Component
             ->orderByDesc('start_date')
             ->paginate(10);
 
-        return view('livewire.admin.promos.index', compact('promos'));
+        return view('livewire.admin.promos.index', [
+            'promos' => $promos,
+            'totalPromos' => Promos::count(),
+            'totalActive' => Promos::where('is_active', true)->count(),
+            'totalInactive' => Promos::where('is_active', false)->count(),
+            'activePromos' => Promos::where('is_active', true)
+                ->whereNotNull('end_date')
+                ->whereDate('start_date', '<=', today())
+                ->whereDate('end_date', '>=', today())
+                ->count(),
+            'upcomingPromos' => Promos::where('is_active', true)
+                ->whereNotNull('end_date')
+                ->whereDate('start_date', '>', today())
+                ->count(),
+            'expiredPromos' => Promos::whereNotNull('end_date')
+            ->whereDate('end_date', '<', today())
+            ->count(),
+        ]);
     }
 }

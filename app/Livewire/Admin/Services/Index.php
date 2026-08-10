@@ -75,6 +75,13 @@ class Index extends Component
             ->orderBy('name')
             ->paginate(10);
 
-        return view('livewire.admin.services.index', compact('services'));
+        return view('livewire.admin.services.index', [
+            'services' => $services,
+            'totalServices' => Services::count(),
+            'totalTreatment' => Services::where('type', 'treatment')->count(),
+            'totalMedical' => Services::where('type', 'medical')->count(),
+            'totalActive' => Services::where('is_active', true)->count(),
+            'totalInactive' => Services::where('is_active', false)->count(),
+        ]);
     }
 }

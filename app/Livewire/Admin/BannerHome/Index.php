@@ -64,6 +64,11 @@ class Index extends Component
             ->orderByDesc('created_at')
             ->paginate(10);
 
-        return view('livewire.admin.banner-home.index', compact('banners'));
+        return view('livewire.admin.banner-home.index', [
+            'banners' => $banners,
+            'totalBanners' => BannerHome::count(),
+            'totalActive' => BannerHome::where('is_active', true)->count(),
+            'totalInactive' => BannerHome::where('is_active', false)->count(),
+        ]);;
     }
 }

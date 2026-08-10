@@ -31,18 +31,22 @@
     <div class="grid grid-cols-3 gap-3 mb-6">
         <div class="bg-white rounded-xl border border-blue-300 px-4 py-3 shadow-md">
             <p class="text-xs text-charcoal/50">Total Testimoni</p>
-            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $testimonials->total() }}</p>
+            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $totalTestimonials }}</p>
         </div>
         <div class="bg-white rounded-xl border border-blue-300 px-4 py-3 shadow-md">
             <p class="text-xs text-charcoal/50">Rating Rata-rata</p>
             <p class="text-xl font-fraunces text-forest mt-0.5 flex items-center gap-1">
-                {{ number_format($testimonials->avg('rating') ?? 0, 1) }}
+                {{ number_format($averageRating ?? 0, 1) }}
                 <span class="text-gold text-sm">★</span>
             </p>
         </div>
         <div class="bg-white rounded-xl border border-blue-300 px-4 py-3 shadow-md">
-            <p class="text-xs text-charcoal/50">Aktif</p>
-            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $testimonials->where('is_active', true)->count() }}</p>
+            <p class="text-xs text-charcoal/50">Total Testimoni Aktif</p>
+            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $totalActive }}</p>
+        </div>
+        <div class="bg-white rounded-xl border border-blue-300 px-4 py-3 shadow-md">
+            <p class="text-xs text-charcoal/50">Total Testimoni Nonaktif</p>
+            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $totalInactive }}</p>
         </div>
     </div>
 

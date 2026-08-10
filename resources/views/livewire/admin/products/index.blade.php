@@ -31,14 +31,14 @@
     <div class="grid grid-cols-3 gap-3 mb-6">
         <div class="bg-white rounded-xl border border-blue-300 px-4 py-3 shadow-md">
             <p class="text-xs text-charcoal/50">Total Produk</p>
-            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $products->total() }}</p>
+            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $totalProducts }}</p>
         </div>
         <div class="bg-white rounded-xl border border-blue-300 px-4 py-3 shadow-md">
-            <p class="text-xs text-charcoal/50">Aktif</p>
+            <p class="text-xs text-charcoal/50">Total Produk Aktif</p>
             <p class="text-xl font-fraunces text-forest mt-0.5">{{ $totalActive }}</p>
         </div>
         <div class="bg-white rounded-xl border border-blue-300 px-4 py-3 shadow-md">
-            <p class="text-xs text-charcoal/50">Nonaktif</p>
+            <p class="text-xs text-charcoal/50">Total Produk Nonaktif</p>
             <p class="text-xl font-fraunces text-forest mt-0.5">{{ $totalInactive }}</p>
         </div>
     </div>

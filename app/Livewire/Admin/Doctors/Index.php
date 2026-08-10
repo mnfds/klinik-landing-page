@@ -70,6 +70,11 @@ class Index extends Component
             ->orderBy('name')
             ->paginate(10);
 
-        return view('livewire.admin.doctors.index', compact('doctors'));
+        return view('livewire.admin.doctors.index', [
+            'doctors' => $doctors,
+            'totalDoctors' => Doctors::count(),
+            'totalActive' => Doctors::where('is_active', true)->count(),
+            'totalInactive' => Doctors::where('is_active', false)->count(),
+        ]);
     }
 }

@@ -70,6 +70,7 @@ class Index extends Component
 
         return view('livewire.admin.products.index', [
             'products' => $products,
+            'totalProducts' => Products::count(),
             'totalActive' => Products::where('is_active', true)->count(),
             'totalInactive' => Products::where('is_active', false)->count(),
         ]);

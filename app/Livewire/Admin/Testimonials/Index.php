@@ -70,6 +70,12 @@ class Index extends Component
             ->orderByDesc('created_at')
             ->paginate(10);
 
-        return view('livewire.admin.testimonials.index', compact('testimonials'));
+        return view('livewire.admin.testimonials.index', [
+            'testimonials' => $testimonials,
+            'totalTestimonials' => Testimonials::count(),
+            'averageRating' => Testimonials::avg('rating') ?? 0,
+            'totalActive' => Testimonials::where('is_active', true)->count(),
+            'totalInactive' => Testimonials::where('is_active', false)->count(),
+        ]);
     }
 }

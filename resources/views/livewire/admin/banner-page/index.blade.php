@@ -31,15 +31,15 @@
     <div class="grid grid-cols-3 gap-3 mb-6">
         <div class="bg-white rounded-xl border border-blue-300 px-4 py-3 shadow-md">
             <p class="text-xs text-charcoal/50">Total Banner</p>
-            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $banners->total() }}</p>
+            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $totalBanners }}</p>
         </div>
         <div class="bg-white rounded-xl border border-blue-300 px-4 py-3 shadow-md">
-            <p class="text-xs text-charcoal/50">Aktif</p>
-            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $banners->where('is_active', true)->count() }}</p>
+            <p class="text-xs text-charcoal/50">Total Banner Aktif</p>
+            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $totalActive }}</p>
         </div>
         <div class="bg-white rounded-xl border border-blue-300 px-4 py-3 shadow-md">
-            <p class="text-xs text-charcoal/50">Nonaktif</p>
-            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $banners->where('is_active', false)->count() }}</p>
+            <p class="text-xs text-charcoal/50">Total Banner Nonaktif</p>
+            <p class="text-xl font-fraunces text-forest mt-0.5">{{ $totalInactive }}</p>
         </div>
     </div>
 
