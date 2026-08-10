@@ -14,8 +14,14 @@
                             @error('name') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                         </div>
     
-                        @if ($currentItemsTestimonialsText)
-                            <p class="text-xs text-charcoal/50 -mb-2">Saat ini: <span class="font-medium">{{ $currentItemsTestimonialsText }}</span> — pilih ulang di bawah untuk mengubahnya.</p>
+                        @if ($currentItemsTestimonialsText && ! $category)
+                            <p class="text-xs text-amber-600 -mb-2">
+                                ⚠️ "{{ $currentItemsTestimonialsText }}" tidak ditemukan di data saat ini — silakan pilih ulang kategori & item.
+                            </p>
+                        @elseif ($currentItemsTestimonialsText)
+                            <p class="text-xs text-charcoal/50 -mb-2">
+                                Saat ini: <span class="font-medium">{{ $currentItemsTestimonialsText }}</span>
+                            </p>
                         @endif
     
                         <div class="grid grid-cols-2 gap-4">

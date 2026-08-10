@@ -106,14 +106,33 @@ class Edit extends Component
         $this->rating = $testimonial->rating;
         $this->is_active = $testimonial->is_active;
 
-        // Data lama hanya teks, tidak bisa di-mapping otomatis ke kategori+ID
         $this->currentItemsTestimonialsText = $testimonial->items_testimonials;
-        $this->category = '';
-        $this->selected_item = '';
+
+        // Auto-detect kategori & item berdasarkan teks yang tersimpan
+        $this->autoDetectCategoryAndItem($testimonial->items_testimonials);
 
         $this->resetErrorBag();
         $this->resetValidation();
         $this->show = true;
+    }
+
+    private function autoDetectCategoryAndItem(string $itemText): void
+    {
+        $this->category = '';
+        $this->selected_item = '';
+
+        foreach ($this->categoryMap as $key => $config) {
+            $model = $config['model'];
+            $field = $config['field'];
+
+            $match = $model::query()->where($field, $itemText)->first();
+
+            if ($match) {
+                $this->category = $key;
+                $this->selected_item = (string) $match->id;
+                return;
+            }
+        }
     }
 
     public function closeModal(): void
