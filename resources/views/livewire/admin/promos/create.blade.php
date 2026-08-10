@@ -33,9 +33,37 @@
                             </div>
                         </div>
     
-                        <div>
-                            <label class="block text-sm font-medium text-charcoal mb-1">Harga Promo (Rp)</label>
-                            <input type="number" step="0.01" wire:model="price" class="w-full rounded-lg border p-2 border-gray-300 focus:border-forest focus:ring-forest text-sm">
+                        <div
+                            x-data="{
+                                raw: @entangle('price'),
+                                display: '',
+                                format(val) {
+                                    if (val === null || val === '' || val === undefined) return '';
+                                    return new Intl.NumberFormat('id-ID').format(val);
+                                },
+                                updateDisplay(e) {
+                                    let digits = e.target.value.replace(/[^0-9]/g, '');
+                                    this.raw = digits ? parseInt(digits) : null;
+                                    this.display = this.format(this.raw);
+                                    this.$nextTick(() => {
+                                        e.target.setSelectionRange(this.display.length, this.display.length);
+                                    });
+                                }
+                            }"
+                            x-init="display = format(raw)"
+                            >
+                            <label class="block text-sm font-medium text-charcoal mb-1">Harga (Rp)</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-charcoal/50">Rp</span>
+                                <input
+                                    type="text"
+                                    inputmode="numeric"
+                                    x-model="display"
+                                    @input="updateDisplay"
+                                    class="w-full rounded-lg border p-2 pl-9 border-gray-300 focus:border-forest focus:ring-forest text-sm"
+                                    placeholder="0"
+                                >
+                            </div>
                             @error('price') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                         </div>
     
