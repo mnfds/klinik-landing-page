@@ -25,18 +25,18 @@ use App\Livewire\Admin\BannerPage\Index as BannerPageIndex;
 Route::get('/', Home::class)->name('home');
 // ===== SERVICES GUEST ROUTE =====
 Route::get('/layanan', ServicesIndex::class)->name('services');
-Route::get('/layanan/{slug}', ServiceDetail::class)->name('services.detail');
+Route::get('/layanan/{service}', ServiceDetail::class)->name('services.detail');
 
 // ===== PRODUCTS GUEST ROUTE =====
 Route::get('/produk', ProductsIndex::class)->name('products');
-Route::get('/produk/{slug}', ProductDetail::class)->name('products.detail');
+Route::get('/produk/{product}', ProductDetail::class)->name('products.detail');
 
 // ===== DOCTORS GUEST ROUTE =====
 Route::get('/dokter', DoctorsIndex::class)->name('doctors');
 
 // ===== TESTIMONIALS GUEST ROUTE =====
 Route::get('/testimoni', TestimonialsIndex::class)->name('testimonials');
-Route::get('/testimoni/{slug}', TestimonialsDetail::class)->name('testimonials.detail');
+Route::get('/testimoni/{testimonial}', TestimonialsDetail::class)->name('testimonials.detail');
 
 // ===== PROMOS GUEST ROUTE =====
 Route::get('/promo', PromosIndex::class)->name('promos');

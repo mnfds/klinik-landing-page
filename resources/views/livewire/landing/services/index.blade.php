@@ -1,14 +1,14 @@
 <div>
     {{-- HEADER --}}
     <x-page-header
-        label="Layanan Kami"
-        title="Treatment estetika dan layanan medis dalam satu tempat"
-        subtitle="Setiap layanan ditangani langsung oleh dokter dan tenaga profesional berpengalaman."
-        image="{{ asset('images/banner/services.png') }}"
+        label="{{ $this->banner->text_badge ?? 'Layanan Kami' }}"
+        title="{{ $this->banner->text_title ?? 'Treatment estetika dan layanan medis dalam satu tempat' }}"
+        subtitle="{{ $this->banner->text_description ?? 'Setiap layanan ditangani langsung oleh dokter dan tenaga profesional berpengalaman.' }}"
+        image="{{ $this->banner && $this->banner->image_desktop ? \Storage::url($this->banner->image_desktop) : asset('images/banner/services.png') }}"
     />
 
     @include('partials.landing.divider')
-    
+
     <section class="bg-ivory border-b border-forest/10 py-2">
         <div class="max-w-5xl mx-auto px-6 lg:px-8">
             <div class="max-w-2xl mx-auto">
@@ -70,13 +70,13 @@
             {{-- Grid --}}
             <div class="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6" wire:key="services-grid-{{ $activeType }}">
                 @forelse ($this->filteredServices as $service)
-                    <div wire:key="service-{{ $loop->index }}" class="group h-full flex flex-col rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md">
+                    <div wire:key="service-{{ $service->id }}" class="group h-full flex flex-col rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md">
                         {{-- Image --}}
                         <div class="aspect-square bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center overflow-hidden">
-                            @if (!empty($service['box']))
+                            @if ($service->image)
                                 <img
-                                    src="{{ $service['box'] }}"
-                                    alt="{{ $service['name'] }}"
+                                    src="{{ \Storage::url($service->image) }}"
+                                    alt="{{ $service->name }}"
                                     class="w-full h-full object-contain"
                                     loading="lazy"
                                 >
@@ -89,21 +89,21 @@
 
                         <div class="p-4 lg:p-6 flex flex-col flex-1">
                             <span class="text-[11px] font-contax font-medium tracking-wide uppercase text-gold">
-                                {{ $service['type'] === 'treatment' ? 'Treatment Estetika' : 'Layanan Medis' }}
+                                {{ $service->type === 'treatment' ? 'Treatment Estetika' : 'Layanan Medis' }}
                             </span>
 
                             <h3 class="mt-2 font-contax text-base lg:text-lg text-forest-dark">
-                                {{ $service['name'] }}
+                                {{ $service->name }}
                             </h3>
 
                             <p class="mt-2 font-contax text-sm text-charcoal/60 leading-relaxed line-clamp-2">
-                                {{ $service['description'] }}
+                                {{ $service->description }}
                             </p>
                             {{-- Grup price + button, selalu nempel di bawah & berdekatan --}}
                             <div class="mt-auto pt-4">
                                 <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                                    @if ($service['youtube_link'])
-                                        <a href="{{ $service['youtube_link'] }}"
+                                    @if ($service->youtube_link)
+                                        <a href="{{ $service->youtube_link }}"
                                             target="_blank"
                                             rel="noopener"
                                             class="order-1 sm:order-2 inline-flex items-center gap-1 text-xs sm:text-sm text-charcoal/50 hover:text-forest transition-colors self-start sm:self-auto"
@@ -116,20 +116,20 @@
                                         </a>
                                     @endif
                                     <span class="order-2 sm:order-1 font-contax text-lg sm:text-xl text-forest-dark">
-                                        Rp {{ number_format($service['price'], 0, ',', '.') }}
+                                        {{ $service->price ? 'Rp ' . number_format($service->price, 0, ',', '.') : 'Hubungi Kami' }}
                                     </span>
                                 </div>
 
                                 <div class="mt-3 flex flex-col gap-2">
 
-                                    <a href="{{ route('services.detail', $service['slug']) }}"
+                                    <a href="{{ route('services.detail', $service->id) }}"
                                         wire:navigate
                                         class="block text-center rounded-full bg-forest py-2 lg:py-2.5 text-xs lg:text-sm font-contax font-medium text-ivory transition-all duration-300 hover:bg-forest-dark"
                                     >
                                         Lihat Detail
                                     </a>
 
-                                    <a href="https://wa.me/6285822810149?text={{ urlencode('Halo, saya ingin tanya tentang layanan ' . $service['name']) }}"
+                                    <a href="https://wa.me/6285822810149?text={{ urlencode('Halo, saya ingin tanya tentang layanan ' . $service->name) }}"
                                         target="_blank"
                                         rel="noopener"
                                         class="block text-center rounded-full border border-forest/20 py-2 lg:py-2.5 text-[10px]  lg:text-sm font-contax font-medium text-forest-dark transition-all duration-300 hover:bg-[#25D366] hover:text-white hover:border-[#1f8f48]"

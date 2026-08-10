@@ -2,6 +2,9 @@
 
 namespace App\Livewire\Landing\Services;
 
+use App\Models\BannerPage;
+use App\Models\Services;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -12,81 +15,26 @@ class Index extends Component
 {
     public string $activeType = 'all';
 
-    // Dummy data — nanti diganti Service::where('is_active', true)->get()
-    protected function services(): array
-    {
-        return [
-            [
-                'slug' => 'facial-glow-signature',
-                'name' => 'Facial Glow Signature',
-                'type' => 'treatment',
-                'description' => 'Perawatan facial dengan teknologi terkini untuk kulit tampak lebih cerah dan lembap.',
-                'price' => 350000,
-                'youtube_link' => null,
-                'box' => asset('images/example/box.png')
-            ],
-            [
-                'slug' => 'laser-whitening',
-                'name' => 'Laser Whitening',
-                'type' => 'treatment',
-                'description' => 'Mencerahkan area kulit tertentu dengan teknologi laser yang aman dan minim risiko.',
-                'price' => 750000,
-                'youtube_link' => 'https://youtube.com/watch?v=example',
-                'box' => asset('images/example/box.png')
-            ],
-            [
-                'slug' => 'chemical-peeling',
-                'name' => 'Chemical Peeling',
-                'type' => 'treatment',
-                'description' => 'Mengangkat sel kulit mati untuk regenerasi kulit yang lebih sehat dan halus.',
-                'price' => 450000,
-                'youtube_link' => null,
-                'box' => asset('images/example/box.png')
-            ],
-            [
-                'slug' => 'konsultasi-dermatologi',
-                'name' => 'Konsultasi Dermatologi',
-                'type' => 'medical',
-                'description' => 'Konsultasi kondisi kulit dengan dokter untuk penanganan masalah kulit non-estetika.',
-                'price' => 200000,
-                'youtube_link' => null,
-                'box' => asset('images/example/box.png')
-            ],
-            [
-                'slug' => 'penanganan-jerawat-medis',
-                'name' => 'Penanganan Jerawat Medis',
-                'type' => 'medical',
-                'description' => 'Diagnosis dan penanganan jerawat sedang-berat dengan pendekatan medis.',
-                'price' => 300000,
-                'youtube_link' => null,
-                'box' => asset('images/example/box.png')
-            ],
-            [
-                'slug' => 'skin-check-up',
-                'name' => 'Skin Check-Up',
-                'type' => 'medical',
-                'description' => 'Pemeriksaan menyeluruh kondisi kulit sebagai dasar rekomendasi perawatan lanjutan.',
-                'price' => 150000,
-                'youtube_link' => null,
-                'box' => asset('images/example/box.png')
-            ],
-        ];
-    }
-
     public function setType(string $type): void
     {
         $this->activeType = $type;
     }
 
-    public function getFilteredServicesProperty(): array
+    public function getFilteredServicesProperty(): Collection
     {
-        $all = $this->services();
+        return Services::query()
+            ->where('is_active', true)
+            ->when($this->activeType !== 'all', fn ($q) => $q->where('type', $this->activeType))
+            ->orderBy('name')
+            ->get();
+    }
 
-        if ($this->activeType === 'all') {
-            return $all;
-        }
-
-        return array_values(array_filter($all, fn ($s) => $s['type'] === $this->activeType));
+    public function getBannerProperty(): ?BannerPage
+    {
+        return BannerPage::query()
+            ->where('type', 'services')
+            ->where('is_active', true)
+            ->first();
     }
 
     public function render()
