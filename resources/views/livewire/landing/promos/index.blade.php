@@ -1,10 +1,10 @@
 <div>
     {{-- HEADER --}}
     <x-page-header
-        label="Promo"
-        title="Penawaran spesial untuk perawatanmu"
-        subtitle="Cek promo yang sedang berlangsung sebelum booking treatment atau membeli produk."
-        image="{{ asset('images/banner/promo.png') }}"
+        label="{{ $this->banner->text_badge ?? 'Promo' }}"
+        title="{{ $this->banner->text_title ?? 'Penawaran spesial untuk perawatanmu' }}"
+        subtitle="{{ $this->banner->text_description ?? 'Cek promo yang sedang berlangsung sebelum booking treatment atau membeli produk.' }}"
+        image="{{ $this->banner && $this->banner->image_desktop ? \Storage::url($this->banner->image_desktop) : asset('images/banner/promo.png') }}"
     />
 
     @include('partials.landing.divider')
@@ -49,13 +49,20 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
                 @forelse ($this->promosList as $promo)
-                    <div wire:key="promo-{{ $loop->index }}" class="group h-full flex flex-col rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md">
+                    <div wire:key="promo-{{ $promo->id }}" class="group relative h-full flex flex-col rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md">
+                        {{-- Badge "Segera Berakhir" --}}
+                        @if ($promo->is_ending_soon)
+                            <span class="absolute top-3 left-3 z-10 px-2.5 py-1 bg-red-500 text-ivory text-[10px] font-contax font-medium rounded-full">
+                                Segera Berakhir
+                            </span>
+                        @endif
+
                         {{-- Image --}}
                         <div class="aspect-square bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center overflow-hidden">
-                            @if (!empty($promo['box']))
+                            @if ($promo->image)
                                 <img
-                                    src="{{ $promo['box'] }}"
-                                    alt="{{ $promo['title'] }}"
+                                    src="{{ \Storage::url($promo->image) }}"
+                                    alt="{{ $promo->title }}"
                                     class="w-full h-full object-contain"
                                     loading="lazy"
                                 >
@@ -67,25 +74,25 @@
                         </div>
                         <div class="p-4 lg:p-6 flex flex-col flex-1">
                             <h3 class="font-contax text-base lg:text-lg text-forest-dark">
-                                {{ $promo['title'] }}
+                                {{ $promo->title }}
                             </h3>
 
                             <p class="mt-2 font-contax text-sm text-charcoal/60 leading-relaxed line-clamp-2">
-                                {{ $promo['description'] }}
+                                {{ $promo->description }}
                             </p>
-                            
+
                             <p class="mt-2 font-contax text-sm text-charcoal/60 leading-relaxed line-clamp-2">
-                                {{ $this->formatPeriod($promo['start_date'], $promo['end_date']) }}
+                                {{ $this->formatPeriod($promo->start_date, $promo->end_date) }}
                             </p>
 
                             {{-- Grup price + button, selalu nempel di bawah & berdekatan --}}
                             <div class="mt-auto pt-4">
                                 <p class="font-contax text-base lg:text-lg text-forest">
-                                    Rp {{ number_format($promo['price'], 0, ',', '.') }}
+                                    {{ $promo->price ? 'Rp ' . number_format($promo->price, 0, ',', '.') : 'Hubungi Kami' }}
                                 </p>
 
                                 <div class="mt-3 flex flex-col gap-2">
-                                    <a href="https://wa.me/6285822810149?text={{ urlencode('Halo, saya ingin tanya tentang promo ' . $promo['title']) }}"
+                                    <a href="https://wa.me/6285822810149?text={{ urlencode('Halo, saya ingin tanya tentang promo ' . $promo->title) }}"
                                         target="_blank"
                                         rel="noopener"
                                         class="block text-center rounded-full border border-forest/20 py-2 lg:py-2.5 text-[10px] lg:text-sm font-contax font-medium text-forest-dark transition-all duration-300 hover:bg-[#25D366] hover:text-white hover:border-[#1f8f48]"
