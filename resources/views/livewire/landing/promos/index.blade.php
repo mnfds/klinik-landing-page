@@ -4,7 +4,8 @@
         label="{{ $this->banner->text_badge ?? 'Promo' }}"
         title="{{ $this->banner->text_title ?? 'Penawaran spesial untuk perawatanmu' }}"
         subtitle="{{ $this->banner->text_description ?? 'Cek promo yang sedang berlangsung sebelum booking treatment atau membeli produk.' }}"
-        image="{{ $this->banner && $this->banner->image_desktop ? \Storage::url($this->banner->image_desktop) : asset('images/banner/promo.png') }}"
+        :image-desktop="$this->banner && $this->banner->image_desktop ? \Storage::url($this->banner->image_desktop) : asset('images/banner/promo.png')"
+        :image-mobile="$this->banner && $this->banner->image_mobile ? \Storage::url($this->banner->image_mobile) : asset('images/banner/promo.png')"
     />
 
     @include('partials.landing.divider')

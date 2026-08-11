@@ -4,7 +4,7 @@
         <div class="space-y-4">
             <div class="flex items-center gap-2">
                 {{-- <span class="flex items-center justify-center w-9 h-9 rounded-full bg-blush text-forest-dark"> --}}
-                    <img src="{{ asset('images/logo/logo-no-text.png') }}" alt="{{ config('app.name', 'Klinik') }}" class="w-14 h-14 object-contain">
+                    <img src="{{ asset('images/logo-no-text.png') }}" alt="{{ config('app.name', 'Klinik') }}" class="w-14 h-14 object-contain">
                 {{-- </span> --}}
                 <span class="font-display text-lg text-ivory">{{ config('app.name', 'Klinik') }}</span>
             </div>

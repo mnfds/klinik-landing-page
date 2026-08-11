@@ -16,7 +16,7 @@
         <div class="max-w-5xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-start">
 
             {{-- Image --}}
-            <div class="aspect-[4/3] rounded-3xl bg-gradient-to-br from-blush/50 via-blush/20 to-ivory border border-forest/10 flex items-center justify-center overflow-hidden">
+            <div class="aspect-square rounded-3xl bg-gradient-to-br from-blush/50 via-blush/20 to-ivory border border-forest/10 flex items-center justify-center overflow-hidden">
                 @if ($service->image)
                     <img
                         src="{{ \Storage::url($service->image) }}"

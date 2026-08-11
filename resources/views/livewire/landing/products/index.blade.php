@@ -4,7 +4,8 @@
         label="{{ $this->banner->text_badge ?? 'Produk Kami' }}"
         title="{{ $this->banner->text_title ?? 'Rangkaian skincare pilihan untuk perawatan di rumah' }}"
         subtitle="{{ $this->banner->text_description ?? 'Konsultasikan dulu dengan tim kami via WhatsApp untuk reomdasi yang sesuai jenis kulitmu' }}"
-        image="{{ $this->banner && $this->banner->image_desktop ? \Storage::url($this->banner->image_desktop) : asset('images/banner/products.png') }}"
+        :image-desktop="$this->banner && $this->banner->image_desktop ? \Storage::url($this->banner->image_desktop) : asset('images/banner/products.png')"
+        :image-mobile="$this->banner && $this->banner->image_mobile ? \Storage::url($this->banner->image_mobile) : asset('images/banner/products.png')"
     />
 
     @include('partials.landing.divider')

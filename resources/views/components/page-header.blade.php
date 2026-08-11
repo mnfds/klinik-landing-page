@@ -2,18 +2,38 @@
     'label' => null,
     'title',
     'subtitle' => null,
-    'image',
+    'image' => null,
+    'imageMobile' => null,
+    'imageDesktop' => null,
     'height' => 'h-screen',
 ])
 
+@php
+    // Fallback: kalau imageMobile/imageDesktop tidak diisi, pakai $image untuk keduanya
+    $desktopSrc = $imageDesktop ?? $image;
+    $mobileSrc = $imageMobile ?? $image;
+@endphp
+
 <section class="relative {{ $height }} overflow-hidden">
-    {{-- Banner image --}}
-    <img
-        src="{{ $image }}"
-        alt="{{ $title }}"
-        class="absolute inset-0 w-full h-full object-cover"
-        loading="eager"
-    >
+    {{-- Banner image: mobile --}}
+    @if ($mobileSrc)
+        <img
+            src="{{ $mobileSrc }}"
+            alt="{{ $title }}"
+            class="absolute inset-0 w-full h-full object-cover sm:hidden"
+            loading="eager"
+        >
+    @endif
+
+    {{-- Banner image: desktop --}}
+    @if ($desktopSrc)
+        <img
+            src="{{ $desktopSrc }}"
+            alt="{{ $title }}"
+            class="absolute inset-0 w-full h-full object-cover hidden sm:block"
+            loading="eager"
+        >
+    @endif
 
     {{-- Overlay gradient supaya teks tetap kebaca --}}
     <div class="absolute inset-0 bg-gradient-to-t from-forest-dark/70 via-forest-dark/20 to-forest-dark/0"></div>

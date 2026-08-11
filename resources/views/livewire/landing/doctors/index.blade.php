@@ -4,7 +4,8 @@
         label="{{ $this->banner->text_badge ?? 'Dokter' }}"
         title="{{ $this->banner->text_title ?? 'Tim dokter profesional kami' }}"
         subtitle="{{ $this->banner->text_description ?? 'Kenali dokter yang siap menangani perawatanmu.' }}"
-        image="{{ $this->banner && $this->banner->image_desktop ? \Storage::url($this->banner->image_desktop) : asset('images/banner/doctors.png') }}"
+        :image-desktop="$this->banner && $this->banner->image_desktop ? \Storage::url($this->banner->image_desktop) : asset('images/banner/doctors.png')"
+        :image-mobile="$this->banner && $this->banner->image_mobile ? \Storage::url($this->banner->image_mobile) : asset('images/banner/doctors.png')"
     />
 
     @include('partials.landing.divider')

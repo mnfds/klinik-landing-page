@@ -4,7 +4,8 @@
         label="{{ $this->banner->text_badge ?? 'Layanan Kami' }}"
         title="{{ $this->banner->text_title ?? 'Treatment estetika dan layanan medis dalam satu tempat' }}"
         subtitle="{{ $this->banner->text_description ?? 'Setiap layanan ditangani langsung oleh dokter dan tenaga profesional berpengalaman.' }}"
-        image="{{ $this->banner && $this->banner->image_desktop ? \Storage::url($this->banner->image_desktop) : asset('images/banner/services.png') }}"
+        :image-desktop="$this->banner && $this->banner->image_desktop ? \Storage::url($this->banner->image_desktop) : asset('images/banner/services.png')"
+        :image-mobile="$this->banner && $this->banner->image_mobile ? \Storage::url($this->banner->image_mobile) : asset('images/banner/services.png')"
     />
 
     @include('partials.landing.divider')

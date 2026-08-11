@@ -57,7 +57,7 @@
                 <!-- Logo -->
                 <a href="{{ route('home') }}" wire:navigate class="flex items-center gap-2 group">
                     {{-- <span class="flex items-center justify-center w-9 h-9 rounded-full bg-blush overflow-hidden transition-transform duration-300 group-hover:scale-105"> --}}
-                        <img src="{{ asset('images/logo/logo-no-text.png') }}" alt="{{ config('app.name', 'Klinik') }}" class="w-12 h-12 object-contain">
+                        <img src="{{ asset('images/logo-no-text.png') }}" alt="{{ config('app.name', 'Klinik') }}" class="w-12 h-12 object-contain">
                     {{-- </span> --}}
                     <span class="font-display text-xl text-forest-dark tracking-tight">{{ config('app.name', 'Klinik') }}</span>
                 </a>

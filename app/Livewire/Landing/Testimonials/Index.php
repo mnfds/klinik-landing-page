@@ -6,6 +6,7 @@ use App\Models\Testimonials as TestimonialsModel;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
+use App\Models\BannerPage;
 use Livewire\Component;
 
 #[Layout('layouts.landing')]
@@ -19,7 +20,13 @@ class Index extends Component
             ->latest()
             ->get();
     }
-
+    public function getBannerProperty(): ?BannerPage
+    {
+        return BannerPage::query()
+            ->where('type', 'services')
+            ->where('is_active', true)
+            ->first();
+    }
     public function render()
     {
         return view('livewire.landing.testimonials.index');

@@ -4,7 +4,8 @@
         label="Testimoni"
         title="Cerita nyata dari pasien kami"
         subtitle="Pengalaman langsung dari mereka yang sudah merasakan perawatan di klinik kami."
-        image="{{ asset('images/banner/testimonials.png') }}"
+        :image-desktop="$this->banner && $this->banner->image_desktop ? \Storage::url($this->banner->image_desktop) : asset('images/banner/testimonials.png')"
+        :image-mobile="$this->banner && $this->banner->image_mobile ? \Storage::url($this->banner->image_mobile) : asset('images/banner/testimonials.png')"
     />
 
     @include('partials.landing.divider')

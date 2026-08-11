@@ -1,10 +1,10 @@
 <div>
     {{-- HERO CAROUSEL --}}
-    @if (count($this->featuredBanner) > 0)
+    @if ($this->featuredBanner->count() > 0)
         <section
             x-data="{
                 active: 0,
-                slides: {{ count($this->featuredBanner) }},
+                slides: {{ $this->featuredBanner->count() }},
                 interval: null,
                 start() {
                     this.interval = setInterval(() => this.next(), 6000)
@@ -26,7 +26,7 @@
             >
             @foreach ($this->featuredBanner as $banner)
             <div
-                wire:key="home-banner-{{ $loop->index }}"
+                wire:key="home-banner-{{ $banner->id }}"
                 x-show="active === {{ $loop->index }}"
                 x-transition:enter="transition ease-out duration-700"
                 x-transition:enter-start="opacity-0"
@@ -37,31 +37,42 @@
                 class="absolute inset-0"
                 >
                 {{-- Background: mobile pakai gambar mobile, sm ke atas pakai gambar desktop --}}
-                <div
-                    class="absolute inset-0 bg-cover bg-center sm:hidden"
-                    style="background-image: url('{{ $banner['mobile'] }}')"
-                ></div>
-                <div
-                    class="absolute inset-0 bg-cover bg-center hidden sm:block"
-                    style="background-image: url('{{ $banner['desktop'] }}')"
-                ></div>
+                @if ($banner->image_mobile)
+                    <div
+                        class="absolute inset-0 bg-cover bg-center sm:hidden"
+                        style="background-image: url('{{ \Storage::url($banner->image_mobile) }}')"
+                    ></div>
+                @endif
+
+                @if ($banner->image_desktop)
+                    <div
+                        class="absolute inset-0 bg-cover bg-center hidden sm:block"
+                        style="background-image: url('{{ \Storage::url($banner->image_desktop) }}')"
+                    ></div>
+                @endif
 
                 <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent sm:bg-gradient-to-r sm:from-ivory/95 sm:via-ivory/60 sm:to-transparent"></div>
 
                 <div class="relative h-full overflow-y-auto pt-20 sm:pt-24 pb-6">
                     <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 h-full flex items-end">
                         <div class="max-w-2xl w-full">
-                            <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-contax font-medium tracking-wide uppercase text-ivory sm:text-forest/70 bg-forest/40 sm:bg-blush/40 rounded-full px-3.5 py-1.5">
-                                {{ $banner['badge'] }}
-                            </span>
+                            @if ($banner->text_badge)
+                                <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-contax font-medium tracking-wide uppercase text-ivory sm:text-forest/70 bg-forest/40 sm:bg-blush/40 rounded-full px-3.5 py-1.5">
+                                    {{ $banner->text_badge }}
+                                </span>
+                            @endif
 
-                            <h1 class="mt-4 sm:mt-6 font-contax font-bold text-2xl xs:text-3xl sm:text-5xl lg:text-6xl leading-[1.15] sm:leading-[1.1] text-ivory sm:text-forest-dark">
-                                {{ $banner['title'] }}
-                            </h1>
+                            @if ($banner->text_title)
+                                <h1 class="mt-4 sm:mt-6 font-contax font-bold text-2xl xs:text-3xl sm:text-5xl lg:text-6xl leading-[1.15] sm:leading-[1.1] text-ivory sm:text-forest-dark">
+                                    {{ $banner->text_title }}
+                                </h1>
+                            @endif
 
-                            <p class="mt-3 sm:mt-6 font-contax text-sm sm:text-lg text-ivory/80 sm:text-charcoal/70 leading-relaxed max-w-lg">
-                                {{ $banner['description'] }}
-                            </p>
+                            @if ($banner->text_description)
+                                <p class="mt-3 sm:mt-6 font-contax text-sm sm:text-lg text-ivory/80 sm:text-charcoal/70 leading-relaxed max-w-lg">
+                                    {{ $banner->text_description }}
+                                </p>
+                            @endif
 
                             <div class="mt-5 sm:mt-10">
                                 <a href="https://wa.me/6285822810149"
@@ -95,9 +106,9 @@
     @include('partials.landing.divider')
 
     {{-- PROMO AKTIF --}}
-    @if (count($this->promos) > 0)
+    @if ($this->promos->count() > 0)
         @php
-            $desktopSlides = collect($this->promos)->chunk(3)->values();
+            $desktopSlides = $this->promos->chunk(3)->values();
         @endphp
 
         <section class="bg-blush/20 py-16 lg:py-20">
@@ -145,15 +156,15 @@
                             @foreach ($desktopSlides as $slide)
                                 <div wire:key="home-promo-desktop-slide-{{ $loop->index }}" class="w-full flex-shrink-0 grid grid-cols-3 gap-6 lg:gap-8 px-1">
                                     @foreach ($slide as $promo)
-                                        <div wire:key="home-promo-desktop-{{ $loop->parent->index }}-{{ $loop->index }}"
+                                        <div wire:key="home-promo-desktop-{{ $promo->id }}"
                                             class="group h-full flex flex-col rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md"
                                             >
                                             {{-- Image --}}
                                             <div class="aspect-square bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center overflow-hidden">
-                                                @if (!empty($promo['box']))
+                                                @if ($promo->image)
                                                     <img
-                                                        src="{{ $promo['box'] }}"
-                                                        alt="{{ $promo['title'] }}"
+                                                        src="{{ \Storage::url($promo->image) }}"
+                                                        alt="{{ $promo->title }}"
                                                         class="w-full h-full object-contain"
                                                         loading="lazy"
                                                     >
@@ -165,24 +176,24 @@
                                             </div>
 
                                             <div class="p-7 flex flex-col flex-1">
-                                                <h3 class="font-contax text-lg text-forest-dark">{{ $promo['title'] }}</h3>
+                                                <h3 class="font-contax text-lg text-forest-dark">{{ $promo->title }}</h3>
 
                                                 <p class="mt-2 font-contax text-sm text-charcoal/60 leading-relaxed line-clamp-2">
-                                                    {{ $promo['description'] }}
+                                                    {{ $promo->description }}
                                                 </p>
 
                                                 <p class="mt-2 font-contax text-sm text-charcoal/60 leading-relaxed line-clamp-2">
-                                                    {{ $this->formatPeriod($promo['start_date'], $promo['end_date']) }}
+                                                    {{ $this->formatPeriod($promo->start_date, $promo->end_date) }}
                                                 </p>
 
                                                 {{-- Grup price + button, selalu nempel di bawah --}}
                                                 <div class="mt-auto pt-4">
                                                     <p class="font-contax text-base lg:text-lg text-forest">
-                                                        Rp {{ number_format($promo['price'], 0, ',', '.') }}
+                                                        {{ $promo->price ? 'Rp ' . number_format($promo->price, 0, ',', '.') : 'Hubungi Kami' }}
                                                     </p>
 
                                                     <div class="mt-3">
-                                                        <a href="https://wa.me/6285822810149?text={{ urlencode('Halo, saya ingin tanya tentang promo ' . $promo['title']) }}"
+                                                        <a href="https://wa.me/6285822810149?text={{ urlencode('Halo, saya ingin tanya tentang promo ' . $promo->title) }}"
                                                             target="_blank"
                                                             rel="noopener"
                                                             class="block text-center rounded-full border border-forest/20 py-2 lg:py-2.5 text-[10px] lg:text-sm font-contax font-medium text-forest-dark transition-all duration-300 hover:bg-[#25D366] hover:text-white hover:border-[#1f8f48]"
@@ -240,7 +251,7 @@
                 <div
                     x-data="{
                         activeIndex: 0,
-                        total: {{ count($this->promos) }},
+                        total: {{ $this->promos->count() }},
                         autoSlide: null,
                         next() { this.activeIndex = (this.activeIndex + 1) % this.total; },
                         prev() { this.activeIndex = (this.activeIndex - 1 + this.total) % this.total; },
@@ -261,14 +272,14 @@
                             :style="`transform: translateX(-${activeIndex * 100}%)`"
                         >
                             @foreach ($this->promos as $promo)
-                                <div wire:key="home-promo-mobile-{{ $loop->index }}" class="w-full flex-shrink-0 px-1">
+                                <div wire:key="home-promo-mobile-{{ $promo->id }}" class="w-full flex-shrink-0 px-1">
                                     <div class="group h-full flex flex-col rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md">
                                         {{-- Image --}}
                                         <div class="aspect-square bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center overflow-hidden">
-                                            @if (!empty($promo['box']))
+                                            @if ($promo->image)
                                                 <img
-                                                    src="{{ $promo['box'] }}"
-                                                    alt="{{ $promo['title'] }}"
+                                                    src="{{ \Storage::url($promo->image) }}"
+                                                    alt="{{ $promo->title }}"
                                                     class="w-full h-full object-contain"
                                                     loading="lazy"
                                                 >
@@ -280,23 +291,23 @@
                                         </div>
 
                                         <div class="p-7 flex flex-col flex-1">
-                                            <h3 class="font-contax text-lg text-forest-dark">{{ $promo['title'] }}</h3>
+                                            <h3 class="font-contax text-lg text-forest-dark">{{ $promo->title }}</h3>
 
                                             <p class="mt-2 font-contax text-sm text-charcoal/60 leading-relaxed line-clamp-2">
-                                                {{ $promo['description'] }}
+                                                {{ $promo->description }}
                                             </p>
 
                                             <p class="mt-2 font-contax text-sm text-charcoal/60 leading-relaxed line-clamp-2">
-                                                {{ $this->formatPeriod($promo['start_date'], $promo['end_date']) }}
+                                                {{ $this->formatPeriod($promo->start_date, $promo->end_date) }}
                                             </p>
 
                                             <div class="mt-auto pt-4">
                                                 <p class="font-contax text-base lg:text-lg text-forest">
-                                                    Rp {{ number_format($promo['price'], 0, ',', '.') }}
+                                                    {{ $promo->price ? 'Rp ' . number_format($promo->price, 0, ',', '.') : 'Hubungi Kami' }}
                                                 </p>
 
                                                 <div class="mt-3">
-                                                    <a href="https://wa.me/6285822810149?text={{ urlencode('Halo, saya ingin tanya tentang promo ' . $promo['title']) }}"
+                                                    <a href="https://wa.me/6285822810149?text={{ urlencode('Halo, saya ingin tanya tentang promo ' . $promo->title) }}"
                                                         target="_blank"
                                                         rel="noopener"
                                                         class="block text-center rounded-full border border-forest/20 py-2 lg:py-2.5 text-[10px] lg:text-sm font-contax font-medium text-forest-dark transition-all duration-300 hover:bg-[#25D366] hover:text-white hover:border-[#1f8f48]"
@@ -314,7 +325,7 @@
                     </div>
 
                     {{-- Nav Arrows --}}
-                    @if (count($this->promos) > 1)
+                    @if ($this->promos->count() > 1)
                         <button
                             @click="prev(); restart()"
                             aria-label="Sebelumnya"
@@ -336,7 +347,7 @@
                     @endif
 
                     {{-- Dots --}}
-                    @if (count($this->promos) > 1)
+                    @if ($this->promos->count() > 1)
                         <div class="flex justify-center gap-2 mt-5">
                             @foreach ($this->promos as $promo)
                                 <button
@@ -355,10 +366,10 @@
     @endif
 
     {{-- CUPLIKAN LAYANAN --}}
-    @if (count($this->featuredServices) > 0)
+    @if ($this->featuredServices->count() > 0)
         @php
-            $mobileServiceSlides = collect($this->featuredServices)->chunk(2)->values();
-            $desktopServiceSlides = collect($this->featuredServices)->chunk(4)->values();
+            $mobileServiceSlides = $this->featuredServices->chunk(2)->values();
+            $desktopServiceSlides = $this->featuredServices->chunk(4)->values();
         @endphp
 
         <section class="text-ivory py-20 lg:py-28 bg-gradient-to-b from-forest-dark/95 via-forest/95 to-forest/95">
@@ -405,16 +416,16 @@
                             @foreach ($mobileServiceSlides as $slide)
                                 <div wire:key="home-service-mobile-slide-{{ $loop->index }}" class="w-full flex-shrink-0 grid grid-cols-2 gap-5 px-1">
                                     @foreach ($slide as $service)
-                                        <a href="{{ Route::has('services.detail') ? route('services.detail', $service['slug']) : '#' }}"
+                                        <a href="{{ Route::has('services.detail') ? route('services.detail', $service->id) : '#' }}"
                                             wire:navigate
-                                            wire:key="home-service-mobile-{{ $loop->parent->index }}-{{ $loop->index }}"
+                                            wire:key="home-service-mobile-{{ $service->id }}"
                                             class="group rounded-tl-[25px] rounded-ee-[25px] border border-charcoal/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md"
                                         >
                                             <div class="aspect-square bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center overflow-hidden">
-                                                @if (!empty($service['box']))
+                                                @if ($service->image)
                                                     <img
-                                                        src="{{ $service['box'] }}"
-                                                        alt="{{ $service['name'] }}"
+                                                        src="{{ \Storage::url($service->image) }}"
+                                                        alt="{{ $service->name }}"
                                                         class="w-full h-full object-contain"
                                                         loading="lazy"
                                                     >
@@ -425,8 +436,10 @@
                                                 @endif
                                             </div>
                                             <div class="p-4">
-                                                <p class="text-sm font-contax font-medium text-forest-dark leading-snug">{{ $service['name'] }}</p>
-                                                <p class="mt-1 font-contax text-sm text-charcoal/50">Rp {{ number_format($service['price'], 0, ',', '.') }}</p>
+                                                <p class="text-sm font-contax font-medium text-forest-dark leading-snug">{{ $service->name }}</p>
+                                                <p class="mt-1 font-contax text-sm text-charcoal/50">
+                                                    {{ $service->price ? 'Rp ' . number_format($service->price, 0, ',', '.') : 'Hubungi Kami' }}
+                                                </p>
                                             </div>
                                         </a>
                                     @endforeach
@@ -493,16 +506,16 @@
                             @foreach ($desktopServiceSlides as $slide)
                                 <div wire:key="home-service-desktop-slide-{{ $loop->index }}" class="w-full flex-shrink-0 grid grid-cols-4 gap-5 px-1">
                                     @foreach ($slide as $service)
-                                        <a href="{{ Route::has('services.detail') ? route('services.detail', $service['slug']) : '#' }}"
+                                        <a href="{{ Route::has('services.detail') ? route('services.detail', $service->id) : '#' }}"
                                             wire:navigate
-                                            wire:key="home-service-desktop-{{ $loop->parent->index }}-{{ $loop->index }}"
+                                            wire:key="home-service-desktop-{{ $service->id }}"
                                             class="group rounded-tl-[25px] rounded-ee-[25px] border border-charcoal/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md"
                                         >
                                             <div class="aspect-square bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center overflow-hidden">
-                                                @if (!empty($service['box']))
+                                                @if ($service->image)
                                                     <img
-                                                        src="{{ $service['box'] }}"
-                                                        alt="{{ $service['name'] }}"
+                                                        src="{{ \Storage::url($service->image) }}"
+                                                        alt="{{ $service->name }}"
                                                         class="w-full h-full object-contain"
                                                         loading="lazy"
                                                     >
@@ -513,8 +526,10 @@
                                                 @endif
                                             </div>
                                             <div class="p-4">
-                                                <p class="text-sm font-contax font-medium text-forest-dark leading-snug">{{ $service['name'] }}</p>
-                                                <p class="mt-1 font-contax text-sm text-charcoal/50">Rp {{ number_format($service['price'], 0, ',', '.') }}</p>
+                                                <p class="text-sm font-contax font-medium text-forest-dark leading-snug">{{ $service->name }}</p>
+                                                <p class="mt-1 font-contax text-sm text-charcoal/50">
+                                                    {{ $service->price ? 'Rp ' . number_format($service->price, 0, ',', '.') : 'Hubungi Kami' }}
+                                                </p>
                                             </div>
                                         </a>
                                     @endforeach
@@ -562,10 +577,10 @@
     @include('partials.landing.divider')
 
     {{-- CUPLIKAN PRODUK --}}
-    @if (count($this->featuredProducts) > 0)
+    @if ($this->featuredProducts->count() > 0)
         @php
-            $mobileProductSlides = collect($this->featuredProducts)->chunk(2)->values();
-            $desktopProductSlides = collect($this->featuredProducts)->chunk(4)->values();
+            $mobileProductSlides = $this->featuredProducts->chunk(2)->values();
+            $desktopProductSlides = $this->featuredProducts->chunk(4)->values();
         @endphp
 
         <section class="bg-ivory py-20 lg:py-28">
@@ -612,16 +627,16 @@
                             @foreach ($mobileProductSlides as $slide)
                                 <div wire:key="home-product-mobile-slide-{{ $loop->index }}" class="w-full flex-shrink-0 grid grid-cols-2 gap-5 px-1">
                                     @foreach ($slide as $product)
-                                        <a href="{{ Route::has('products.detail') ? route('products.detail', $product['slug']) : '#' }}"
+                                        <a href="{{ Route::has('products.detail') ? route('products.detail', $product->id) : '#' }}"
                                             wire:navigate
-                                            wire:key="home-product-mobile-{{ $loop->parent->index }}-{{ $loop->index }}"
+                                            wire:key="home-product-mobile-{{ $product->id }}"
                                             class="group rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md"
                                         >
                                             <div class="aspect-square bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center overflow-hidden">
-                                                @if (!empty($product['box']))
+                                                @if ($product->image)
                                                     <img
-                                                        src="{{ $product['box'] }}"
-                                                        alt="{{ $product['name'] }}"
+                                                        src="{{ \Storage::url($product->image) }}"
+                                                        alt="{{ $product->name }}"
                                                         class="w-full h-full object-contain"
                                                         loading="lazy"
                                                     >
@@ -632,8 +647,10 @@
                                                 @endif
                                             </div>
                                             <div class="p-4">
-                                                <p class="text-sm font-contax font-medium text-forest-dark leading-snug">{{ $product['name'] }}</p>
-                                                <p class="mt-1 font-contax text-sm text-charcoal/50">Rp {{ number_format($product['price'], 0, ',', '.') }}</p>
+                                                <p class="text-sm font-contax font-medium text-forest-dark leading-snug">{{ $product->name }}</p>
+                                                <p class="mt-1 font-contax text-sm text-charcoal/50">
+                                                    {{ $product->price ? 'Rp ' . number_format($product->price, 0, ',', '.') : 'Hubungi Kami' }}
+                                                </p>
                                             </div>
                                         </a>
                                     @endforeach
@@ -700,16 +717,16 @@
                             @foreach ($desktopProductSlides as $slide)
                                 <div wire:key="home-product-desktop-slide-{{ $loop->index }}" class="w-full flex-shrink-0 grid grid-cols-4 gap-5 px-1">
                                     @foreach ($slide as $product)
-                                        <a href="{{ Route::has('products.detail') ? route('products.detail', $product['slug']) : '#' }}"
+                                        <a href="{{ Route::has('products.detail') ? route('products.detail', $product->id) : '#' }}"
                                             wire:navigate
-                                            wire:key="home-product-desktop-{{ $loop->parent->index }}-{{ $loop->index }}"
+                                            wire:key="home-product-desktop-{{ $product->id }}"
                                             class="group rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md"
                                         >
                                             <div class="aspect-square bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center overflow-hidden">
-                                                @if (!empty($product['box']))
+                                                @if ($product->image)
                                                     <img
-                                                        src="{{ $product['box'] }}"
-                                                        alt="{{ $product['name'] }}"
+                                                        src="{{ \Storage::url($product->image) }}"
+                                                        alt="{{ $product->name }}"
                                                         class="w-full h-full object-contain"
                                                         loading="lazy"
                                                     >
@@ -720,8 +737,10 @@
                                                 @endif
                                             </div>
                                             <div class="p-4">
-                                                <p class="text-sm font-contax font-medium text-forest-dark leading-snug">{{ $product['name'] }}</p>
-                                                <p class="mt-1 font-contax text-sm text-charcoal/50">Rp {{ number_format($product['price'], 0, ',', '.') }}</p>
+                                                <p class="text-sm font-contax font-medium text-forest-dark leading-snug">{{ $product->name }}</p>
+                                                <p class="mt-1 font-contax text-sm text-charcoal/50">
+                                                    {{ $product->price ? 'Rp ' . number_format($product->price, 0, ',', '.') : 'Hubungi Kami' }}
+                                                </p>
                                             </div>
                                         </a>
                                     @endforeach
@@ -830,15 +849,15 @@
             </div>
 
             <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach ($this->featuredTestimonials as $testimonial)
+                @forelse ($this->featuredTestimonials as $testimonial)
                     <div
-                        wire:key="home-testimonial-{{ $loop->index }}"
+                        wire:key="home-testimonial-{{ $testimonial->id }}"
                         class="group flex h-full flex-col rounded-tl-[25px] rounded-ee-[25px] border border-ivory/10 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
 
                         {{-- Rating --}}
                         <div class="flex items-center gap-1">
                             @for ($i = 1; $i <= 5; $i++)
-                                <svg viewBox="0 0 20 20" class="w-4 h-4 {{ $i <= $testimonial['rating'] ? 'text-gold' : 'text-forest/10' }}" fill="currentColor">
+                                <svg viewBox="0 0 20 20" class="w-4 h-4 {{ $i <= $testimonial->rating ? 'text-gold' : 'text-forest/10' }}" fill="currentColor">
                                     <path d="M10 1.5l2.6 5.27 5.82.85-4.21 4.1.99 5.79L10 14.9l-5.2 2.61.99-5.79-4.21-4.1 5.82-.85L10 1.5z" />
                                 </svg>
                             @endfor
@@ -846,11 +865,11 @@
 
                         {{-- Testimoni --}}
                         <p class="mt-4 font-contax text-sm text-charcoal/70 leading-relaxed flex-1 line-clamp-2">
-                            &ldquo;{{ $testimonial['message'] }}&rdquo;
+                            &ldquo;{{ $testimonial->message }}&rdquo;
                         </p>
 
                         {{-- Selengkapnya --}}
-                        <a href="{{ route('testimonials.detail', $testimonial['slug']) }}"
+                        <a href="{{ route('testimonials.detail', $testimonial->id) }}"
                             wire:navigate
                             class="mt-3 self-start text-sm font-contax font-medium text-gold hover:text-forest transition-colors"
                         >
@@ -861,18 +880,26 @@
                         <div class="mt-5 pt-4 border-t border-forest/10">
                             <div class="flex items-center gap-3">
                                 {{-- Avatar --}}
-                                <div class="flex h-11 w-11 items-center justify-center rounded-full bg-forest text-sm font-semibold text-ivory">
-                                    {{ strtoupper(substr($testimonial['name'], 0, 1)) }}
-                                </div>
+                                @if ($testimonial->avatar)
+                                    <img
+                                        src="{{ \Storage::url($testimonial->avatar) }}"
+                                        alt="{{ $testimonial->name }}"
+                                        class="h-11 w-11 rounded-full object-cover"
+                                    >
+                                @else
+                                    <div class="flex h-11 w-11 items-center justify-center rounded-full bg-forest text-sm font-semibold text-ivory">
+                                        {{ strtoupper(substr($testimonial->name, 0, 1)) }}
+                                    </div>
+                                @endif
 
                                 <div class="min-w-0">
                                     <h4 class="truncate font-contax text-base text-forest-dark">
-                                        {{ $testimonial['name'] }}
+                                        {{ $testimonial->name }}
                                     </h4>
 
-                                    @if ($testimonial['service_name'])
+                                    @if ($testimonial->items_testimonials)
                                         <p class="text-xs sm:text-sm font-medium text-gold truncate">
-                                            {{ $testimonial['service_name'] }}
+                                            {{ $testimonial->items_testimonials }}
                                         </p>
                                     @else
                                         <p class="text-xs sm:text-sm text-charcoal/40">
@@ -883,7 +910,11 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="col-span-full py-16 text-center">
+                        <p class="text-ivory/60">Belum ada testimoni tersedia.</p>
+                    </div>
+                @endforelse
             </div>
         </div>
     </section>
