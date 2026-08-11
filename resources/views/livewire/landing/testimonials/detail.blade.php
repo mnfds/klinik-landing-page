@@ -16,12 +16,12 @@
         <div class="max-w-5xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-start">
 
             {{-- Image --}}
-            <div class="aspect-[4/3] rounded-3xl bg-gradient-to-br from-blush/50 via-blush/20 to-ivory border border-forest/10 flex items-center justify-center overflow-hidden">
+            <div class="aspect-square rounded-3xl bg-gradient-to-br from-blush/50 via-blush/20 to-ivory border border-forest/10 flex items-center justify-center overflow-hidden">
                 @if ($testimonial->photo)
                     <img
                         src="{{ \Storage::url($testimonial->photo) }}"
                         alt="{{ $testimonial->name }}"
-                        class="w-full h-full object-cover"
+                        class="w-full h-full object-contain"
                     >
                 @else
                     <svg viewBox="0 0 24 24" class="w-16 h-16 text-forest/25" fill="none" stroke="currentColor" stroke-width="1">
