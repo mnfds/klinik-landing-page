@@ -22,9 +22,13 @@ class Home extends Component
     {
         return Promos::query()
             ->where('is_active', true)
-            ->where(fn ($q) => $q->whereNull('end_date')->orWhereDate('end_date', '>=', now()))
-            ->orderByDesc('start_date')
-            ->limit(4)
+            ->whereDate('start_date', '<=', now())
+            ->where(fn ($q) =>
+                $q->whereNull('end_date')
+                ->orWhereDate('end_date', '>=', now())
+            )
+            ->inRandomOrder()
+            ->limit(6)
             ->get();
     }
 
@@ -44,8 +48,8 @@ class Home extends Component
     {
         return Services::query()
             ->where('is_active', true)
-            ->orderBy('name')
-            ->limit(6)
+            ->inRandomOrder()
+            ->limit(8)
             ->get();
     }
 
@@ -53,8 +57,8 @@ class Home extends Component
     {
         return Products::query()
             ->where('is_active', true)
-            ->orderBy('name')
-            ->limit(6)
+            ->inRandomOrder()
+            ->limit(8)
             ->get();
     }
 
@@ -62,7 +66,7 @@ class Home extends Component
     {
         return BannerHome::query()
             ->where('is_active', true)
-            ->latest()
+            ->inRandomOrder()
             ->get();
     }
 
@@ -70,7 +74,7 @@ class Home extends Component
     {
         return Testimonials::query()
             ->where('is_active', true)
-            ->latest()
+            ->inRandomOrder()
             ->limit(3)
             ->get();
     }
