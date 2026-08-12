@@ -46,7 +46,7 @@
     </section>
 
     {{-- FILTER + GRID --}}
-    <section class="bg-ivory py-16 lg:py-20">
+    <section class="bg-ivory py-16 lg:py-20 ">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
 
             {{-- Filter Tabs --}}
@@ -69,9 +69,9 @@
             </div>
 
             {{-- Grid --}}
-            <div class="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6" wire:key="services-grid-{{ $activeType }}">
+            <div class="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 " wire:key="services-grid-{{ $activeType }}" data-aos="fade-up">
                 @forelse ($this->filteredServices as $service)
-                    <div wire:key="service-{{ $service->id }}" class="group h-full flex flex-col rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md">
+                    <div wire:key="service-{{ $service->id }}" class="group h-full flex flex-col rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:-translate-y-1 hover:border-forest/30 hover:shadow-lg">
                         {{-- Image --}}
                         <div class="aspect-square bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center overflow-hidden">
                             @if ($service->image)

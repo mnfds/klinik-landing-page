@@ -50,7 +50,7 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
                 @forelse ($this->promosList as $promo)
-                    <div wire:key="promo-{{ $promo->id }}" class="group relative h-full flex flex-col rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md">
+                    <div wire:key="promo-{{ $promo->id }}" class="group relative h-full flex flex-col rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:-translate-y-1 hover:border-forest/30 hover:shadow-lg">
                         {{-- Badge "Segera Berakhir" --}}
                         @if ($promo->is_ending_soon)
                             <span class="absolute top-3 left-3 z-10 px-2.5 py-1 bg-red-500 text-ivory text-[10px] font-contax font-medium rounded-full">

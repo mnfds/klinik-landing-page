@@ -157,7 +157,7 @@
                                 <div wire:key="home-promo-desktop-slide-{{ $loop->index }}" class="w-full flex-shrink-0 grid grid-cols-3 gap-6 lg:gap-8 px-1">
                                     @foreach ($slide as $promo)
                                         <div wire:key="home-promo-desktop-{{ $promo->id }}"
-                                            class="group h-full flex flex-col rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md"
+                                            class="group h-full flex flex-col rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:-translate-y-1 hover:border-forest/30 hover:shadow-lg"
                                             >
                                             {{-- Image --}}
                                             <div class="aspect-square bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center overflow-hidden">
@@ -273,7 +273,7 @@
                         >
                             @foreach ($this->promos as $promo)
                                 <div wire:key="home-promo-mobile-{{ $promo->id }}" class="w-full flex-shrink-0 px-1">
-                                    <div class="group h-full flex flex-col rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md">
+                                    <div class="group h-full flex flex-col rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:-translate-y-1 hover:border-forest/30 hover:shadow-lg">
                                         {{-- Image --}}
                                         <div class="aspect-square bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center overflow-hidden">
                                             @if ($promo->image)
@@ -419,7 +419,7 @@
                                         <a href="{{ Route::has('services.detail') ? route('services.detail', $service->id) : '#' }}"
                                             wire:navigate
                                             wire:key="home-service-mobile-{{ $service->id }}"
-                                            class="group rounded-tl-[25px] rounded-ee-[25px] border border-charcoal/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md"
+                                            class="group rounded-tl-[25px] rounded-ee-[25px] border border-charcoal/10 overflow-hidden bg-white transition-all duration-300 hover:-translate-y-1 hover:border-forest/30 hover:shadow-lg"
                                         >
                                             <div class="aspect-square bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center overflow-hidden">
                                                 @if ($service->image)
@@ -509,7 +509,7 @@
                                         <a href="{{ Route::has('services.detail') ? route('services.detail', $service->id) : '#' }}"
                                             wire:navigate
                                             wire:key="home-service-desktop-{{ $service->id }}"
-                                            class="group rounded-tl-[25px] rounded-ee-[25px] border border-charcoal/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md"
+                                            class="group rounded-tl-[25px] rounded-ee-[25px] border border-charcoal/10 overflow-hidden bg-white transition-all duration-300 hover:-translate-y-1 hover:border-forest/30 hover:shadow-lg"
                                         >
                                             <div class="aspect-square bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center overflow-hidden">
                                                 @if ($service->image)
@@ -630,7 +630,7 @@
                                         <a href="{{ Route::has('products.detail') ? route('products.detail', $product->id) : '#' }}"
                                             wire:navigate
                                             wire:key="home-product-mobile-{{ $product->id }}"
-                                            class="group rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md"
+                                            class="group rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:-translate-y-1 hover:border-forest/20 hover:shadow-lg"
                                         >
                                             <div class="aspect-square bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center overflow-hidden">
                                                 @if ($product->image)
@@ -720,7 +720,7 @@
                                         <a href="{{ Route::has('products.detail') ? route('products.detail', $product->id) : '#' }}"
                                             wire:navigate
                                             wire:key="home-product-desktop-{{ $product->id }}"
-                                            class="group rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:border-forest/30 hover:shadow-md"
+                                            class="group rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:-translate-y-1 hover:border-forest/20 hover:shadow-lg"
                                         >
                                             <div class="aspect-square bg-gradient-to-br from-blush/50 via-blush/20 to-ivory flex items-center justify-center overflow-hidden">
                                                 @if ($product->image)
