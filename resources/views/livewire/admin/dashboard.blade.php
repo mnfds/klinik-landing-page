@@ -6,7 +6,31 @@
     </div>
 
     {{-- Stat utama --}}
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
+    <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
+        <div class="bg-white rounded-xl border border-blue-300 px-4 py-3.5 shadow-md">
+            <div class="flex items-center justify-between">
+                <p class="text-xs text-charcoal/50">Total Pengujung</p>
+                <i class="fa-solid fa-users text-forest/30 text-sm"></i>
+            </div>
+            <p class="text-2xl font-fraunces text-forest mt-1">{{ $stats['totalVisitors'] }}</p>
+        </div>
+
+        <div class="bg-white rounded-xl border border-blue-300 px-4 py-3.5 shadow-md">
+            <div class="flex items-center justify-between">
+                <p class="text-xs text-charcoal/50">Pengunjung hari ini</p>
+                <i class="fa-solid fa-user-group text-forest/30 text-sm"></i>
+            </div>
+            <p class="text-2xl font-fraunces text-forest mt-1">{{ $stats['todayVisitors'] }}</p>
+        </div>
+
+        <div class="bg-white rounded-xl border border-blue-300 px-4 py-3.5 shadow-md">
+            <div class="flex items-center justify-between">
+                <p class="text-xs text-charcoal/50">Pengunjung bulan ini</p>
+                <i class="fa-solid fa-circle-user text-forest/30 text-sm"></i>
+            </div>
+            <p class="text-2xl font-fraunces text-forest mt-1">{{ $stats['monthVisitors'] }}</p>
+        </div>
+
         <div class="bg-white rounded-xl border border-blue-300 px-4 py-3.5 shadow-md">
             <div class="flex items-center justify-between">
                 <p class="text-xs text-charcoal/50">Layanan</p>

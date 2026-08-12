@@ -7,6 +7,7 @@ use App\Models\Products;
 use App\Models\Promos;
 use App\Models\Services;
 use App\Models\Testimonials;
+use App\Models\Visitor;
 use Illuminate\Support\Carbon;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -30,6 +31,9 @@ class Dashboard extends Component
                 'doctorsActive' => Doctors::where('is_active', true)->count(),
                 'testimonials' => Testimonials::count(),
                 'ratingAvg' => Testimonials::avg('rating'),
+                'totalVisitors' => Visitor::count(),
+                'todayVisitors' => Visitor::whereDate('visited_date',today())->count(),
+                'monthVisitors' => Visitor::whereBetween('visited_date',[now()->startOfMonth(), now()->endOfMonth(),])->count(),
             ],
             'recentTestimonials' => Testimonials::latest()->take(5)->get(),
             'expiringPromos' => Promos::whereNotNull('end_date')
