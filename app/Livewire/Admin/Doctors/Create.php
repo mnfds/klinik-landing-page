@@ -134,7 +134,7 @@ class Create extends Component
     
             $this->closeModal();
             $this->dispatch('doctorSaved');
-            $this->dispatch('toast', type: 'error', message: 'Dokter berhasil disimpan.');
+            $this->dispatch('toast', type: 'success', message: 'Dokter berhasil disimpan.');
         } catch (\Throwable $th) {
             $this->dispatch('toast', type: 'error', message: 'Gagal menyimpan dokter. silahkan coba lagi.');
         }
