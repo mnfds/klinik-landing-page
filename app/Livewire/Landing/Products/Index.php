@@ -13,10 +13,20 @@ use Livewire\Component;
 #[Title('Produk')]
 class Index extends Component
 {
+    public string $search = '';
+    
     public function getProductsListProperty(): Collection
     {
         return Products::query()
             ->where('is_active', true)
+            ->when(
+                filled(trim($this->search)),
+                fn ($q) => $q->where(
+                    'name',
+                    'like',
+                    '%' . trim($this->search) . '%'
+                )
+            )
             ->orderBy('name')
             ->get();
     }

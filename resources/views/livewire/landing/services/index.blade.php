@@ -23,6 +23,7 @@
                 <div class="relative mt-6">
                     <input
                         type="text"
+                        wire:model.live.debounce.300ms="search"
                         placeholder="Cari layanan..."
                         class="w-full rounded-xl border border-forest/20 bg-white py-3 pl-12 pr-4 focus:border-forest focus:ring-2 focus:ring-forest/20 outline-none transition"
                     >
@@ -59,7 +60,7 @@
                     <button
                         wire:click="setType('{{ $key }}')"
                         class="px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold
-                            {{ $activeType === $key
+                            {{ $filterType === $key
                                 ? 'bg-forest text-ivory shadow-sm'
                                 : 'bg-transparent text-charcoal/70 border border-forest/15 hover:border-forest/40' }}"
                     >
@@ -69,7 +70,7 @@
             </div>
 
             {{-- Grid --}}
-            <div class="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 " wire:key="services-grid-{{ $activeType }}" data-aos="fade-up">
+            <div class="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 " wire:key="services-grid-{{ $filterType }}" data-aos="fade-up">
                 @forelse ($this->filteredServices as $service)
                     <div wire:key="service-{{ $service->id }}" class="group h-full flex flex-col rounded-tl-[25px] rounded-ee-[25px] border border-forest/10 overflow-hidden bg-white transition-all duration-300 hover:-translate-y-1 hover:border-forest/30 hover:shadow-lg">
                         {{-- Image --}}

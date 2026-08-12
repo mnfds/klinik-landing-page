@@ -23,7 +23,8 @@
                 <div class="relative mt-6">
                     <input
                         type="text"
-                        placeholder="Cari layanan..."
+                        wire:model.live.debounce.300ms="search"
+                        placeholder="Cari promo..."
                         class="w-full rounded-xl border border-forest/20 bg-white py-3 pl-12 pr-4 focus:border-forest focus:ring-2 focus:ring-forest/20 outline-none transition"
                     >
 

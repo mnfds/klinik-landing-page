@@ -13,18 +13,29 @@ use Livewire\Attributes\Title;
 #[Title('Layanan')]
 class Index extends Component
 {
-    public string $activeType = 'all';
+    public string $search = '';
+    public string $filterType = 'all';
 
     public function setType(string $type): void
     {
-        $this->activeType = $type;
+        $this->filterType = $type;
     }
 
     public function getFilteredServicesProperty(): Collection
     {
         return Services::query()
             ->where('is_active', true)
-            ->when($this->activeType !== 'all', fn ($q) => $q->where('type', $this->activeType))
+
+            ->when(
+                $this->search !== '',
+                fn ($q) => $q->where('name', 'like', '%' . $this->search . '%')
+            )
+
+            ->when(
+                $this->filterType !== 'all',
+                fn ($q) => $q->where('type', $this->filterType)
+            )
+
             ->orderBy('name')
             ->get();
     }

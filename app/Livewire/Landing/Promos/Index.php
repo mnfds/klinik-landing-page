@@ -14,16 +14,39 @@ use Livewire\Component;
 #[Title('Promo')]
 class Index extends Component
 {
+    public string $search = '';
+    
+
     public function getPromosListProperty(): Collection
     {
         return Promos::query()
             ->where('is_active', true)
-            ->where(fn ($q) => $q->whereNull('end_date')->orWhereDate('end_date', '>=', now()))
+
+            // Promo sudah dimulai
+            ->whereDate('start_date', '<=', now())
+
+            // Promo belum berakhir
+            ->where(function ($q) {
+                $q->whereNull('end_date')
+                    ->orWhereDate('end_date', '>=', now());
+            })
+
+            // Search
+            ->when(
+                filled(trim($this->search)),
+                fn ($q) => $q->where(
+                    'name',
+                    'like',
+                    '%' . trim($this->search) . '%'
+                )
+            )
+
             ->orderByDesc('start_date')
             ->get()
             ->map(function ($promo) {
                 $promo->is_ending_soon = $promo->end_date
-                    ? $promo->end_date->isFuture() && $promo->end_date->diffInDays(now(), false) >= -7
+                    ? $promo->end_date->isFuture()
+                        && $promo->end_date->diffInDays(now(), false) >= -7
                     : false;
 
                 return $promo;
