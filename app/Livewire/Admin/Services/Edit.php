@@ -68,23 +68,26 @@ class Edit extends Component
     public function save(): void
     {
         $validated = $this->validate();
-
-        $service = Services::findOrFail($this->serviceId);
-
-        if ($this->image) {
-            if ($service->image) {
-                Storage::disk('public')->delete($service->image);
+        try {
+            $service = Services::findOrFail($this->serviceId);
+    
+            if ($this->image) {
+                if ($service->image) {
+                    Storage::disk('public')->delete($service->image);
+                }
+                $validated['image'] = $this->image->store('services', 'public');
+            } else {
+                unset($validated['image']);
             }
-            $validated['image'] = $this->image->store('services', 'public');
-        } else {
-            unset($validated['image']);
+    
+            $service->update($validated);
+    
+            $this->closeModal();
+            $this->dispatch('serviceSaved');
+            $this->dispatch('toast', type: 'success', message: 'Layanan berhasil diperbarui.');
+        } catch (\Throwable $th) {
+            $this->dispatch('toast', type: 'error', message: 'Gagal memperbarui layanan. Silakan coba lagi.');
         }
-
-        $service->update($validated);
-
-        $this->closeModal();
-        $this->dispatch('serviceSaved');
-        session()->flash('success', 'Layanan berhasil diperbarui.');
     }
 
     public function render()

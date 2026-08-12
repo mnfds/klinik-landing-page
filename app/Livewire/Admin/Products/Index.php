@@ -37,16 +37,19 @@ class Index extends Component
 
     public function delete(): void
     {
-        $product = Products::findOrFail($this->deleteId);
-
-        if ($product->image) {
-            Storage::disk('public')->delete($product->image);
+        try {
+            $product = Products::findOrFail($this->deleteId);
+    
+            if ($product->image) {
+                Storage::disk('public')->delete($product->image);
+            }
+    
+            $product->delete();
+            $this->deleteId = null;
+            $this->dispatch('toast', type: 'success', message: 'Produk berhasil dihapus.');
+        } catch (\Throwable $th) {
+            $this->dispatch('toast', type: 'error', message: 'Gagal menghapus produk. silahkan coba lagi.');
         }
-
-        $product->delete();
-        $this->deleteId = null;
-
-        session()->flash('success', 'Produk berhasil dihapus.');
     }
 
     public function toggleActive(int $id): void

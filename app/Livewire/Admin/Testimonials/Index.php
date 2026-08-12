@@ -36,19 +36,22 @@ class Index extends Component
 
     public function delete(): void
     {
-        $testimonial = Testimonials::findOrFail($this->deleteId);
-
-        if ($testimonial->photo) {
-            Storage::disk('public')->delete($testimonial->photo);
+        try {
+            $testimonial = Testimonials::findOrFail($this->deleteId);
+    
+            if ($testimonial->photo) {
+                Storage::disk('public')->delete($testimonial->photo);
+            }
+            if ($testimonial->avatar) {
+                Storage::disk('public')->delete($testimonial->avatar);
+            }
+    
+            $testimonial->delete();
+            $this->deleteId = null;
+            $this->dispatch('toast', type: 'success', message: 'Testimoni berhasil dihapus.');
+        } catch (\Throwable $th) {
+            $this->dispatch('toast', type: 'error', message: 'Gagal menghapus testimoni. silahkan coba lagi.');
         }
-        if ($testimonial->avatar) {
-            Storage::disk('public')->delete($testimonial->avatar);
-        }
-
-        $testimonial->delete();
-        $this->deleteId = null;
-
-        session()->flash('success', 'Testimoni berhasil dihapus.');
     }
 
     public function toggleActive(int $id): void

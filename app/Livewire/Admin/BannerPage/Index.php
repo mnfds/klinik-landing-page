@@ -45,19 +45,23 @@ class Index extends Component
 
     public function delete(): void
     {
-        $banner = BannerPage::findOrFail($this->deleteId);
-
-        if ($banner->image_mobile) {
-            Storage::disk('public')->delete($banner->image_mobile);
+        try {
+            $banner = BannerPage::findOrFail($this->deleteId);
+    
+            if ($banner->image_mobile) {
+                Storage::disk('public')->delete($banner->image_mobile);
+            }
+            if ($banner->image_desktop) {
+                Storage::disk('public')->delete($banner->image_desktop);
+            }
+    
+            $banner->delete();
+            $this->deleteId = null;
+            $this->dispatch('toast', type: 'success', message: 'Banner berhasil dihapus');
+        } catch (\Throwable $th) {
+            $this->dispatch('toast', type: 'error', message: 'Gagal menghapus banner. silahkan coba lagi.');
         }
-        if ($banner->image_desktop) {
-            Storage::disk('public')->delete($banner->image_desktop);
-        }
 
-        $banner->delete();
-        $this->deleteId = null;
-
-        session()->flash('success', 'Banner page berhasil dihapus.');
     }
 
     public function toggleActive(int $id): void

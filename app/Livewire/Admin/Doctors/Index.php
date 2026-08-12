@@ -37,17 +37,19 @@ class Index extends Component
 
     public function delete(): void
     {
-        $doctor = Doctors::findOrFail($this->deleteId);
-
-        if ($doctor->photo) {
-            Storage::disk('public')->delete($doctor->photo);
+        try {
+            $doctor = Doctors::findOrFail($this->deleteId);
+    
+            if ($doctor->photo) {
+                Storage::disk('public')->delete($doctor->photo);
+            }
+            // schedules ikut terhapus otomatis (cascadeOnDelete di migration)
+            $doctor->delete();
+            $this->deleteId = null;
+            $this->dispatch('toast', type: 'success', message: 'Dokter berhasil dihapus.');
+        } catch (\Throwable $th) {
+            $this->dispatch('toast', type: 'error', message: 'Gagal menghapus dokter. silahkan coba lagi.');
         }
-
-        // schedules ikut terhapus otomatis (cascadeOnDelete di migration)
-        $doctor->delete();
-        $this->deleteId = null;
-
-        session()->flash('success', 'Dokter berhasil dihapus.');
     }
 
     public function toggleActive(int $id): void

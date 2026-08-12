@@ -61,23 +61,26 @@ class Edit extends Component
     public function save(): void
     {
         $validated = $this->validate();
-
-        $product = Products::findOrFail($this->productId);
-
-        if ($this->image) {
-            if ($product->image) {
-                Storage::disk('public')->delete($product->image);
+        try {
+            $product = Products::findOrFail($this->productId);
+    
+            if ($this->image) {
+                if ($product->image) {
+                    Storage::disk('public')->delete($product->image);
+                }
+                $validated['image'] = $this->image->store('products', 'public');
+            } else {
+                unset($validated['image']);
             }
-            $validated['image'] = $this->image->store('products', 'public');
-        } else {
-            unset($validated['image']);
+    
+            $product->update($validated);
+    
+            $this->closeModal();
+            $this->dispatch('productSaved');
+            $this->dispatch('toast', type: 'success', message: 'Produk berhasil diperbarui.');
+        } catch (\Throwable $th) {
+            $this->dispatch('toast', type: 'error', message: 'Gagal memperbarui produk. silahkan coba lagi');
         }
-
-        $product->update($validated);
-
-        $this->closeModal();
-        $this->dispatch('productSaved');
-        session()->flash('success', 'Produk berhasil diperbarui.');
     }
 
     public function render()

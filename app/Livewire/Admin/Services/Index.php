@@ -43,16 +43,19 @@ class Index extends Component
 
     public function delete(): void
     {
-        $service = Services::findOrFail($this->deleteId);
-
-        if ($service->image) {
-            Storage::disk('public')->delete($service->image);
+        try {
+            $service = Services::findOrFail($this->deleteId);
+    
+            if ($service->image) {
+                Storage::disk('public')->delete($service->image);
+            }
+    
+            $service->delete();
+            $this->deleteId = null;
+            $this->dispatch('toast', type: 'success', message: 'Layanan berhasil dihapus.');
+        } catch (\Throwable $th) {
+                $this->dispatch('toast', type: 'error', message: 'Gagal menghapus layanan. silahkan coba lagi');
         }
-
-        $service->delete();
-        $this->deleteId = null;
-
-        session()->flash('success', 'Layanan berhasil dihapus.');
     }
 
     public function toggleActive(int $id): void

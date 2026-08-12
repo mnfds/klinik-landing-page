@@ -112,29 +112,32 @@ class Create extends Component
     public function save(): void
     {
         $validated = $this->validate();
-
-        if (! $this->validateScheduleTimes()) {
-            return;
+        try {
+            if (! $this->validateScheduleTimes()) {
+                return;
+            }
+    
+            if ($this->photo) {
+                $validated['photo'] = $this->photo->store('doctors', 'public');
+            } else {
+                unset($validated['photo']);
+            }
+    
+            $schedules = $validated['schedules'] ?? [];
+            unset($validated['schedules']);
+    
+            $doctor = Doctors::create($validated);
+    
+            foreach ($schedules as $schedule) {
+                $doctor->schedules()->create($schedule);
+            }
+    
+            $this->closeModal();
+            $this->dispatch('doctorSaved');
+            $this->dispatch('toast', type: 'error', message: 'Dokter berhasil disimpan.');
+        } catch (\Throwable $th) {
+            $this->dispatch('toast', type: 'error', message: 'Gagal menyimpan dokter. silahkan coba lagi.');
         }
-
-        if ($this->photo) {
-            $validated['photo'] = $this->photo->store('doctors', 'public');
-        } else {
-            unset($validated['photo']);
-        }
-
-        $schedules = $validated['schedules'] ?? [];
-        unset($validated['schedules']);
-
-        $doctor = Doctors::create($validated);
-
-        foreach ($schedules as $schedule) {
-            $doctor->schedules()->create($schedule);
-        }
-
-        $this->closeModal();
-        $this->dispatch('doctorSaved');
-        session()->flash('success', 'Dokter berhasil ditambahkan.');
     }
 
     public function render()

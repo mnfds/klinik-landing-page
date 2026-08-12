@@ -56,24 +56,27 @@ class Create extends Component
     public function save(): void
     {
         $validated = $this->validate();
-
-        if ($this->image_mobile) {
-            $validated['image_mobile'] = $this->image_mobile->store('banner-home', 'public');
-        } else {
-            unset($validated['image_mobile']);
+        try {
+            if ($this->image_mobile) {
+                $validated['image_mobile'] = $this->image_mobile->store('banner-home', 'public');
+            } else {
+                unset($validated['image_mobile']);
+            }
+    
+            if ($this->image_desktop) {
+                $validated['image_desktop'] = $this->image_desktop->store('banner-home', 'public');
+            } else {
+                unset($validated['image_desktop']);
+            }
+    
+            BannerHome::create($validated);
+    
+            $this->closeModal();
+            $this->dispatch('bannerHomeSaved');
+            $this->dispatch('toast', type: 'success', message: 'Banner berhasil disimpan');
+        } catch (\Throwable $th) {
+            $this->dispatch('toast', type: 'error', message: 'Gagal menyimpan testimoni. silahkan coba lagi.');
         }
-
-        if ($this->image_desktop) {
-            $validated['image_desktop'] = $this->image_desktop->store('banner-home', 'public');
-        } else {
-            unset($validated['image_desktop']);
-        }
-
-        BannerHome::create($validated);
-
-        $this->closeModal();
-        $this->dispatch('bannerHomeSaved');
-        session()->flash('success', 'Banner home berhasil ditambahkan.');
     }
 
     public function render()

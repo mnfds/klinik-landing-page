@@ -60,18 +60,21 @@ class Create extends Component
     public function save(): void
     {
         $validated = $this->validate();
-
-        if ($this->image) {
-            $validated['image'] = $this->image->store('services', 'public');
-        } else {
-            unset($validated['image']);
+        try {
+            if ($this->image) {
+                $validated['image'] = $this->image->store('services', 'public');
+            } else {
+                unset($validated['image']);
+            }
+    
+            Services::create($validated);
+    
+            $this->closeModal();
+            $this->dispatch('serviceSaved');
+            $this->dispatch('toast', type: 'success', message: 'Layanan berhasil disimpan.');
+        } catch (\Throwable $th) {
+            $this->dispatch('toast', type: 'error', message: 'Gagal menyimpan layanan. silahkan coba lagi.');
         }
-
-        Services::create($validated);
-
-        $this->closeModal();
-        $this->dispatch('serviceSaved');
-        session()->flash('success', 'Layanan berhasil ditambahkan.');
     }
 
     public function render()

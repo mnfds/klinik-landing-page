@@ -69,32 +69,35 @@ class Edit extends Component
     public function save(): void
     {
         $validated = $this->validate();
-
-        $banner = BannerHome::findOrFail($this->bannerId);
-
-        if ($this->image_mobile) {
-            if ($banner->image_mobile) {
-                Storage::disk('public')->delete($banner->image_mobile);
+        try {
+            $banner = BannerHome::findOrFail($this->bannerId);
+    
+            if ($this->image_mobile) {
+                if ($banner->image_mobile) {
+                    Storage::disk('public')->delete($banner->image_mobile);
+                }
+                $validated['image_mobile'] = $this->image_mobile->store('banner-home', 'public');
+            } else {
+                unset($validated['image_mobile']);
             }
-            $validated['image_mobile'] = $this->image_mobile->store('banner-home', 'public');
-        } else {
-            unset($validated['image_mobile']);
-        }
-
-        if ($this->image_desktop) {
-            if ($banner->image_desktop) {
-                Storage::disk('public')->delete($banner->image_desktop);
+    
+            if ($this->image_desktop) {
+                if ($banner->image_desktop) {
+                    Storage::disk('public')->delete($banner->image_desktop);
+                }
+                $validated['image_desktop'] = $this->image_desktop->store('banner-home', 'public');
+            } else {
+                unset($validated['image_desktop']);
             }
-            $validated['image_desktop'] = $this->image_desktop->store('banner-home', 'public');
-        } else {
-            unset($validated['image_desktop']);
+    
+            $banner->update($validated);
+    
+            $this->closeModal();
+            $this->dispatch('bannerHomeSaved');
+            $this->dispatch('toast', type: 'success', message: 'Banner berhasil diperbarui.');
+        } catch (\Throwable $th) {
+            $this->dispatch('toast', type: 'error', message: 'Gagal memperbarui banner. silahkan coba lagi');
         }
-
-        $banner->update($validated);
-
-        $this->closeModal();
-        $this->dispatch('bannerHomeSaved');
-        session()->flash('success', 'Banner home berhasil diperbarui.');
     }
 
     public function render()

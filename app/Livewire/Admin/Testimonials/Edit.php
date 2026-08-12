@@ -149,43 +149,46 @@ class Edit extends Component
     public function save(): void
     {
         $validated = $this->validate();
-
-        $config = $this->categoryMap[$this->category];
-        $item = $config['model']::find($this->selected_item);
-
-        if (! $item) {
-            $this->addError('selected_item', 'Item yang dipilih tidak ditemukan.');
-            return;
-        }
-
-        $validated['items_testimonials'] = $item->{$config['field']};
-        unset($validated['category'], $validated['selected_item']);
-
-        $testimonial = Testimonials::findOrFail($this->testimonialId);
-
-        if ($this->photo) {
-            if ($testimonial->photo) {
-                Storage::disk('public')->delete($testimonial->photo);
+        try {
+            $config = $this->categoryMap[$this->category];
+            $item = $config['model']::find($this->selected_item);
+    
+            if (! $item) {
+                $this->addError('selected_item', 'Item yang dipilih tidak ditemukan.');
+                return;
             }
-            $validated['photo'] = $this->photo->store('testimonials', 'public');
-        } else {
-            unset($validated['photo']);
-        }
-
-        if ($this->avatar) {
-            if ($testimonial->avatar) {
-                Storage::disk('public')->delete($testimonial->avatar);
+    
+            $validated['items_testimonials'] = $item->{$config['field']};
+            unset($validated['category'], $validated['selected_item']);
+    
+            $testimonial = Testimonials::findOrFail($this->testimonialId);
+    
+            if ($this->photo) {
+                if ($testimonial->photo) {
+                    Storage::disk('public')->delete($testimonial->photo);
+                }
+                $validated['photo'] = $this->photo->store('testimonials', 'public');
+            } else {
+                unset($validated['photo']);
             }
-            $validated['avatar'] = $this->avatar->store('testimonials/avatars', 'public');
-        } else {
-            unset($validated['avatar']);
+    
+            if ($this->avatar) {
+                if ($testimonial->avatar) {
+                    Storage::disk('public')->delete($testimonial->avatar);
+                }
+                $validated['avatar'] = $this->avatar->store('testimonials/avatars', 'public');
+            } else {
+                unset($validated['avatar']);
+            }
+    
+            $testimonial->update($validated);
+    
+            $this->closeModal();
+            $this->dispatch('testimonialSaved');
+            $this->dispatch('toast', type: 'success', message: 'Testimoni berhasil diperbarui.');
+        } catch (\Throwable $th) {
+            $this->dispatch('toast', type: 'error', message: 'Gagal memperbarui testimoni. Silakan coba lagi.');
         }
-
-        $testimonial->update($validated);
-
-        $this->closeModal();
-        $this->dispatch('testimonialSaved');
-        session()->flash('success', 'Testimoni berhasil diperbarui.');
     }
 
     public function render()

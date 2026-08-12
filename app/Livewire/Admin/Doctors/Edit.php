@@ -138,47 +138,50 @@ class Edit extends Component
     public function save(): void
     {
         $validated = $this->validate();
-
-        if (! $this->validateScheduleTimes()) {
-            return;
-        }
-
-        $doctor = Doctors::findOrFail($this->doctorId);
-
-        if ($this->photo) {
-            if ($doctor->photo) {
-                Storage::disk('public')->delete($doctor->photo);
+        try {
+            if (! $this->validateScheduleTimes()) {
+                return;
             }
-            $validated['photo'] = $this->photo->store('doctors', 'public');
-        } else {
-            unset($validated['photo']);
-        }
-
-        $schedules = $validated['schedules'] ?? [];
-        unset($validated['schedules']);
-
-        $doctor->update($validated);
-
-        // hapus jadwal yang dibuang user di UI
-        if (! empty($this->removedScheduleIds)) {
-            $doctor->schedules()->whereIn('id', $this->removedScheduleIds)->delete();
-        }
-
-        // update existing / create baru
-        foreach ($schedules as $schedule) {
-            $scheduleId = $schedule['id'] ?? null;
-            unset($schedule['id']);
-
-            if ($scheduleId) {
-                $doctor->schedules()->where('id', $scheduleId)->update($schedule);
+    
+            $doctor = Doctors::findOrFail($this->doctorId);
+    
+            if ($this->photo) {
+                if ($doctor->photo) {
+                    Storage::disk('public')->delete($doctor->photo);
+                }
+                $validated['photo'] = $this->photo->store('doctors', 'public');
             } else {
-                $doctor->schedules()->create($schedule);
+                unset($validated['photo']);
             }
+    
+            $schedules = $validated['schedules'] ?? [];
+            unset($validated['schedules']);
+    
+            $doctor->update($validated);
+    
+            // hapus jadwal yang dibuang user di UI
+            if (! empty($this->removedScheduleIds)) {
+                $doctor->schedules()->whereIn('id', $this->removedScheduleIds)->delete();
+            }
+    
+            // update existing / create baru
+            foreach ($schedules as $schedule) {
+                $scheduleId = $schedule['id'] ?? null;
+                unset($schedule['id']);
+    
+                if ($scheduleId) {
+                    $doctor->schedules()->where('id', $scheduleId)->update($schedule);
+                } else {
+                    $doctor->schedules()->create($schedule);
+                }
+            }
+    
+            $this->closeModal();
+            $this->dispatch('doctorSaved');
+            $this->dispatch('toast', type: 'success', message: 'Dokter berhasil diperbarui.');
+        } catch (\Throwable $th) {
+            $this->dispatch('toast', type: 'error', message: 'Gagal memperbarui dokter. silahkan coba lagi.');
         }
-
-        $this->closeModal();
-        $this->dispatch('doctorSaved');
-        session()->flash('success', 'Dokter berhasil diperbarui.');
     }
 
     public function render()

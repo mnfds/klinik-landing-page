@@ -112,36 +112,39 @@ class Create extends Component
     public function save(): void
     {
         $validated = $this->validate();
-
+        try {
+            $config = $this->categoryMap[$this->category];
+            $item = $config['model']::find($this->selected_item);
+    
+            if (! $item) {
+                $this->addError('selected_item', 'Item yang dipilih tidak ditemukan.');
+                return;
+            }
+    
+            $validated['items_testimonials'] = $item->{$config['field']};
+            unset($validated['category'], $validated['selected_item']);
+    
+            if ($this->photo) {
+                $validated['photo'] = $this->photo->store('testimonials', 'public');
+            } else {
+                unset($validated['photo']);
+            }
+    
+            if ($this->avatar) {
+                $validated['avatar'] = $this->avatar->store('testimonials/avatars', 'public');
+            } else {
+                unset($validated['avatar']);
+            }
+    
+            Testimonials::create($validated);
+    
+            $this->closeModal();
+            $this->dispatch('testimonialSaved');
+            $this->dispatch('toast', type: 'success', message: 'Testimoni berhasil disimpan.');
+        } catch (\Throwable $th) {
+            $this->dispatch('toast', type: 'error', message: 'Gagal menyimpan testimoni. silahkan coba lagi.');
+        }
         // Resolve item terpilih menjadi teks nama/judul untuk disimpan ke kolom items_testimonials
-        $config = $this->categoryMap[$this->category];
-        $item = $config['model']::find($this->selected_item);
-
-        if (! $item) {
-            $this->addError('selected_item', 'Item yang dipilih tidak ditemukan.');
-            return;
-        }
-
-        $validated['items_testimonials'] = $item->{$config['field']};
-        unset($validated['category'], $validated['selected_item']);
-
-        if ($this->photo) {
-            $validated['photo'] = $this->photo->store('testimonials', 'public');
-        } else {
-            unset($validated['photo']);
-        }
-
-        if ($this->avatar) {
-            $validated['avatar'] = $this->avatar->store('testimonials/avatars', 'public');
-        } else {
-            unset($validated['avatar']);
-        }
-
-        Testimonials::create($validated);
-
-        $this->closeModal();
-        $this->dispatch('testimonialSaved');
-        session()->flash('success', 'Testimoni berhasil ditambahkan.');
     }
 
     public function render()

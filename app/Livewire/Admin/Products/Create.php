@@ -54,18 +54,21 @@ class Create extends Component
     public function save(): void
     {
         $validated = $this->validate();
-
-        if ($this->image) {
-            $validated['image'] = $this->image->store('products', 'public');
-        } else {
-            unset($validated['image']);
+        try {
+            if ($this->image) {
+                $validated['image'] = $this->image->store('products', 'public');
+            } else {
+                unset($validated['image']);
+            }
+    
+            Products::create($validated);
+    
+            $this->closeModal();
+            $this->dispatch('productSaved');
+            $this->dispatch('toast', type: 'success', message: 'Produk berhasil disimpan.');
+        } catch (\Throwable $th) {
+            $this->dispatch('toast', type: 'error', message: 'Gagal menyimpan produk. silahkan coba lagi.');
         }
-
-        Products::create($validated);
-
-        $this->closeModal();
-        $this->dispatch('productSaved');
-        session()->flash('success', 'Produk berhasil ditambahkan.');
     }
 
     public function render()

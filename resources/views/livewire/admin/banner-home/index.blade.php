@@ -15,18 +15,6 @@
         </button>
     </div>
 
-    {{-- Alert sukses --}}
-    @if (session('success'))
-        <div class="mb-5 px-4 py-3 bg-green-50 border border-green-100 text-green-700 rounded-xl text-sm flex items-center gap-2.5 animate-[fadeIn_0.3s_ease]">
-            <span class="flex items-center justify-center w-5 h-5 rounded-full bg-green-100 shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-            </span>
-            {{ session('success') }}
-        </div>
-    @endif
-
     {{-- Stat ringkas --}}
     <div class="grid grid-cols-3 gap-3 mb-6">
         <div class="bg-white rounded-xl border border-blue-300 px-4 py-3 shadow-md">
