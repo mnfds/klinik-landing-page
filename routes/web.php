@@ -19,6 +19,7 @@ use App\Livewire\Admin\Doctors\Index as DoctorsAdminIndex;
 use App\Livewire\Admin\Testimonials\Index as TestimonialsAdminIndex;
 use App\Livewire\Admin\BannerHome\Index as BannerHomeIndex;
 use App\Livewire\Admin\BannerPage\Index as BannerPageIndex;
+use App\Livewire\Admin\Brosur\Index as BrosurIndex;
 
 Route::middleware('visitor')->group(function () {
         // Route::view('/', 'welcome');
@@ -40,6 +41,11 @@ Route::middleware('visitor')->group(function () {
         
         // ===== PROMOS GUEST ROUTE =====
         Route::get('/promo', PromosIndex::class)->name('promos');
+        // ===== E-BROCHURE GUEST ROUTE =====
+        Route::get('/e-brosur', function () {
+        $brosur = \App\Models\Brosurs::where('is_active', true)->firstOrFail();
+        return redirect(\Illuminate\Support\Facades\Storage::url($brosur->file));
+        })->name('brosur.download');
 });
 
 
@@ -54,6 +60,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::get('/testimonials', TestimonialsAdminIndex::class)->name('testimonials.index');
         Route::get('/banner-home', BannerHomeIndex::class)->name('banner-home.index');
         Route::get('/banner-page', BannerPageIndex::class)->name('banner-page.index');
+        Route::get('/brosur', BrosurIndex::class)->name('brosur.index');
 });
 
 Route::view('profile', 'profile')->middleware(['auth'])->name('profile');

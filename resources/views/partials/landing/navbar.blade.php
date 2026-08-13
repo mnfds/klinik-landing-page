@@ -34,10 +34,10 @@
                 OUR LOCATION
             </a>
         </div>
-
+        @if ($activeBrosur)
         <div class="text-forest px-4 pt-2 pb-1.5 transition-colors duration-300 hover:text-forest-dark">
             <a
-                href="{{ asset('brochure.pdf') }}"
+                href="{{ route('brosur.download') }}"
                 target="_blank"
                 rel="noopener"
                 class="font-contax text-sm"
@@ -45,6 +45,7 @@
                 E-BROCHURE
             </a>
         </div>
+        @endif
     </div>
 
     <!-- Main Nav (fixed - mengambang di atas konten, transparan saat discroll) -->
@@ -157,14 +158,16 @@
             >
                 OUR LOCATION
             </a>
+            @if ($activeBrosur)
             <a
-                href="{{ asset('brochure.pdf') }}"
+                href="{{ route('brosur.download') }}"
                 target="_blank"
                 rel="noopener"
                 class="block text-base font-contax font-medium text-charcoal/80 hover:text-forest"
             >
                 E-BROCHURE
             </a>
+            @endif
         </div>
 
         {{-- WhatsApp CTA --}}

@@ -54,6 +54,9 @@ new class extends Component
                     <x-nav-link :href="route('admin.banner-page.index')" :active="request()->routeIs('admin.banner-page.index')" wire:navigate>
                         {{ __('Banner Page') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.brosur.index')" :active="request()->routeIs('admin.brosur.index')" wire:navigate>
+                        {{ __('Brosur') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -125,6 +128,9 @@ new class extends Component
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.banner-page.index')" :active="request()->routeIs('admin.banner-page.index')" wire:navigate>
                 {{ __('Banner Page') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.brosur.index')" :active="request()->routeIs('admin.brosur.index')" wire:navigate>
+                {{ __('Brosur') }}
             </x-responsive-nav-link>
         </div>
 
