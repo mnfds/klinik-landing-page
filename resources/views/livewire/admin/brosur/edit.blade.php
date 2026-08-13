@@ -8,7 +8,7 @@
                     <div>
                         <label class="block text-sm font-medium text-charcoal mb-1">Judul</label>
                         <input type="text" wire:model="title"
-                            class="w-full rounded-lg border-gray-300 focus:border-forest focus:ring-forest">
+                            class="w-full rounded-lg border p-2 border-gray-300 focus:border-forest focus:ring-forest">
                         @error('title') <span class="text-blush text-xs">{{ $message }}</span> @enderror
                     </div>
 

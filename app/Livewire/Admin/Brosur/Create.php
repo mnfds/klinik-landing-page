@@ -37,22 +37,25 @@ class Create extends Component
             'file' => 'required|file|mimes:pdf|max:10240',
             'is_active' => 'boolean',
         ]);
-
-        DB::transaction(function () {
-            if ($this->is_active) {
-                Brosurs::where('is_active', true)->update(['is_active' => false]);
-            }
-
-            Brosurs::create([
-                'title' => $this->title,
-                'file' => $this->file->store('brosurs', 'public'),
-                'is_active' => $this->is_active,
-            ]);
-        });
-
-        $this->close();
-        $this->dispatch('brosur-saved');
-        session()->flash('message', 'Brosur berhasil ditambahkan.');
+        try {
+            DB::transaction(function () {
+                if ($this->is_active) {
+                    Brosurs::where('is_active', true)->update(['is_active' => false]);
+                }
+    
+                Brosurs::create([
+                    'title' => $this->title,
+                    'file' => $this->file->store('brosurs', 'public'),
+                    'is_active' => $this->is_active,
+                ]);
+            });
+    
+            $this->close();
+            $this->dispatch('brosur-saved');
+            $this->dispatch('toast', type: 'success', message: 'Brosur berhasil disimpan.');
+        } catch (\Throwable $th) {
+            $this->dispatch('toast', type: 'error', message: 'Gagal menyimpan brosur. silahkan coba lagi.');
+        }
     }
 
     public function render()

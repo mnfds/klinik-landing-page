@@ -47,32 +47,33 @@ class Edit extends Component
             'file' => 'nullable|file|mimes:pdf|max:10240',
             'is_active' => 'boolean',
         ]);
+        try {
+            DB::transaction(function () {
+                $brosur = Brosurs::findOrFail($this->brosurId);
+                if ($this->is_active) {
+                    Brosurs::where('is_active', true)
+                        ->where('id', '!=', $this->brosurId)
+                        ->update(['is_active' => false]);
+                }
+                $data = [
+                    'title' => $this->title,
+                    'is_active' => $this->is_active,
+                ];
+    
+                if ($this->file) {
+                    Storage::disk('public')->delete($brosur->file);
+                    $data['file'] = $this->file->store('brosurs', 'public');
+                }
+                $brosur->update($data);
+            });
+    
+            $this->close();
+            $this->dispatch('brosur-updated');
+            $this->dispatch('toast', type: 'success', message: 'Brosur berhasil diperbarui.');
+        } catch (\Throwable $th) {
+            $this->dispatch('toast', type: 'error', message: 'Gagal memperbarui brosur. Silahkan coba lagi');
+        }
 
-        DB::transaction(function () {
-            $brosur = Brosurs::findOrFail($this->brosurId);
-
-            if ($this->is_active) {
-                Brosurs::where('is_active', true)
-                    ->where('id', '!=', $this->brosurId)
-                    ->update(['is_active' => false]);
-            }
-
-            $data = [
-                'title' => $this->title,
-                'is_active' => $this->is_active,
-            ];
-
-            if ($this->file) {
-                Storage::disk('public')->delete($brosur->file);
-                $data['file'] = $this->file->store('brosurs', 'public');
-            }
-
-            $brosur->update($data);
-        });
-
-        $this->close();
-        $this->dispatch('brosur-updated');
-        session()->flash('message', 'Brosur berhasil diperbarui.');
     }
 
     public function render()
