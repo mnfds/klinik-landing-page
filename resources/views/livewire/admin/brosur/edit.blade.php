@@ -26,6 +26,7 @@
                             </p>
                         @endif
                         @error('file') <span class="text-blush text-xs">{{ $message }}</span> @enderror
+                        <span class="text-xs text-gray-300">(Max 10 mb)</span>
                     </div>
 
                     <label class="flex items-center gap-2">

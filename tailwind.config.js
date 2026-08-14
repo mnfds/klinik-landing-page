@@ -10,12 +10,12 @@ export default {
       colors: {
         ivory: '#F2F4FA',
         forest: {
-          DEFAULT: '#218ce3',
+          DEFAULT: '#1B5D36',
           light: '#4A6B9A',
-          dark: '#125E9C',
+          dark: '#2eb363',
         },
         blush: '#D7E6FF',
-        gold: '#3BA8F5',
+        gold: '#2ce372',
         charcoal: '#273244',
       },
       fontFamily: {

@@ -50,6 +50,7 @@
                                 <img src="{{ $image_mobile->temporaryUrl() }}" class="w-24 h-16 object-cover rounded-lg mt-2">
                             @endif
                             @error('image_mobile') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                            <span class="text-xs text-gray-300">(Max 10 mb)</span>
                         </div>
     
                         <div>
@@ -65,6 +66,7 @@
                                 <img src="{{ $image_desktop->temporaryUrl() }}" class="w-32 h-16 object-cover rounded-lg mt-2">
                             @endif
                             @error('image_desktop') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                            <span class="text-xs text-gray-300">(Max 10 mb)</span>
                         </div>
     
                         <label class="flex items-center gap-2 text-sm text-charcoal">

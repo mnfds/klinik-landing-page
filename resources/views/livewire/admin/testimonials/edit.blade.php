@@ -84,6 +84,7 @@
                                     <img src="{{ $photo->temporaryUrl() }}" class="w-16 h-16 object-cover rounded-lg mt-2">
                                 @endif
                                 @error('photo') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                                <span class="text-xs text-gray-300">(Max 3 mb)</span>
                             </div>
     
                             <div>
@@ -99,6 +100,7 @@
                                     <img src="{{ $avatar->temporaryUrl() }}" class="w-16 h-16 object-cover rounded-full mt-2">
                                 @endif
                                 @error('avatar') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                                <span class="text-xs text-gray-300">(Max 3 mb)</span>
                             </div>
                         </div>
     

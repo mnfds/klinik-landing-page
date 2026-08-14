@@ -3,10 +3,15 @@
         <!-- Brand -->
         <div class="space-y-4">
             <div class="flex items-center gap-2">
-                {{-- <span class="flex items-center justify-center w-9 h-9 rounded-full bg-blush text-forest-dark"> --}}
-                    <img src="{{ asset('images/logo-no-text.png') }}" alt="{{ config('app.name', 'Klinik') }}" class="w-14 h-14 object-contain">
-                {{-- </span> --}}
-                <span class="font-display text-lg text-ivory">{{ config('app.name', 'Klinik') }}</span>
+                <img
+                    src="{{ asset('images/DokterL_3D.svg') }}"
+                    alt="{{ config('app.name', 'Klinik') }}"
+                    class="w-24 sm:w-28 md:w-32 h-auto object-contain"
+                >
+
+                <span class="font-display text-sm sm:text-base md:text-lg text-ivory">
+                    {{ config('app.name', 'Klinik') }}
+                </span>
             </div>
             <p class="text-sm font-contax text-ivory/70 leading-relaxed max-w-xs">
                 Perawatan kecantikan dan layanan medis dengan pendekatan yang tenang, aman, dan personal.

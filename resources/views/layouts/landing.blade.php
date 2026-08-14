@@ -23,12 +23,12 @@
         border-radius: 20px;
     }
     body::-webkit-scrollbar-thumb {
-        background: #2E4F7D;
+        background: #1B5D36;
         border-radius: 20px;
     }
 
     body::-webkit-scrollbar-thumb:hover {
-        background: #203450;
+        background: #1B5D36;
     }
     </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])

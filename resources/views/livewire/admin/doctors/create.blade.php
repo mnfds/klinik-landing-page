@@ -36,6 +36,7 @@
                                 <img src="{{ $photo->temporaryUrl() }}" class="w-20 h-20 object-cover rounded-full mt-2">
                             @endif
                             @error('photo') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                            <span class="text-xs text-gray-300">(Max 3 mb)</span>
                         </div>
     
                         <label class="flex items-center gap-2 text-sm text-charcoal">
