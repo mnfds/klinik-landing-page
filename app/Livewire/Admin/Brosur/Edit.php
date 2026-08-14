@@ -44,7 +44,7 @@ class Edit extends Component
     {
         $this->validate([
             'title' => 'required|string|max:255',
-            'file' => 'nullable|file|mimes:pdf|max:10240',
+            'file' => 'nullable|file|mimes:pdf|max:51200',
             'is_active' => 'boolean',
         ]);
         try {

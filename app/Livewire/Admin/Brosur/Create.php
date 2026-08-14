@@ -34,7 +34,7 @@ class Create extends Component
     {
         $this->validate([
             'title' => 'required|string|max:255',
-            'file' => 'required|file|mimes:pdf|max:10240',
+            'file' => 'required|file|mimes:pdf|max:51200',
             'is_active' => 'boolean',
         ]);
         try {
