@@ -4,12 +4,12 @@
         <div class="space-y-4">
             <div class="flex items-center gap-2">
                 <img
-                    src="{{ asset('images/DokterL_3D.svg') }}"
+                    src="{{ asset('images/logoKlinik3D.svg') }}"
                     alt="{{ config('app.name', 'Klinik') }}"
-                    class="w-24 sm:w-28 md:w-32 h-auto object-contain"
+                    class="w-12 md:w-16 lg:w-20 h-auto object-contain"
                 >
 
-                <span class="font-display text-sm sm:text-base md:text-lg text-ivory">
+                <span class="font-display text-lg md:text-3xl lg:text-4xl text-ivory">
                     {{ config('app.name', 'Klinik') }}
                 </span>
             </div>
