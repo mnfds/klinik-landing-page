@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ?? config('app.name', 'Klinik Kecantikan') }}</title>
-
+    <link rel="icon" type="image/png" href="{{ asset('images/logo-no-text.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/logo-no-text.png') }}">
     <!-- Fontawesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
