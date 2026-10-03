@@ -51,25 +51,25 @@
                     ></div>
                 @endif
 
-                <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent sm:bg-gradient-to-r sm:from-ivory/95 sm:via-ivory/60 sm:to-transparent"></div>
+                <div class="absolute inset-0 to-transparent bg-gradient-to-r from-ivory/95 via-ivory/60"></div>
 
                 <div class="relative h-full overflow-y-auto pt-20 sm:pt-24 pb-6">
                     <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 h-full flex items-end">
                         <div class="max-w-2xl w-full">
                             @if ($banner->text_badge)
-                                <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-contax font-medium tracking-wide uppercase text-ivory sm:text-forest/70 bg-forest/40 sm:bg-blush/40 rounded-full px-3.5 py-1.5">
+                                <span class="inline-flex items-center gap-2 text-[11px] sm:text-xs font-contax font-medium tracking-wide uppercase text-forest/70 bg-blush/40 rounded-full px-3.5 py-1.5">
                                     {{ $banner->text_badge }}
                                 </span>
                             @endif
 
                             @if ($banner->text_title)
-                                <h1 class="mt-4 sm:mt-6 font-contax font-bold text-2xl xs:text-3xl sm:text-5xl lg:text-6xl leading-[1.15] sm:leading-[1.1] text-ivory sm:text-forest-dark">
+                                <h1 class="mt-4 sm:mt-6 font-contax font-bold text-2xl xs:text-3xl sm:text-5xl lg:text-6xl leading-[1.15] sm:leading-[1.1] text-forest-dark">
                                     {{ $banner->text_title }}
                                 </h1>
                             @endif
 
                             @if ($banner->text_description)
-                                <p class="mt-3 sm:mt-6 font-contax text-sm sm:text-lg text-ivory/80 sm:text-charcoal/70 leading-relaxed max-w-lg">
+                                <p class="mt-3 sm:mt-6 font-contax text-sm sm:text-lg text-charcoal/70 leading-relaxed max-w-lg">
                                     {{ $banner->text_description }}
                                 </p>
                             @endif
