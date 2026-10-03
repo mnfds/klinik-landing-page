@@ -14,12 +14,7 @@
         class="hidden lg:flex fixed inset-x-2 lg:inset-x-20 z-50 justify-start items-center gap-4"
     >
         <div class="bg-forest text-ivory px-4 pt-2 pb-1.5 rounded-es-[15px] rounded-ee-[15px] transition-colors duration-300 hover:bg-forest-dark">
-            <a
-                href="https://wa.me/6285822810149?text={{ urlencode('Halo, saya ingin melakukan reservasi online.') }}"
-                target="_blank"
-                rel="noopener"
-                class="font-contax text-sm"
-            >
+            <a href="{{ route('reservasi.create') }}" wire:navigate class="font-contax text-sm">
                 ONLINE RESERVATION
             </a>
         </div>
@@ -142,13 +137,8 @@
 
         {{-- Utility Links (Online Reservation, Our Location, E-Brochure) --}}
         <div class="pt-4 border-t border-forest/10 space-y-3">
-            <a
-                href="https://wa.me/6285822810149?text={{ urlencode('Halo, saya ingin melakukan reservasi online.') }}"
-                target="_blank"
-                rel="noopener"
-                class="block text-base font-contax font-medium text-forest"
-            >
-                Online Reservation
+            <a href="{{ route('reservasi.create') }}" class="font-contax text-sm">
+                ONLINE RESERVATION
             </a>
             <a
                 href="https://maps.google.com"

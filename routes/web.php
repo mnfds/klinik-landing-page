@@ -11,6 +11,7 @@ use App\Livewire\Landing\Doctors\Index as DoctorsIndex;
 use App\Livewire\Landing\Testimonials\Index as TestimonialsIndex;
 use App\Livewire\Landing\Testimonials\Detail as TestimonialsDetail;
 use App\Livewire\Landing\Promos\Index as PromosIndex;
+use App\Livewire\Landing\Reservasi\Create as ReservasiIndex;
 
 use App\Livewire\Admin\Services\Index as ServicesAdminIndex;
 use App\Livewire\Admin\Products\Index as ProductsAdminIndex;
@@ -41,6 +42,10 @@ Route::middleware('visitor')->group(function () {
         
         // ===== PROMOS GUEST ROUTE =====
         Route::get('/promo', PromosIndex::class)->name('promos');
+
+        // ===== RESERVATION GUEST ROUTE =====
+        Route::get('/reservation', ReservasiIndex::class)->name('reservasi.create');
+
         // ===== E-BROCHURE GUEST ROUTE =====
         Route::get('/e-brosur', function () {
         $brosur = \App\Models\Brosurs::where('is_active', true)->firstOrFail();

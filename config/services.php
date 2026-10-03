@@ -34,5 +34,8 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
-
+    'siklinik' => [
+        'url' => env('SIKLINIK_API_URL'),
+        'key' => env('SIKLINIK_API_KEY'),
+    ],
 ];
