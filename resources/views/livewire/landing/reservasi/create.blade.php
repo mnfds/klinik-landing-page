@@ -64,7 +64,8 @@
     
                     <div>
                         <label class="{{ $label }}">Nama lengkap</label>
-                        <input type="text" wire:model="nama" autocomplete="name" class="{{ $input }}">
+                        <input type="text" wire:model="nama" autocomplete="name" autocapitalize="characters"
+                            class="{{ $input }} uppercase placeholder:normal-case">
                         @error('nama') <p class="{{ $galat }}">{{ $message }}</p> @enderror
                     </div>
     
@@ -147,7 +148,7 @@
     
                     <button type="submit" wire:loading.attr="disabled" wire:target="kirim"
                             class="w-full rounded-lg bg-forest py-3 font-contax text-sm tracking-wide text-ivory transition-colors hover:bg-forest-dark disabled:opacity-60">
-                        <span wire:loading.remove wire:target="kirim">KIRIM PERMINTAAN</span>
+                        <span wire:loading.remove wire:target="kirim">RESERVASI SEKARANG</span>
                         <span wire:loading wire:target="kirim">MENGIRIM...</span>
                     </button>
     

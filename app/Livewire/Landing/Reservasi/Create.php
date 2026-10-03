@@ -98,6 +98,7 @@ class Create extends Component
     {
         $this->pesanError = null;
         $this->nik = preg_replace('/\D/', '', $this->nik);
+        $this->nama = mb_strtoupper(trim($this->nama));
         $this->validate();
 
         $kunci = 'reservasi:' . request()->ip();
