@@ -96,7 +96,7 @@
     
                     @if ($status_pasien === 'lama')
                         <div>
-                            <label class="{{ $label }}">No. Register <span class="font-normal text-gray-400">(opsional)</span></label>
+                            <label class="{{ $label }}">No. Rekam Medis <span class="font-normal text-gray-400">(opsional)</span></label>
                             <input type="text" wire:model="no_register" class="{{ $input }}">
                             @error('no_register') <p class="{{ $galat }}">{{ $message }}</p> @enderror
                         </div>
@@ -141,7 +141,7 @@
                     </div>
     
                     <div>
-                        <label class="{{ $label }}">Catatan <span class="font-normal text-gray-400">(opsional)</span></label>
+                        <label class="{{ $label }}">Keluhan Anda <span class="font-normal text-gray-400">(opsional)</span></label>
                         <textarea wire:model="catatan" rows="3" maxlength="1000" class="{{ $input }}"></textarea>
                         @error('catatan') <p class="{{ $galat }}">{{ $message }}</p> @enderror
                     </div>
